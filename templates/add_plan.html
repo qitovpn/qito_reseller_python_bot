@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Add Plan - VPN Bot Admin{% endblock %}
+{% block page_title %}Add New Plan{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Add New VPN Plan</h5>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Plan Name</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                        <div class="form-text">e.g., Basic Plan, Premium Plan, etc.</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                        <div class="form-text">Optional description for this plan</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="credits_required" class="form-label">Credits Required</label>
+                        <input type="number" class="form-control" id="credits_required" name="credits_required" required min="1">
+                        <div class="form-text">Number of credits needed to purchase this plan</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="duration_days" class="form-label">Duration (Days)</label>
+                        <input type="number" class="form-control" id="duration_days" name="duration_days" required min="1">
+                        <div class="form-text">How many days the plan is valid for</div>
+                    </div>
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{{ url_for('plan_management') }}" class="btn btn-secondary me-md-2">Cancel</a>
+                        <button type="submit" class="btn btn-primary">Add Plan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

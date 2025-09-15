@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+
+{% block title %}Contact Configuration - VPN Bot Admin{% endblock %}
+{% block page_title %}Contact Configuration{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            <h4 class="alert-heading">📞 Contact Configuration</h4>
+            <p>Configure contact information that will be displayed to users in the bot. The main focus is on Telegram contact methods.</p>
+            <hr>
+            <p class="mb-0">Changes will be reflected immediately in the bot's contact information.</p>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h5 class="card-title mb-0">Contact Information</h5>
+    </div>
+    <div class="card-body">
+        {% if contacts %}
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Value</th>
+                            <th>Status</th>
+                            <th>Order</th>
+                            <th>Last Updated</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for contact in contacts %}
+                        <tr>
+                            <td>
+                                <strong>
+                                    {% if contact[1] == 'telegram' %}
+                                        📱 Telegram Support
+                                    {% elif contact[1] == 'telegram_admin' %}
+                                        👤 Admin Contact
+                                    {% elif contact[1] == 'email' %}
+                                        📧 Email
+                                    {% elif contact[1] == 'phone' %}
+                                        📞 Phone
+                                    {% elif contact[1] == 'website' %}
+                                        🌐 Website
+                                    {% elif contact[1] == 'response_time' %}
+                                        ⏰ Response Time
+                                    {% elif contact[1] == 'business_hours' %}
+                                        🕒 Business Hours
+                                    {% else %}
+                                        {{ contact[1].title() }}
+                                    {% endif %}
+                                </strong>
+                            </td>
+                            <td>{{ contact[2] }}</td>
+                            <td>
+                                {% if contact[3] %}
+                                    <span class="badge bg-success">Active</span>
+                                {% else %}
+                                    <span class="badge bg-secondary">Inactive</span>
+                                {% endif %}
+                            </td>
+                            <td>{{ contact[4] }}</td>
+                            <td>{{ contact[6][:16] if contact[6] else 'Never' }}</td>
+                            <td>
+                                <a href="{{ url_for('edit_contact', contact_id=contact[0]) }}" class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-edit"></i> Edit
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="text-center py-5">
+                <i class="fas fa-phone fa-3x text-muted mb-3"></i>
+                <h5 class="text-muted">No contact configurations found</h5>
+                <p class="text-muted">Contact configurations should be automatically created. Please check your database.</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Contact Types</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled">
+                    <li><strong>📱 Telegram Support:</strong> Main support channel</li>
+                    <li><strong>👤 Admin Contact:</strong> Direct admin contact</li>
+                    <li><strong>📧 Email:</strong> Email support</li>
+                    <li><strong>📞 Phone:</strong> Phone number</li>
+                    <li><strong>🌐 Website:</strong> Company website</li>
+                    <li><strong>⏰ Response Time:</strong> Expected response time</li>
+                    <li><strong>🕒 Business Hours:</strong> Operating hours</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Tips</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled">
+                    <li>• <strong>Telegram</strong> is the main focus for contact</li>
+                    <li>• Use <strong>@username</strong> format for Telegram contacts</li>
+                    <li>• <strong>Display Order</strong> controls the order in bot messages</li>
+                    <li>• <strong>Inactive</strong> contacts won't show in the bot</li>
+                    <li>• Changes take effect immediately</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

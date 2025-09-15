@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Contact - VPN Bot Admin{% endblock %}
+{% block page_title %}Edit Contact Configuration{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    Edit Contact: 
+                    {% if contact[1] == 'telegram' %}
+                        📱 Telegram Support
+                    {% elif contact[1] == 'telegram_admin' %}
+                        👤 Admin Contact
+                    {% elif contact[1] == 'email' %}
+                        📧 Email
+                    {% elif contact[1] == 'phone' %}
+                        📞 Phone
+                    {% elif contact[1] == 'website' %}
+                        🌐 Website
+                    {% elif contact[1] == 'response_time' %}
+                        ⏰ Response Time
+                    {% elif contact[1] == 'business_hours' %}
+                        🕒 Business Hours
+                    {% else %}
+                        {{ contact[1].title() }}
+                    {% endif %}
+                </h5>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="contact_value" class="form-label">Contact Value</label>
+                        <input type="text" class="form-control" id="contact_value" name="contact_value" 
+                               value="{{ contact[2] }}" required>
+                        <div class="form-text">
+                            {% if contact[1] == 'telegram' or contact[1] == 'telegram_admin' %}
+                                Use @username format (e.g., @VPNSupportBot)
+                            {% elif contact[1] == 'email' %}
+                                Enter email address (e.g., support@vpnservice.com)
+                            {% elif contact[1] == 'phone' %}
+                                Enter phone number (e.g., +95-XXX-XXX-XXXX)
+                            {% elif contact[1] == 'website' %}
+                                Enter full URL (e.g., https://vpnservice.com)
+                            {% elif contact[1] == 'response_time' %}
+                                Enter response time (e.g., Within 2 hours)
+                            {% elif contact[1] == 'business_hours' %}
+                                Enter business hours (e.g., Monday - Friday: 9:00 AM - 6:00 PM)
+                            {% else %}
+                                Enter the contact information
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="display_order" class="form-label">Display Order</label>
+                        <input type="number" class="form-control" id="display_order" name="display_order" 
+                               value="{{ contact[4] }}" min="0" max="100">
+                        <div class="form-text">Lower numbers appear first in the bot message</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="is_active" name="is_active" 
+                                   {% if contact[3] %}checked{% endif %}>
+                            <label class="form-check-label" for="is_active">
+                                Active
+                            </label>
+                        </div>
+                        <div class="form-text">Uncheck to hide this contact from the bot</div>
+                    </div>
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{{ url_for('contact_management') }}" class="btn btn-secondary me-md-2">Cancel</a>
+                        <button type="submit" class="btn btn-primary">Update Contact</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div class="card mt-4">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Preview</h5>
+            </div>
+            <div class="card-body">
+                <p><strong>Current Value:</strong> {{ contact[2] }}</p>
+                <p><strong>Status:</strong> 
+                    {% if contact[3] %}
+                        <span class="badge bg-success">Active</span>
+                    {% else %}
+                        <span class="badge bg-secondary">Inactive</span>
+                    {% endif %}
+                </p>
+                <p><strong>Display Order:</strong> {{ contact[4] }}</p>
+                <p><strong>Last Updated:</strong> {{ contact[6][:16] if contact[6] else 'Never' }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

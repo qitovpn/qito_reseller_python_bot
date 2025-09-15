@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block title %}Plan Keys - VPN Bot Admin{% endblock %}
+{% block page_title %}Manage Keys for {{ plan[1] }}{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>VPN Keys for {{ plan[1] }}</h2>
+    <a href="{{ url_for('plan_management') }}" class="btn btn-secondary">
+        <i class="fas fa-arrow-left me-2"></i>Back to Plans
+    </a>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Add New Keys</h5>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('add_plan_keys', plan_id=plan[0]) }}">
+                    <div class="mb-3">
+                        <label for="keys" class="form-label">VPN Keys</label>
+                        <textarea class="form-control" id="keys" name="keys" rows="10" 
+                                  placeholder="Enter VPN keys, one per line:&#10;key1&#10;key2&#10;key3"></textarea>
+                        <div class="form-text">Enter one VPN key per line</div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Keys</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Plan Information</h5>
+            </div>
+            <div class="card-body">
+                <p><strong>Name:</strong> {{ plan[1] }}</p>
+                <p><strong>Description:</strong> {{ plan[2] or 'No description' }}</p>
+                <p><strong>Credits Required:</strong> {{ plan[3] }}</p>
+                <p><strong>Duration:</strong> {{ plan[4] }} days</p>
+                <p><strong>Status:</strong> 
+                    {% if plan[5] %}
+                        <span class="badge bg-success">Active</span>
+                    {% else %}
+                        <span class="badge bg-secondary">Inactive</span>
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card mt-4">
+    <div class="card-header">
+        <h5 class="card-title mb-0">Existing Keys</h5>
+    </div>
+    <div class="card-body">
+        {% if keys %}
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Key Value</th>
+                            <th>Status</th>
+                            <th>Used By</th>
+                            <th>Used At</th>
+                            <th>Created</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for key in keys %}
+                        <tr>
+                            <td>{{ key[0] }}</td>
+                            <td><code>{{ key[1] }}</code></td>
+                            <td>
+                                {% if key[2] %}
+                                    <span class="badge bg-warning">Used</span>
+                                {% else %}
+                                    <span class="badge bg-success">Available</span>
+                                {% endif %}
+                            </td>
+                            <td>{{ key[3] or '-' }}</td>
+                            <td>{{ key[4][:16] if key[4] else '-' }}</td>
+                            <td>{{ key[5][:16] }}</td>
+                            <td>
+                                <a href="{{ url_for('delete_key', key_id=key[0]) }}" 
+                                   class="btn btn-sm btn-outline-danger"
+                                   onclick="return confirm('Are you sure you want to delete this key?')">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="text-center py-4">
+                <i class="fas fa-key fa-3x text-muted mb-3"></i>
+                <h5 class="text-muted">No keys found</h5>
+                <p class="text-muted">Add VPN keys for this plan using the form above.</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

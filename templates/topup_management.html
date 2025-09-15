@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}Topup Management - VPN Bot Admin{% endblock %}
+{% block page_title %}Topup Options Management{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Topup Options</h2>
+    <a href="{{ url_for('add_topup') }}" class="btn btn-primary">
+        <i class="fas fa-plus me-2"></i>Add New Topup Option
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        {% if topup_options %}
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Credits</th>
+                            <th>MMK Price</th>
+                            <th>Status</th>
+                            <th>Created</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for option in topup_options %}
+                        <tr>
+                            <td>{{ option.id }}</td>
+                            <td>{{ option.credits }}</td>
+                            <td>{{ "{:,}".format(option.mmk_price) }} MMK</td>
+                            <td>
+                                {% if option.is_active %}
+                                    <span class="badge bg-success">Active</span>
+                                {% else %}
+                                    <span class="badge bg-secondary">Inactive</span>
+                                {% endif %}
+                            </td>
+                            <td>{{ option.created_at[:10] }}</td>
+                            <td>
+                                <a href="{{ url_for('edit_topup', topup_id=option.id) }}" class="btn btn-sm btn-outline-primary me-1">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a href="{{ url_for('delete_topup', topup_id=option.id) }}" 
+                                   class="btn btn-sm btn-outline-danger"
+                                   onclick="return confirm('Are you sure you want to delete this topup option?')">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="text-center py-5">
+                <i class="fas fa-coins fa-3x text-muted mb-3"></i>
+                <h5 class="text-muted">No topup options found</h5>
+                <p class="text-muted">Add your first topup option to get started.</p>
+                <a href="{{ url_for('add_topup') }}" class="btn btn-primary">
+                    <i class="fas fa-plus me-2"></i>Add Topup Option
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

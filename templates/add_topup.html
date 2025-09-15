@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Add Topup Option - VPN Bot Admin{% endblock %}
+{% block page_title %}Add New Topup Option{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Add New Topup Option</h5>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="credits" class="form-label">Credits</label>
+                        <input type="number" class="form-control" id="credits" name="credits" required min="1">
+                        <div class="form-text">Number of credits to give to user</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="mmk_price" class="form-label">MMK Price</label>
+                        <input type="number" class="form-control" id="mmk_price" name="mmk_price" required min="1">
+                        <div class="form-text">Price in Myanmar Kyat</div>
+                    </div>
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{{ url_for('topup_management') }}" class="btn btn-secondary me-md-2">Cancel</a>
+                        <button type="submit" class="btn btn-primary">Add Topup Option</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
