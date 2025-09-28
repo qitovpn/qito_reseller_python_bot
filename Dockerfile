@@ -30,18 +30,20 @@ COPY . .
 RUN mkdir -p /app/apk_files
 
 # Create startup script
-COPY start_with_cron.sh /app/start_with_cron.sh
+COPY start_with_cron_fixed.sh /app/start_with_cron.sh
 RUN chmod +x /app/start_with_cron.sh
 
 # Create non-root user for security
 RUN useradd --create-home --shell /bin/bash app && \
     chown -R app:app /app && \
-    echo "app ALL=(ALL) NOPASSWD: /usr/sbin/service, /usr/sbin/cron, /bin/systemctl" >> /etc/sudoers
+    echo "app ALL=(ALL) NOPASSWD: /usr/sbin/service, /usr/sbin/cron, /bin/systemctl, /usr/sbin/cron" >> /etc/sudoers
 
-# Create cron job for app user
-RUN echo "*/5 * * * * cd /app && /usr/local/bin/python3 check_expired_keys.py >> /app/cronjob.log 2>&1" > /tmp/app-cronjob && \
-    crontab -u app /tmp/app-cronjob && \
-    rm /tmp/app-cronjob
+# Create cron job for root user (cron needs to run as root)
+RUN echo "*/5 * * * * cd /app && /usr/local/bin/python3 check_expired_keys.py >> /app/cronjob.log 2>&1" > /etc/cron.d/vpn-bot && \
+    chmod 0644 /etc/cron.d/vpn-bot
+
+# Create logs directory
+RUN mkdir -p /app/logs && chown -R app:app /app/logs
 
 # Switch to app user
 USER app

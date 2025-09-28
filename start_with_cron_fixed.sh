@@ -8,15 +8,16 @@ start_cron() {
     if [ "$EUID" -eq 0 ]; then
         echo "Running as root, starting cron service..."
         
-        # Start cron daemon
-        cron
+        # Start cron daemon in background
+        cron -f &
+        CRON_PID=$!
         
         # Wait a moment for cron to start
         sleep 3
         
         # Check if cron is running
         if pgrep cron > /dev/null; then
-            echo "✅ Cron service started successfully"
+            echo "✅ Cron service started successfully (PID: $CRON_PID)"
             return 0
         else
             echo "❌ Failed to start cron service"
@@ -26,7 +27,7 @@ start_cron() {
         echo "Not running as root, trying alternative methods..."
         
         # Try to start cron with sudo
-        if sudo cron 2>/dev/null; then
+        if sudo cron -f & 2>/dev/null; then
             sleep 3
             if pgrep cron > /dev/null; then
                 echo "✅ Cron service started with sudo"
@@ -37,19 +38,6 @@ start_cron() {
         echo "❌ Failed to start cron service (not root and sudo failed)"
         return 1
     fi
-}
-
-# Function to setup cron job
-setup_cron_job() {
-    echo "Setting up cron job..."
-    
-    # Create cron job entry
-    CRON_ENTRY="*/5 * * * * cd /app && /usr/local/bin/python3 check_expired_keys.py >> /app/cronjob.log 2>&1"
-    
-    # Add to crontab
-    (crontab -l 2>/dev/null; echo "$CRON_ENTRY") | crontab -
-    
-    echo "📋 Cron job added: $CRON_ENTRY"
 }
 
 # Function to start alternative scheduler
@@ -76,6 +64,8 @@ def run_expired_keys_check():
         
         if result.returncode == 0:
             print(f"[{datetime.now()}] Expired keys check completed successfully")
+            if result.stdout:
+                print(f"Output: {result.stdout}")
         else:
             print(f"[{datetime.now()}] Expired keys check failed: {result.stderr}")
             
@@ -107,17 +97,40 @@ EOF
     
     # Start scheduler in background
     nohup python /app/scheduler.py > /app/scheduler.log 2>&1 &
-    echo "✅ Alternative scheduler started in background"
+    SCHEDULER_PID=$!
+    echo "✅ Alternative scheduler started in background (PID: $SCHEDULER_PID)"
 }
+
+# Function to check if cron jobs are working
+check_cron_status() {
+    echo "Checking cron status..."
+    
+    # Check if cron is running
+    if pgrep cron > /dev/null; then
+        echo "✅ Cron daemon is running"
+        
+        # Check if our cron job exists
+        if [ -f /etc/cron.d/vpn-bot ]; then
+            echo "✅ VPN Bot cron job file exists"
+            cat /etc/cron.d/vpn-bot
+        else
+            echo "⚠️ VPN Bot cron job file not found"
+        fi
+        
+        return 0
+    else
+        echo "❌ Cron daemon is not running"
+        return 1
+    fi
+}
+
+# Main execution
+echo "🚀 Starting VPN Bot with scheduling..."
 
 # Try to start cron service
 if start_cron; then
-    # Setup cron job
-    setup_cron_job
-    
-    # Display cron jobs
-    echo "📋 Current cron jobs:"
-    crontab -l
+    echo "📋 Cron service started, checking status..."
+    check_cron_status
     
     # Start the main application
     echo "🚀 Starting VPN Bot application with cron..."
