@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+
+{% block title %}Database Backups - VPN Bot Admin{% endblock %}
+{% block page_title %}Database Backups{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Database Backups</h2>
+    <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">
+        <i class="fas fa-arrow-left me-2"></i>Back to Dashboard
+    </a>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Available Backups</h5>
+            </div>
+            <div class="card-body">
+                {% if backups %}
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Filename</th>
+                                    <th>Size</th>
+                                    <th>Created</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for backup in backups %}
+                                <tr>
+                                    <td>
+                                        <code>{{ backup.filename }}</code>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-info">{{ backup.size }} MB</span>
+                                    </td>
+                                    <td>{{ backup.modified }}</td>
+                                    <td>
+                                        <div class="btn-group" role="group">
+                                            <a href="{{ url_for('download_backup', filename=backup.filename) }}" 
+                                               class="btn btn-sm btn-outline-primary" title="Download">
+                                                <i class="fas fa-download"></i>
+                                            </a>
+                                            <a href="{{ url_for('restore_from_backup', filename=backup.filename) }}" 
+                                               class="btn btn-sm btn-outline-warning" 
+                                               title="Restore"
+                                               onclick="return confirm('Are you sure you want to restore from {{ backup.filename }}? This will replace the current database!')">
+                                                <i class="fas fa-upload"></i>
+                                            </a>
+                                            <a href="{{ url_for('delete_backup', filename=backup.filename) }}" 
+                                               class="btn btn-sm btn-outline-danger" 
+                                               title="Delete"
+                                               onclick="return confirm('Are you sure you want to delete {{ backup.filename }}?')">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="text-center py-5">
+                        <i class="fas fa-database fa-3x text-muted mb-3"></i>
+                        <h5 class="text-muted">No backups found</h5>
+                        <p class="text-muted">Create your first backup from the dashboard.</p>
+                        <a href="{{ url_for('dashboard') }}" class="btn btn-primary">
+                            <i class="fas fa-arrow-left me-2"></i>Back to Dashboard
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Backup Information</h5>
+            </div>
+            <div class="card-body">
+                <h6>What are backups?</h6>
+                <p class="small text-muted">
+                    Database backups are timestamped copies of your database that include:
+                </p>
+                <ul class="small text-muted">
+                    <li>All user accounts and balances</li>
+                    <li>VPN plans and keys</li>
+                    <li>Payment history</li>
+                    <li>Transaction records</li>
+                </ul>
+                
+                <h6 class="mt-3">Backup Management</h6>
+                <ul class="small text-muted">
+                    <li><strong>Download:</strong> Save backup to your computer</li>
+                    <li><strong>Restore:</strong> Replace current database with backup</li>
+                    <li><strong>Delete:</strong> Remove backup file (permanent)</li>
+                </ul>
+                
+                <div class="alert alert-warning mt-3">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    <strong>Warning:</strong> Restoring a database will replace all current data. Make sure to create a backup first!
+                </div>
+            </div>
+        </div>
+        
+        <div class="card mt-3">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Quick Actions</h5>
+            </div>
+            <div class="card-body">
+                <a href="{{ url_for('dashboard') }}" class="btn btn-primary w-100 mb-2">
+                    <i class="fas fa-plus me-2"></i>Create New Backup
+                </a>
+                <a href="{{ url_for('download_database') }}" class="btn btn-success w-100 mb-2">
+                    <i class="fas fa-download me-2"></i>Download Current DB
+                </a>
+                <a href="{{ url_for('dashboard') }}" class="btn btn-secondary w-100">
+                    <i class="fas fa-arrow-left me-2"></i>Back to Dashboard
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if backups %}
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Backup Statistics</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <h4 class="text-primary">{{ backups|length }}</h4>
+                            <p class="text-muted mb-0">Total Backups</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <h4 class="text-info">{{ "%.1f"|format(backups|sum(attribute='size')) }} MB</h4>
+                            <p class="text-muted mb-0">Total Size</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <h4 class="text-success">{{ backups[0].modified if backups else 'N/A' }}</h4>
+                            <p class="text-muted mb-0">Latest Backup</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <h4 class="text-warning">{{ "%.1f"|format(backups|sum(attribute='size') / backups|length) if backups else 0 }} MB</h4>
+                            <p class="text-muted mb-0">Average Size</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}

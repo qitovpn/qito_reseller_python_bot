@@ -37,12 +37,13 @@
                 <h5 class="card-title mb-0">Plan Information</h5>
             </div>
             <div class="card-body">
-                <p><strong>Name:</strong> {{ plan[1] }}</p>
-                <p><strong>Description:</strong> {{ plan[2] or 'No description' }}</p>
-                <p><strong>Credits Required:</strong> {{ plan[3] }}</p>
-                <p><strong>Duration:</strong> {{ plan[4] }} days</p>
+                <p><strong>Plan ID:</strong> {{ plan[1] }}</p>
+                <p><strong>Name:</strong> {{ plan[2] }}</p>
+                <p><strong>Description:</strong> {{ plan[3] or 'No description' }}</p>
+                <p><strong>Credits Required:</strong> {{ plan[4] }}</p>
+                <p><strong>Duration:</strong> {{ plan[5] }} days</p>
                 <p><strong>Status:</strong> 
-                    {% if plan[5] %}
+                    {% if plan[6] %}
                         <span class="badge bg-success">Active</span>
                     {% else %}
                         <span class="badge bg-secondary">Inactive</span>

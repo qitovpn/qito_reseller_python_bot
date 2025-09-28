@@ -1,0 +1,4722 @@
+[2025-09-27 21:20:00.901689] Starting expired keys check...
+[2025-09-27 21:20:00.902376] No expired keys found
+[2025-09-27 21:20:00.902923] No orphaned keys found
+[2025-09-27 21:20:00.903933] Statistics:
+  - Active plans: 7
+  - Total VPN keys: 7
+  - Used keys: 7
+  - Available keys: 0
+[2025-09-27 21:20:00.903957] Expired keys check completed successfully
+[2025-09-27 21:20:01.527332] Starting expired keys check...
+[2025-09-27 21:20:01.528621] No expired keys found
+[2025-09-27 21:20:01.529738] No orphaned keys found
+[2025-09-27 21:20:01.532916] Statistics:
+  - Active plans: 7
+  - Total VPN keys: 7
+  - Used keys: 7
+  - Available keys: 0
+[2025-09-27 21:20:01.532960] Expired keys check completed successfully
+[2025-09-27 21:25:01.844549] Starting expired keys check...
+[2025-09-27 21:25:01.846982] No expired keys found
+[2025-09-27 21:25:01.849240] No orphaned keys found
+[2025-09-27 21:25:01.853941] Statistics:
+  - Active plans: 7
+  - Total VPN keys: 7
+  - Used keys: 7
+  - Available keys: 0
+[2025-09-27 21:25:01.853981] Expired keys check completed successfully
+[2025-09-27 21:30:01.995556] Starting expired keys check...
+[2025-09-27 21:30:01.996249] No expired keys found
+[2025-09-27 21:30:02.010763] Cleaned up 2 orphaned keys
+  - Orphaned key: ethipojthpjo (Plan ID: 6)
+  - Orphaned key: eojepjghp (Plan ID: 6)
+[2025-09-27 21:30:02.011829] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-27 21:30:02.012931] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-27 21:30:02.012999] Expired keys check completed successfully
+[2025-09-27 21:35:01.209899] Starting expired keys check...
+[2025-09-27 21:35:01.210621] No expired keys found
+[2025-09-27 21:35:01.211187] No orphaned keys found
+[2025-09-27 21:35:01.211712] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-27 21:35:01.212268] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-27 21:35:01.212292] Expired keys check completed successfully
+[2025-09-27 21:40:01.490231] Starting expired keys check...
+[2025-09-27 21:40:01.492389] No expired keys found
+[2025-09-27 21:40:01.494687] No orphaned keys found
+[2025-09-27 21:40:01.496295] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-27 21:40:01.497671] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-27 21:40:01.497720] Expired keys check completed successfully
+[2025-09-27 21:45:01.824916] Starting expired keys check...
+[2025-09-27 21:45:01.826042] No expired keys found
+[2025-09-27 21:45:01.827836] No orphaned keys found
+[2025-09-27 21:45:01.831317] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-27 21:45:01.834530] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-27 21:45:01.834575] Expired keys check completed successfully
+[2025-09-27 21:50:02.301560] Starting expired keys check...
+[2025-09-27 21:50:02.304015] No expired keys found
+[2025-09-27 21:50:02.306962] No orphaned keys found
+[2025-09-27 21:50:02.308888] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-27 21:50:02.310325] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-27 21:50:02.310405] Expired keys check completed successfully
+[2025-09-27 21:55:01.525056] Starting expired keys check...
+[2025-09-27 21:55:01.526413] No expired keys found
+[2025-09-27 21:55:01.527448] No orphaned keys found
+[2025-09-27 21:55:01.528586] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-27 21:55:01.529598] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-27 21:55:01.529627] Expired keys check completed successfully
+[2025-09-27 22:00:01.679406] Starting expired keys check...
+[2025-09-27 22:00:01.680116] No expired keys found
+[2025-09-27 22:00:01.680691] No orphaned keys found
+[2025-09-27 22:00:01.681203] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-27 22:00:01.681774] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-27 22:00:01.681794] Expired keys check completed successfully
+[2025-09-27 22:05:01.790647] Starting expired keys check...
+[2025-09-27 22:05:01.791346] No expired keys found
+[2025-09-27 22:05:01.791933] No orphaned keys found
+[2025-09-27 22:05:01.792413] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-27 22:05:01.792963] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-27 22:05:01.792981] Expired keys check completed successfully
+[2025-09-27 22:10:01.903053] Starting expired keys check...
+[2025-09-27 22:10:01.903753] No expired keys found
+[2025-09-27 22:10:01.904308] No orphaned keys found
+[2025-09-27 22:10:01.904817] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-27 22:10:01.905371] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-27 22:10:01.905393] Expired keys check completed successfully
+[2025-09-27 22:15:02.010594] Starting expired keys check...
+[2025-09-27 22:15:02.011261] No expired keys found
+[2025-09-27 22:15:02.011793] No orphaned keys found
+[2025-09-27 22:15:02.012251] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-27 22:15:02.012784] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-27 22:15:02.012800] Expired keys check completed successfully
+[2025-09-27 22:20:01.285906] Starting expired keys check...
+[2025-09-27 22:20:01.287269] No expired keys found
+[2025-09-27 22:20:01.288086] No orphaned keys found
+[2025-09-27 22:20:01.288646] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-27 22:20:01.289258] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-27 22:20:01.289283] Expired keys check completed successfully
+[2025-09-27 22:25:01.511293] Starting expired keys check...
+[2025-09-27 22:25:01.512097] No expired keys found
+[2025-09-27 22:25:01.512744] No orphaned keys found
+[2025-09-27 22:25:01.513429] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-27 22:25:01.514387] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-27 22:25:01.514426] Expired keys check completed successfully
+[2025-09-27 22:30:01.835935] Starting expired keys check...
+[2025-09-27 22:30:01.837421] No expired keys found
+[2025-09-27 22:30:01.839031] No orphaned keys found
+[2025-09-27 22:30:01.842033] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-27 22:30:01.846438] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-27 22:30:01.846538] Expired keys check completed successfully
+[2025-09-27 22:35:02.107920] Starting expired keys check...
+[2025-09-27 22:35:02.110166] No expired keys found
+[2025-09-27 22:35:02.113292] No orphaned keys found
+[2025-09-27 22:35:02.115997] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-27 22:35:02.118952] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-27 22:35:02.119038] Expired keys check completed successfully
+[2025-09-27 22:40:01.392752] Starting expired keys check...
+[2025-09-27 22:40:01.393788] No expired keys found
+[2025-09-27 22:40:01.394425] No orphaned keys found
+[2025-09-27 22:40:01.394984] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-27 22:40:01.395802] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-27 22:40:01.395834] Expired keys check completed successfully
+[2025-09-27 22:45:01.670691] Starting expired keys check...
+[2025-09-27 22:45:01.672592] No expired keys found
+[2025-09-27 22:45:01.673298] No orphaned keys found
+[2025-09-27 22:45:01.674519] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-27 22:45:01.675298] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-27 22:45:01.675328] Expired keys check completed successfully
+[2025-09-27 22:50:01.918973] Starting expired keys check...
+[2025-09-27 22:50:01.920183] No expired keys found
+[2025-09-27 22:50:01.921256] No orphaned keys found
+[2025-09-27 22:50:01.921834] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-27 22:50:01.922496] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-27 22:50:01.922526] Expired keys check completed successfully
+[2025-09-27 22:55:02.197454] Starting expired keys check...
+[2025-09-27 22:55:02.199389] No expired keys found
+[2025-09-27 22:55:02.200344] No orphaned keys found
+[2025-09-27 22:55:02.200991] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-27 22:55:02.201677] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-27 22:55:02.201702] Expired keys check completed successfully
+[2025-09-27 23:00:01.459035] Starting expired keys check...
+[2025-09-27 23:00:01.459825] No expired keys found
+[2025-09-27 23:00:01.460507] No orphaned keys found
+[2025-09-27 23:00:01.461487] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-27 23:00:01.462654] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-27 23:00:01.462722] Expired keys check completed successfully
+[2025-09-27 23:05:01.729414] Starting expired keys check...
+[2025-09-27 23:05:01.730718] No expired keys found
+[2025-09-27 23:05:01.733872] No orphaned keys found
+[2025-09-27 23:05:01.736018] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-27 23:05:01.738852] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-27 23:05:01.738939] Expired keys check completed successfully
+[2025-09-27 23:10:01.975747] Starting expired keys check...
+[2025-09-27 23:10:01.976938] No expired keys found
+[2025-09-27 23:10:01.977723] No orphaned keys found
+[2025-09-27 23:10:01.979015] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-27 23:10:01.983574] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-27 23:10:01.983713] Expired keys check completed successfully
+[2025-09-27 23:15:01.238349] Starting expired keys check...
+[2025-09-27 23:15:01.240281] No expired keys found
+[2025-09-27 23:15:01.242600] No orphaned keys found
+[2025-09-27 23:15:01.243734] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-27 23:15:01.244889] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-27 23:15:01.244932] Expired keys check completed successfully
+[2025-09-27 23:20:01.539780] Starting expired keys check...
+[2025-09-27 23:20:01.542656] No expired keys found
+[2025-09-27 23:20:01.545220] No orphaned keys found
+[2025-09-27 23:20:01.548835] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-27 23:20:01.551832] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-27 23:20:01.551866] Expired keys check completed successfully
+[2025-09-27 23:25:01.816022] Starting expired keys check...
+[2025-09-27 23:25:01.817854] No expired keys found
+[2025-09-27 23:25:01.818902] No orphaned keys found
+[2025-09-27 23:25:01.819507] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-27 23:25:01.820314] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-27 23:25:01.820357] Expired keys check completed successfully
+[2025-09-27 23:30:02.083039] Starting expired keys check...
+[2025-09-27 23:30:02.084587] No expired keys found
+[2025-09-27 23:30:02.087521] No orphaned keys found
+[2025-09-27 23:30:02.089703] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-27 23:30:02.092607] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-27 23:30:02.092691] Expired keys check completed successfully
+[2025-09-27 23:35:01.350126] Starting expired keys check...
+[2025-09-27 23:35:01.352813] No expired keys found
+[2025-09-27 23:35:01.354581] No orphaned keys found
+[2025-09-27 23:35:01.355551] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-27 23:35:01.356208] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-27 23:35:01.356241] Expired keys check completed successfully
+[2025-09-27 23:40:01.694126] Starting expired keys check...
+[2025-09-27 23:40:01.697032] No expired keys found
+[2025-09-27 23:40:01.699970] No orphaned keys found
+[2025-09-27 23:40:01.701115] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-27 23:40:01.702275] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-27 23:40:01.702320] Expired keys check completed successfully
+[2025-09-27 23:45:01.958866] Starting expired keys check...
+[2025-09-27 23:45:01.960415] No expired keys found
+[2025-09-27 23:45:01.961348] No orphaned keys found
+[2025-09-27 23:45:01.961956] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-27 23:45:01.962655] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-27 23:45:01.962692] Expired keys check completed successfully
+[2025-09-27 23:50:01.272594] Starting expired keys check...
+[2025-09-27 23:50:01.275367] No expired keys found
+[2025-09-27 23:50:01.277655] No orphaned keys found
+[2025-09-27 23:50:01.278431] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-27 23:50:01.279181] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-27 23:50:01.279213] Expired keys check completed successfully
+[2025-09-27 23:55:01.508030] Starting expired keys check...
+[2025-09-27 23:55:01.509022] No expired keys found
+[2025-09-27 23:55:01.509863] No orphaned keys found
+[2025-09-27 23:55:01.511849] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-27 23:55:01.515382] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-27 23:55:01.515460] Expired keys check completed successfully
+[2025-09-28 00:00:01.903323] Starting expired keys check...
+[2025-09-28 00:00:01.907910] No expired keys found
+[2025-09-28 00:00:01.909567] No orphaned keys found
+[2025-09-28 00:00:01.910626] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 00:00:01.911850] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 00:00:01.911903] Expired keys check completed successfully
+[2025-09-28 00:05:02.187444] Starting expired keys check...
+[2025-09-28 00:05:02.188290] No expired keys found
+[2025-09-28 00:05:02.189047] No orphaned keys found
+[2025-09-28 00:05:02.190188] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 00:05:02.194425] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 00:05:02.194648] Expired keys check completed successfully
+[2025-09-28 00:10:01.450804] Starting expired keys check...
+[2025-09-28 00:10:01.451818] No expired keys found
+[2025-09-28 00:10:01.452734] No orphaned keys found
+[2025-09-28 00:10:01.453958] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 00:10:01.456088] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 00:10:01.456192] Expired keys check completed successfully
+[2025-09-28 00:15:01.746131] Starting expired keys check...
+[2025-09-28 00:15:01.747065] No expired keys found
+[2025-09-28 00:15:01.747822] No orphaned keys found
+[2025-09-28 00:15:01.748528] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 00:15:01.749255] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 00:15:01.749285] Expired keys check completed successfully
+[2025-09-28 00:20:02.037085] Starting expired keys check...
+[2025-09-28 00:20:02.038488] No expired keys found
+[2025-09-28 00:20:02.039997] No orphaned keys found
+[2025-09-28 00:20:02.041686] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 00:20:02.044205] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 00:20:02.044249] Expired keys check completed successfully
+[2025-09-28 00:25:01.293034] Starting expired keys check...
+[2025-09-28 00:25:01.294042] No expired keys found
+[2025-09-28 00:25:01.294611] No orphaned keys found
+[2025-09-28 00:25:01.295171] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 00:25:01.295780] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 00:25:01.295800] Expired keys check completed successfully
+[2025-09-28 00:30:01.548976] Starting expired keys check...
+[2025-09-28 00:30:01.550027] No expired keys found
+[2025-09-28 00:30:01.550906] No orphaned keys found
+[2025-09-28 00:30:01.552229] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 00:30:01.553804] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 00:30:01.553843] Expired keys check completed successfully
+[2025-09-28 00:35:01.811837] Starting expired keys check...
+[2025-09-28 00:35:01.814437] No expired keys found
+[2025-09-28 00:35:01.815723] No orphaned keys found
+[2025-09-28 00:35:01.816684] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 00:35:01.817964] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 00:35:01.818003] Expired keys check completed successfully
+[2025-09-28 00:40:02.054133] Starting expired keys check...
+[2025-09-28 00:40:02.058040] No expired keys found
+[2025-09-28 00:40:02.059790] No orphaned keys found
+[2025-09-28 00:40:02.062333] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 00:40:02.063624] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 00:40:02.063669] Expired keys check completed successfully
+[2025-09-28 00:45:01.288634] Starting expired keys check...
+[2025-09-28 00:45:01.290261] No expired keys found
+[2025-09-28 00:45:01.291279] No orphaned keys found
+[2025-09-28 00:45:01.292122] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 00:45:01.293329] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 00:45:01.293389] Expired keys check completed successfully
+[2025-09-28 00:50:01.529159] Starting expired keys check...
+[2025-09-28 00:50:01.531219] No expired keys found
+[2025-09-28 00:50:01.533424] No orphaned keys found
+[2025-09-28 00:50:01.535271] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 00:50:01.536689] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 00:50:01.536730] Expired keys check completed successfully
+[2025-09-28 00:55:01.779837] Starting expired keys check...
+[2025-09-28 00:55:01.780936] No expired keys found
+[2025-09-28 00:55:01.781525] No orphaned keys found
+[2025-09-28 00:55:01.782219] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 00:55:01.783302] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 00:55:01.783337] Expired keys check completed successfully
+[2025-09-28 01:00:02.006362] Starting expired keys check...
+[2025-09-28 01:00:02.008347] No expired keys found
+[2025-09-28 01:00:02.010320] No orphaned keys found
+[2025-09-28 01:00:02.011334] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 01:00:02.013331] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 01:00:02.013408] Expired keys check completed successfully
+[2025-09-28 01:05:01.275194] Starting expired keys check...
+[2025-09-28 01:05:01.276483] No expired keys found
+[2025-09-28 01:05:01.277409] No orphaned keys found
+[2025-09-28 01:05:01.277960] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 01:05:01.278730] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 01:05:01.278762] Expired keys check completed successfully
+[2025-09-28 01:10:01.562629] Starting expired keys check...
+[2025-09-28 01:10:01.563856] No expired keys found
+[2025-09-28 01:10:01.565137] No orphaned keys found
+[2025-09-28 01:10:01.566576] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 01:10:01.569443] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 01:10:01.569768] Expired keys check completed successfully
+[2025-09-28 01:15:01.812884] Starting expired keys check...
+[2025-09-28 01:15:01.814817] No expired keys found
+[2025-09-28 01:15:01.816396] No orphaned keys found
+[2025-09-28 01:15:01.817635] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 01:15:01.819609] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 01:15:01.819660] Expired keys check completed successfully
+[2025-09-28 01:20:02.088744] Starting expired keys check...
+[2025-09-28 01:20:02.092674] No expired keys found
+[2025-09-28 01:20:02.096216] No orphaned keys found
+[2025-09-28 01:20:02.097438] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 01:20:02.099187] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 01:20:02.099242] Expired keys check completed successfully
+[2025-09-28 01:25:01.341554] Starting expired keys check...
+[2025-09-28 01:25:01.344786] No expired keys found
+[2025-09-28 01:25:01.345784] No orphaned keys found
+[2025-09-28 01:25:01.347844] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 01:25:01.349639] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 01:25:01.349690] Expired keys check completed successfully
+[2025-09-28 01:30:01.591412] Starting expired keys check...
+[2025-09-28 01:30:01.592610] No expired keys found
+[2025-09-28 01:30:01.593966] No orphaned keys found
+[2025-09-28 01:30:01.595492] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 01:30:01.598837] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 01:30:01.598902] Expired keys check completed successfully
+[2025-09-28 01:35:01.876707] Starting expired keys check...
+[2025-09-28 01:35:01.877895] No expired keys found
+[2025-09-28 01:35:01.878624] No orphaned keys found
+[2025-09-28 01:35:01.880030] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 01:35:01.881186] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 01:35:01.881385] Expired keys check completed successfully
+[2025-09-28 01:40:02.136824] Starting expired keys check...
+[2025-09-28 01:40:02.140659] No expired keys found
+[2025-09-28 01:40:02.141925] No orphaned keys found
+[2025-09-28 01:40:02.143898] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 01:40:02.145198] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 01:40:02.145243] Expired keys check completed successfully
+[2025-09-28 01:45:01.459198] Starting expired keys check...
+[2025-09-28 01:45:01.460651] No expired keys found
+[2025-09-28 01:45:01.462056] No orphaned keys found
+[2025-09-28 01:45:01.464596] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 01:45:01.467428] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 01:45:01.467511] Expired keys check completed successfully
+[2025-09-28 01:50:01.749756] Starting expired keys check...
+[2025-09-28 01:50:01.750855] No expired keys found
+[2025-09-28 01:50:01.752928] No orphaned keys found
+[2025-09-28 01:50:01.754813] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 01:50:01.756262] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 01:50:01.756302] Expired keys check completed successfully
+[2025-09-28 01:55:02.031074] Starting expired keys check...
+[2025-09-28 01:55:02.031967] No expired keys found
+[2025-09-28 01:55:02.032975] No orphaned keys found
+[2025-09-28 01:55:02.035840] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 01:55:02.039877] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 01:55:02.039960] Expired keys check completed successfully
+[2025-09-28 02:00:01.311807] Starting expired keys check...
+[2025-09-28 02:00:01.313304] No expired keys found
+[2025-09-28 02:00:01.315831] No orphaned keys found
+[2025-09-28 02:00:01.319173] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 02:00:01.320773] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 02:00:01.320821] Expired keys check completed successfully
+[2025-09-28 02:05:01.539595] Starting expired keys check...
+[2025-09-28 02:05:01.541077] No expired keys found
+[2025-09-28 02:05:01.543327] No orphaned keys found
+[2025-09-28 02:05:01.544613] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 02:05:01.545649] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 02:05:01.545698] Expired keys check completed successfully
+[2025-09-28 02:10:01.850070] Starting expired keys check...
+[2025-09-28 02:10:01.852817] No expired keys found
+[2025-09-28 02:10:01.854194] No orphaned keys found
+[2025-09-28 02:10:01.855784] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 02:10:01.857972] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 02:10:01.858026] Expired keys check completed successfully
+[2025-09-28 02:15:02.166432] Starting expired keys check...
+[2025-09-28 02:15:02.167612] No expired keys found
+[2025-09-28 02:15:02.169568] No orphaned keys found
+[2025-09-28 02:15:02.170505] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 02:15:02.171188] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 02:15:02.171218] Expired keys check completed successfully
+[2025-09-28 02:20:01.498250] Starting expired keys check...
+[2025-09-28 02:20:01.499162] No expired keys found
+[2025-09-28 02:20:01.499934] No orphaned keys found
+[2025-09-28 02:20:01.500775] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 02:20:01.502104] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 02:20:01.502213] Expired keys check completed successfully
+[2025-09-28 02:25:01.786536] Starting expired keys check...
+[2025-09-28 02:25:01.787925] No expired keys found
+[2025-09-28 02:25:01.789325] No orphaned keys found
+[2025-09-28 02:25:01.790217] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 02:25:01.791153] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 02:25:01.791186] Expired keys check completed successfully
+[2025-09-28 02:30:02.030829] Starting expired keys check...
+[2025-09-28 02:30:02.032914] No expired keys found
+[2025-09-28 02:30:02.034146] No orphaned keys found
+[2025-09-28 02:30:02.035096] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 02:30:02.036165] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 02:30:02.036223] Expired keys check completed successfully
+[2025-09-28 02:35:01.299101] Starting expired keys check...
+[2025-09-28 02:35:01.300274] No expired keys found
+[2025-09-28 02:35:01.302258] No orphaned keys found
+[2025-09-28 02:35:01.305131] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 02:35:01.307656] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 02:35:01.307697] Expired keys check completed successfully
+[2025-09-28 02:40:01.578956] Starting expired keys check...
+[2025-09-28 02:40:01.580072] No expired keys found
+[2025-09-28 02:40:01.580969] No orphaned keys found
+[2025-09-28 02:40:01.581959] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 02:40:01.583079] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 02:40:01.583123] Expired keys check completed successfully
+[2025-09-28 02:45:01.878790] Starting expired keys check...
+[2025-09-28 02:45:01.883254] No expired keys found
+[2025-09-28 02:45:01.885970] No orphaned keys found
+[2025-09-28 02:45:01.887390] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 02:45:01.891115] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 02:45:01.891313] Expired keys check completed successfully
+[2025-09-28 02:50:02.174320] Starting expired keys check...
+[2025-09-28 02:50:02.175713] No expired keys found
+[2025-09-28 02:50:02.177129] No orphaned keys found
+[2025-09-28 02:50:02.177780] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 02:50:02.178364] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 02:50:02.178389] Expired keys check completed successfully
+[2025-09-28 02:55:01.428790] Starting expired keys check...
+[2025-09-28 02:55:01.430802] No expired keys found
+[2025-09-28 02:55:01.431923] No orphaned keys found
+[2025-09-28 02:55:01.433137] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 02:55:01.434137] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 02:55:01.434180] Expired keys check completed successfully
+[2025-09-28 03:00:01.695244] Starting expired keys check...
+[2025-09-28 03:00:01.696641] No expired keys found
+[2025-09-28 03:00:01.698004] No orphaned keys found
+[2025-09-28 03:00:01.699626] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 03:00:01.701785] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 03:00:01.701856] Expired keys check completed successfully
+[2025-09-28 03:05:01.971520] Starting expired keys check...
+[2025-09-28 03:05:01.972274] No expired keys found
+[2025-09-28 03:05:01.972944] No orphaned keys found
+[2025-09-28 03:05:01.973967] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 03:05:01.976026] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 03:05:01.976140] Expired keys check completed successfully
+[2025-09-28 03:10:01.271234] Starting expired keys check...
+[2025-09-28 03:10:01.273106] No expired keys found
+[2025-09-28 03:10:01.274204] No orphaned keys found
+[2025-09-28 03:10:01.275513] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 03:10:01.278773] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 03:10:01.278817] Expired keys check completed successfully
+[2025-09-28 03:15:01.604595] Starting expired keys check...
+[2025-09-28 03:15:01.608842] No expired keys found
+[2025-09-28 03:15:01.610129] No orphaned keys found
+[2025-09-28 03:15:01.611118] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 03:15:01.613195] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 03:15:01.613245] Expired keys check completed successfully
+[2025-09-28 03:20:01.909387] Starting expired keys check...
+[2025-09-28 03:20:01.912099] No expired keys found
+[2025-09-28 03:20:01.915336] No orphaned keys found
+[2025-09-28 03:20:01.916402] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 03:20:01.918397] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 03:20:01.918541] Expired keys check completed successfully
+[2025-09-28 03:25:02.215139] Starting expired keys check...
+[2025-09-28 03:25:02.215915] No expired keys found
+[2025-09-28 03:25:02.216543] No orphaned keys found
+[2025-09-28 03:25:02.217881] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 03:25:02.218593] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 03:25:02.218627] Expired keys check completed successfully
+[2025-09-28 03:30:01.493053] Starting expired keys check...
+[2025-09-28 03:30:01.494443] No expired keys found
+[2025-09-28 03:30:01.495454] No orphaned keys found
+[2025-09-28 03:30:01.496421] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 03:30:01.497459] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 03:30:01.497517] Expired keys check completed successfully
+[2025-09-28 03:35:01.777700] Starting expired keys check...
+[2025-09-28 03:35:01.778629] No expired keys found
+[2025-09-28 03:35:01.779319] No orphaned keys found
+[2025-09-28 03:35:01.780730] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 03:35:01.784680] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 03:35:01.784724] Expired keys check completed successfully
+[2025-09-28 03:40:02.085768] Starting expired keys check...
+[2025-09-28 03:40:02.088144] No expired keys found
+[2025-09-28 03:40:02.089350] No orphaned keys found
+[2025-09-28 03:40:02.091098] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 03:40:02.093756] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 03:40:02.093902] Expired keys check completed successfully
+[2025-09-28 03:45:01.398530] Starting expired keys check...
+[2025-09-28 03:45:01.402008] No expired keys found
+[2025-09-28 03:45:01.405419] No orphaned keys found
+[2025-09-28 03:45:01.407449] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 03:45:01.410138] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 03:45:01.410192] Expired keys check completed successfully
+[2025-09-28 03:50:01.719082] Starting expired keys check...
+[2025-09-28 03:50:01.721004] No expired keys found
+[2025-09-28 03:50:01.722611] No orphaned keys found
+[2025-09-28 03:50:01.723977] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 03:50:01.726794] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 03:50:01.726839] Expired keys check completed successfully
+[2025-09-28 03:55:02.027711] Starting expired keys check...
+[2025-09-28 03:55:02.030283] No expired keys found
+[2025-09-28 03:55:02.031410] No orphaned keys found
+[2025-09-28 03:55:02.032357] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 03:55:02.034163] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 03:55:02.034259] Expired keys check completed successfully
+[2025-09-28 04:00:01.329118] Starting expired keys check...
+[2025-09-28 04:00:01.330705] No expired keys found
+[2025-09-28 04:00:01.331710] No orphaned keys found
+[2025-09-28 04:00:01.332526] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 04:00:01.333559] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 04:00:01.333597] Expired keys check completed successfully
+[2025-09-28 04:05:01.573413] Starting expired keys check...
+[2025-09-28 04:05:01.575224] No expired keys found
+[2025-09-28 04:05:01.576692] No orphaned keys found
+[2025-09-28 04:05:01.577893] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 04:05:01.578698] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 04:05:01.578729] Expired keys check completed successfully
+[2025-09-28 04:10:01.905232] Starting expired keys check...
+[2025-09-28 04:10:01.907148] No expired keys found
+[2025-09-28 04:10:01.909372] No orphaned keys found
+[2025-09-28 04:10:01.910461] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 04:10:01.912128] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 04:10:01.912178] Expired keys check completed successfully
+[2025-09-28 04:15:02.244662] Starting expired keys check...
+[2025-09-28 04:15:02.246803] No expired keys found
+[2025-09-28 04:15:02.248016] No orphaned keys found
+[2025-09-28 04:15:02.248809] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 04:15:02.250041] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 04:15:02.250086] Expired keys check completed successfully
+[2025-09-28 04:20:01.602422] Starting expired keys check...
+[2025-09-28 04:20:01.604604] No expired keys found
+[2025-09-28 04:20:01.605766] No orphaned keys found
+[2025-09-28 04:20:01.606918] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 04:20:01.608093] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 04:20:01.608146] Expired keys check completed successfully
+[2025-09-28 04:25:01.870132] Starting expired keys check...
+[2025-09-28 04:25:01.872186] No expired keys found
+[2025-09-28 04:25:01.873960] No orphaned keys found
+[2025-09-28 04:25:01.875200] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 04:25:01.876174] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 04:25:01.876214] Expired keys check completed successfully
+[2025-09-28 04:30:02.155187] Starting expired keys check...
+[2025-09-28 04:30:02.157335] No expired keys found
+[2025-09-28 04:30:02.159348] No orphaned keys found
+[2025-09-28 04:30:02.160629] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 04:30:02.162858] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 04:30:02.162913] Expired keys check completed successfully
+[2025-09-28 04:35:01.409228] Starting expired keys check...
+[2025-09-28 04:35:01.410153] No expired keys found
+[2025-09-28 04:35:01.410744] No orphaned keys found
+[2025-09-28 04:35:01.411260] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 04:35:01.412551] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 04:35:01.412646] Expired keys check completed successfully
+[2025-09-28 04:40:01.672018] Starting expired keys check...
+[2025-09-28 04:40:01.673336] No expired keys found
+[2025-09-28 04:40:01.674546] No orphaned keys found
+[2025-09-28 04:40:01.675262] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 04:40:01.676669] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 04:40:01.676737] Expired keys check completed successfully
+[2025-09-28 04:45:01.920833] Starting expired keys check...
+[2025-09-28 04:45:01.921627] No expired keys found
+[2025-09-28 04:45:01.922291] No orphaned keys found
+[2025-09-28 04:45:01.922903] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 04:45:01.923635] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 04:45:01.923701] Expired keys check completed successfully
+[2025-09-28 04:50:02.258328] Starting expired keys check...
+[2025-09-28 04:50:02.260547] No expired keys found
+[2025-09-28 04:50:02.262161] No orphaned keys found
+[2025-09-28 04:50:02.264776] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 04:50:02.266041] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 04:50:02.266079] Expired keys check completed successfully
+[2025-09-28 04:55:01.530610] Starting expired keys check...
+[2025-09-28 04:55:01.531725] No expired keys found
+[2025-09-28 04:55:01.532848] No orphaned keys found
+[2025-09-28 04:55:01.533664] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 04:55:01.534275] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 04:55:01.534301] Expired keys check completed successfully
+[2025-09-28 05:00:01.885448] Starting expired keys check...
+[2025-09-28 05:00:01.888748] No expired keys found
+[2025-09-28 05:00:01.889904] No orphaned keys found
+[2025-09-28 05:00:01.893393] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 05:00:01.898189] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 05:00:01.898231] Expired keys check completed successfully
+[2025-09-28 05:05:02.209846] Starting expired keys check...
+[2025-09-28 05:05:02.212588] No expired keys found
+[2025-09-28 05:05:02.214641] No orphaned keys found
+[2025-09-28 05:05:02.216094] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 05:05:02.218421] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 05:05:02.218489] Expired keys check completed successfully
+[2025-09-28 05:10:01.518989] Starting expired keys check...
+[2025-09-28 05:10:01.520807] No expired keys found
+[2025-09-28 05:10:01.523581] No orphaned keys found
+[2025-09-28 05:10:01.525884] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 05:10:01.528540] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 05:10:01.528611] Expired keys check completed successfully
+[2025-09-28 05:15:01.812889] Starting expired keys check...
+[2025-09-28 05:15:01.814123] No expired keys found
+[2025-09-28 05:15:01.815340] No orphaned keys found
+[2025-09-28 05:15:01.816735] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 05:15:01.817392] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 05:15:01.817421] Expired keys check completed successfully
+[2025-09-28 05:20:02.090590] Starting expired keys check...
+[2025-09-28 05:20:02.091670] No expired keys found
+[2025-09-28 05:20:02.092593] No orphaned keys found
+[2025-09-28 05:20:02.093392] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 05:20:02.094361] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 05:20:02.094400] Expired keys check completed successfully
+[2025-09-28 05:25:01.406975] Starting expired keys check...
+[2025-09-28 05:25:01.408981] No expired keys found
+[2025-09-28 05:25:01.410505] No orphaned keys found
+[2025-09-28 05:25:01.413106] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 05:25:01.416354] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 05:25:01.416436] Expired keys check completed successfully
+[2025-09-28 05:30:01.737066] Starting expired keys check...
+[2025-09-28 05:30:01.738224] No expired keys found
+[2025-09-28 05:30:01.739046] No orphaned keys found
+[2025-09-28 05:30:01.739698] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 05:30:01.741678] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 05:30:01.741733] Expired keys check completed successfully
+[2025-09-28 05:35:02.018675] Starting expired keys check...
+[2025-09-28 05:35:02.020642] No expired keys found
+[2025-09-28 05:35:02.022193] No orphaned keys found
+[2025-09-28 05:35:02.024534] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 05:35:02.027242] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 05:35:02.027336] Expired keys check completed successfully
+[2025-09-28 05:40:01.351870] Starting expired keys check...
+[2025-09-28 05:40:01.353319] No expired keys found
+[2025-09-28 05:40:01.354966] No orphaned keys found
+[2025-09-28 05:40:01.356358] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 05:40:01.358852] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 05:40:01.358966] Expired keys check completed successfully
+[2025-09-28 05:45:01.598697] Starting expired keys check...
+[2025-09-28 05:45:01.600588] No expired keys found
+[2025-09-28 05:45:01.602368] No orphaned keys found
+[2025-09-28 05:45:01.603649] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 05:45:01.605587] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 05:45:01.605682] Expired keys check completed successfully
+[2025-09-28 05:50:01.890503] Starting expired keys check...
+[2025-09-28 05:50:01.891547] No expired keys found
+[2025-09-28 05:50:01.892174] No orphaned keys found
+[2025-09-28 05:50:01.894784] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 05:50:01.897750] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 05:50:01.897869] Expired keys check completed successfully
+[2025-09-28 05:55:02.215716] Starting expired keys check...
+[2025-09-28 05:55:02.216928] No expired keys found
+[2025-09-28 05:55:02.217738] No orphaned keys found
+[2025-09-28 05:55:02.218284] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 05:55:02.220199] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 05:55:02.220246] Expired keys check completed successfully
+[2025-09-28 06:00:01.516444] Starting expired keys check...
+[2025-09-28 06:00:01.517379] No expired keys found
+[2025-09-28 06:00:01.518141] No orphaned keys found
+[2025-09-28 06:00:01.518745] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 06:00:01.519287] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 06:00:01.519306] Expired keys check completed successfully
+[2025-09-28 06:05:01.831879] Starting expired keys check...
+[2025-09-28 06:05:01.833271] No expired keys found
+[2025-09-28 06:05:01.834335] No orphaned keys found
+[2025-09-28 06:05:01.836886] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 06:05:01.841842] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 06:05:01.841928] Expired keys check completed successfully
+[2025-09-28 06:10:02.136194] Starting expired keys check...
+[2025-09-28 06:10:02.137947] No expired keys found
+[2025-09-28 06:10:02.139371] No orphaned keys found
+[2025-09-28 06:10:02.143119] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 06:10:02.147863] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 06:10:02.148046] Expired keys check completed successfully
+[2025-09-28 06:15:01.394104] Starting expired keys check...
+[2025-09-28 06:15:01.395075] No expired keys found
+[2025-09-28 06:15:01.396045] No orphaned keys found
+[2025-09-28 06:15:01.397618] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 06:15:01.399977] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 06:15:01.400087] Expired keys check completed successfully
+[2025-09-28 06:20:01.742639] Starting expired keys check...
+[2025-09-28 06:20:01.744022] No expired keys found
+[2025-09-28 06:20:01.746142] No orphaned keys found
+[2025-09-28 06:20:01.751403] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 06:20:01.753423] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 06:20:01.753486] Expired keys check completed successfully
+[2025-09-28 06:25:02.029725] Starting expired keys check...
+[2025-09-28 06:25:02.030841] No expired keys found
+[2025-09-28 06:25:02.031456] No orphaned keys found
+[2025-09-28 06:25:02.032239] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 06:25:02.032996] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 06:25:02.033024] Expired keys check completed successfully
+[2025-09-28 06:30:01.371878] Starting expired keys check...
+[2025-09-28 06:30:01.375968] No expired keys found
+[2025-09-28 06:30:01.378746] No orphaned keys found
+[2025-09-28 06:30:01.380646] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 06:30:01.381558] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 06:30:01.381606] Expired keys check completed successfully
+[2025-09-28 06:35:01.672736] Starting expired keys check...
+[2025-09-28 06:35:01.675219] No expired keys found
+[2025-09-28 06:35:01.677278] No orphaned keys found
+[2025-09-28 06:35:01.678797] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 06:35:01.680756] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 06:35:01.680845] Expired keys check completed successfully
+[2025-09-28 06:40:01.937137] Starting expired keys check...
+[2025-09-28 06:40:01.938884] No expired keys found
+[2025-09-28 06:40:01.940583] No orphaned keys found
+[2025-09-28 06:40:01.941350] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 06:40:01.942024] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 06:40:01.942051] Expired keys check completed successfully
+[2025-09-28 06:45:02.249218] Starting expired keys check...
+[2025-09-28 06:45:02.250366] No expired keys found
+[2025-09-28 06:45:02.251344] No orphaned keys found
+[2025-09-28 06:45:02.252061] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 06:45:02.253242] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 06:45:02.253294] Expired keys check completed successfully
+[2025-09-28 06:50:01.605387] Starting expired keys check...
+[2025-09-28 06:50:01.606644] No expired keys found
+[2025-09-28 06:50:01.607961] No orphaned keys found
+[2025-09-28 06:50:01.609842] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 06:50:01.611174] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 06:50:01.611231] Expired keys check completed successfully
+[2025-09-28 06:55:01.931321] Starting expired keys check...
+[2025-09-28 06:55:01.932585] No expired keys found
+[2025-09-28 06:55:01.934081] No orphaned keys found
+[2025-09-28 06:55:01.936370] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 06:55:01.937181] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 06:55:01.937207] Expired keys check completed successfully
+[2025-09-28 07:00:02.251135] Starting expired keys check...
+[2025-09-28 07:00:02.254260] No expired keys found
+[2025-09-28 07:00:02.257256] No orphaned keys found
+[2025-09-28 07:00:02.258515] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 07:00:02.260356] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 07:00:02.260456] Expired keys check completed successfully
+[2025-09-28 07:05:01.541535] Starting expired keys check...
+[2025-09-28 07:05:01.543821] No expired keys found
+[2025-09-28 07:05:01.544640] No orphaned keys found
+[2025-09-28 07:05:01.545268] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 07:05:01.545891] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 07:05:01.545914] Expired keys check completed successfully
+[2025-09-28 07:10:01.854448] Starting expired keys check...
+[2025-09-28 07:10:01.857510] No expired keys found
+[2025-09-28 07:10:01.859089] No orphaned keys found
+[2025-09-28 07:10:01.860007] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 07:10:01.862703] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 07:10:01.862805] Expired keys check completed successfully
+[2025-09-28 07:15:02.154111] Starting expired keys check...
+[2025-09-28 07:15:02.156765] No expired keys found
+[2025-09-28 07:15:02.158110] No orphaned keys found
+[2025-09-28 07:15:02.159412] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 07:15:02.162197] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 07:15:02.162309] Expired keys check completed successfully
+[2025-09-28 07:20:01.514883] Starting expired keys check...
+[2025-09-28 07:20:01.516393] No expired keys found
+[2025-09-28 07:20:01.517114] No orphaned keys found
+[2025-09-28 07:20:01.517861] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 07:20:01.518542] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 07:20:01.518570] Expired keys check completed successfully
+[2025-09-28 07:25:01.871760] Starting expired keys check...
+[2025-09-28 07:25:01.876200] No expired keys found
+[2025-09-28 07:25:01.879425] No orphaned keys found
+[2025-09-28 07:25:01.881870] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 07:25:01.883233] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 07:25:01.883289] Expired keys check completed successfully
+[2025-09-28 07:30:02.197293] Starting expired keys check...
+[2025-09-28 07:30:02.198700] No expired keys found
+[2025-09-28 07:30:02.201548] No orphaned keys found
+[2025-09-28 07:30:02.204856] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 07:30:02.206990] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 07:30:02.207035] Expired keys check completed successfully
+[2025-09-28 07:35:01.461717] Starting expired keys check...
+[2025-09-28 07:35:01.463443] No expired keys found
+[2025-09-28 07:35:01.464516] No orphaned keys found
+[2025-09-28 07:35:01.465328] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 07:35:01.466535] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 07:35:01.466583] Expired keys check completed successfully
+[2025-09-28 07:40:01.754396] Starting expired keys check...
+[2025-09-28 07:40:01.756305] No expired keys found
+[2025-09-28 07:40:01.757844] No orphaned keys found
+[2025-09-28 07:40:01.759416] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 07:40:01.760948] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 07:40:01.761032] Expired keys check completed successfully
+[2025-09-28 07:45:02.109436] Starting expired keys check...
+[2025-09-28 07:45:02.113899] No expired keys found
+[2025-09-28 07:45:02.115310] No orphaned keys found
+[2025-09-28 07:45:02.116359] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 07:45:02.117632] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 07:45:02.117680] Expired keys check completed successfully
+[2025-09-28 07:50:01.426933] Starting expired keys check...
+[2025-09-28 07:50:01.428395] No expired keys found
+[2025-09-28 07:50:01.430035] No orphaned keys found
+[2025-09-28 07:50:01.431964] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 07:50:01.434855] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 07:50:01.434936] Expired keys check completed successfully
+[2025-09-28 07:55:01.707313] Starting expired keys check...
+[2025-09-28 07:55:01.709040] No expired keys found
+[2025-09-28 07:55:01.710292] No orphaned keys found
+[2025-09-28 07:55:01.711283] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 07:55:01.714432] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 07:55:01.714574] Expired keys check completed successfully
+[2025-09-28 08:00:02.009010] Starting expired keys check...
+[2025-09-28 08:00:02.011934] No expired keys found
+[2025-09-28 08:00:02.014865] No orphaned keys found
+[2025-09-28 08:00:02.016402] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 08:00:02.017618] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 08:00:02.017664] Expired keys check completed successfully
+[2025-09-28 08:05:01.315075] Starting expired keys check...
+[2025-09-28 08:05:01.316979] No expired keys found
+[2025-09-28 08:05:01.317773] No orphaned keys found
+[2025-09-28 08:05:01.318611] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 08:05:01.319213] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 08:05:01.319234] Expired keys check completed successfully
+[2025-09-28 08:10:01.611039] Starting expired keys check...
+[2025-09-28 08:10:01.612685] No expired keys found
+[2025-09-28 08:10:01.614345] No orphaned keys found
+[2025-09-28 08:10:01.615416] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 08:10:01.617304] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 08:10:01.617620] Expired keys check completed successfully
+[2025-09-28 08:15:02.023020] Starting expired keys check...
+[2025-09-28 08:15:02.024220] No expired keys found
+[2025-09-28 08:15:02.025121] No orphaned keys found
+[2025-09-28 08:15:02.026126] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 08:15:02.027103] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 08:15:02.027142] Expired keys check completed successfully
+[2025-09-28 08:20:01.378112] Starting expired keys check...
+[2025-09-28 08:20:01.378852] No expired keys found
+[2025-09-28 08:20:01.379401] No orphaned keys found
+[2025-09-28 08:20:01.380423] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 08:20:01.382088] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 08:20:01.382131] Expired keys check completed successfully
+[2025-09-28 08:25:01.810538] Starting expired keys check...
+[2025-09-28 08:25:01.812760] No expired keys found
+[2025-09-28 08:25:01.814107] No orphaned keys found
+[2025-09-28 08:25:01.815736] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 08:25:01.819312] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 08:25:01.819573] Expired keys check completed successfully
+[2025-09-28 08:30:02.124193] Starting expired keys check...
+[2025-09-28 08:30:02.125361] No expired keys found
+[2025-09-28 08:30:02.126309] No orphaned keys found
+[2025-09-28 08:30:02.127253] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 08:30:02.128400] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 08:30:02.128443] Expired keys check completed successfully
+[2025-09-28 08:35:01.512880] Starting expired keys check...
+[2025-09-28 08:35:01.514049] No expired keys found
+[2025-09-28 08:35:01.515081] No orphaned keys found
+[2025-09-28 08:35:01.515958] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 08:35:01.517557] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 08:35:01.517643] Expired keys check completed successfully
+[2025-09-28 08:40:01.984686] Starting expired keys check...
+[2025-09-28 08:40:01.986227] No expired keys found
+[2025-09-28 08:40:01.994930] No orphaned keys found
+[2025-09-28 08:40:01.995967] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 08:40:01.997025] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 08:40:01.997063] Expired keys check completed successfully
+[2025-09-28 08:45:01.414192] Starting expired keys check...
+[2025-09-28 08:45:01.416393] No expired keys found
+[2025-09-28 08:45:01.424458] No orphaned keys found
+[2025-09-28 08:45:01.425720] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 08:45:01.427834] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 08:45:01.427884] Expired keys check completed successfully
+[2025-09-28 08:50:01.876780] Starting expired keys check...
+[2025-09-28 08:50:01.879289] No expired keys found
+[2025-09-28 08:50:01.880956] No orphaned keys found
+[2025-09-28 08:50:01.882042] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 08:50:01.883605] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 08:50:01.883723] Expired keys check completed successfully
+[2025-09-28 08:55:02.234881] Starting expired keys check...
+[2025-09-28 08:55:02.237898] No expired keys found
+[2025-09-28 08:55:02.239671] No orphaned keys found
+[2025-09-28 08:55:02.241648] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 08:55:02.243080] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 08:55:02.243187] Expired keys check completed successfully
+[2025-09-28 09:00:01.659091] Starting expired keys check...
+[2025-09-28 09:00:01.660323] No expired keys found
+[2025-09-28 09:00:01.661872] No orphaned keys found
+[2025-09-28 09:00:01.663009] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 09:00:01.664253] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 09:00:01.664281] Expired keys check completed successfully
+[2025-09-28 09:05:01.959512] Starting expired keys check...
+[2025-09-28 09:05:01.960700] No expired keys found
+[2025-09-28 09:05:01.961535] No orphaned keys found
+[2025-09-28 09:05:01.962501] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 09:05:01.963351] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 09:05:01.963420] Expired keys check completed successfully
+[2025-09-28 09:10:01.323755] Starting expired keys check...
+[2025-09-28 09:10:01.325654] No expired keys found
+[2025-09-28 09:10:01.329623] No orphaned keys found
+[2025-09-28 09:10:01.332393] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 09:10:01.337585] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 09:10:01.337655] Expired keys check completed successfully
+[2025-09-28 09:15:01.768370] Starting expired keys check...
+[2025-09-28 09:15:01.769672] No expired keys found
+[2025-09-28 09:15:01.770772] No orphaned keys found
+[2025-09-28 09:15:01.772540] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 09:15:01.780035] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 09:15:01.780077] Expired keys check completed successfully
+[2025-09-28 09:20:02.238709] Starting expired keys check...
+[2025-09-28 09:20:02.241011] No expired keys found
+[2025-09-28 09:20:02.242327] No orphaned keys found
+[2025-09-28 09:20:02.243602] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 09:20:02.246848] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 09:20:02.247000] Expired keys check completed successfully
+[2025-09-28 09:25:01.668257] Starting expired keys check...
+[2025-09-28 09:25:01.671399] No expired keys found
+[2025-09-28 09:25:01.672922] No orphaned keys found
+[2025-09-28 09:25:01.674182] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 09:25:01.675689] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 09:25:01.675764] Expired keys check completed successfully
+[2025-09-28 09:30:02.114749] Starting expired keys check...
+[2025-09-28 09:30:02.122982] No expired keys found
+[2025-09-28 09:30:02.127002] No orphaned keys found
+[2025-09-28 09:30:02.129483] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 09:30:02.132534] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 09:30:02.132688] Expired keys check completed successfully
+[2025-09-28 09:35:01.608876] Starting expired keys check...
+[2025-09-28 09:35:01.610378] No expired keys found
+[2025-09-28 09:35:01.612550] No orphaned keys found
+[2025-09-28 09:35:01.614894] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 09:35:01.616330] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 09:35:01.616371] Expired keys check completed successfully
+[2025-09-28 09:40:02.008814] Starting expired keys check...
+[2025-09-28 09:40:02.011449] No expired keys found
+[2025-09-28 09:40:02.018990] No orphaned keys found
+[2025-09-28 09:40:02.021147] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 09:40:02.023104] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 09:40:02.023154] Expired keys check completed successfully
+[2025-09-28 09:45:01.425953] Starting expired keys check...
+[2025-09-28 09:45:01.428743] No expired keys found
+[2025-09-28 09:45:01.430910] No orphaned keys found
+[2025-09-28 09:45:01.432277] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 09:45:01.433511] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 09:45:01.433558] Expired keys check completed successfully
+[2025-09-28 09:50:02.005376] Starting expired keys check...
+[2025-09-28 09:50:02.007044] No expired keys found
+[2025-09-28 09:50:02.015290] No orphaned keys found
+[2025-09-28 09:50:02.016764] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 09:50:02.018832] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 09:50:02.018916] Expired keys check completed successfully
+[2025-09-28 09:55:01.707702] Starting expired keys check...
+[2025-09-28 09:55:01.710504] No expired keys found
+[2025-09-28 09:55:01.719925] No orphaned keys found
+[2025-09-28 09:55:01.721128] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 09:55:01.722685] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 09:55:01.722731] Expired keys check completed successfully
+[2025-09-28 10:00:02.137405] Starting expired keys check...
+[2025-09-28 10:00:02.138522] No expired keys found
+[2025-09-28 10:00:02.139500] No orphaned keys found
+[2025-09-28 10:00:02.140209] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 10:00:02.140922] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 10:00:02.140949] Expired keys check completed successfully
+[2025-09-28 10:05:01.561938] Starting expired keys check...
+[2025-09-28 10:05:01.565790] No expired keys found
+[2025-09-28 10:05:01.568393] No orphaned keys found
+[2025-09-28 10:05:01.575964] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 10:05:01.577966] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 10:05:01.578012] Expired keys check completed successfully
+[2025-09-28 10:10:02.056948] Starting expired keys check...
+[2025-09-28 10:10:02.058178] No expired keys found
+[2025-09-28 10:10:02.059239] No orphaned keys found
+[2025-09-28 10:10:02.061961] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 10:10:02.063746] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 10:10:02.063831] Expired keys check completed successfully
+[2025-09-28 10:15:01.470238] Starting expired keys check...
+[2025-09-28 10:15:01.471946] No expired keys found
+[2025-09-28 10:15:01.473847] No orphaned keys found
+[2025-09-28 10:15:01.475264] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 10:15:01.476787] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 10:15:01.476846] Expired keys check completed successfully
+[2025-09-28 10:20:01.990393] Starting expired keys check...
+[2025-09-28 10:20:01.997934] No expired keys found
+[2025-09-28 10:20:01.998998] No orphaned keys found
+[2025-09-28 10:20:02.000523] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 10:20:02.001699] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 10:20:02.001738] Expired keys check completed successfully
+[2025-09-28 10:25:01.487048] Starting expired keys check...
+[2025-09-28 10:25:01.490107] No expired keys found
+[2025-09-28 10:25:01.492545] No orphaned keys found
+[2025-09-28 10:25:01.494156] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 10:25:01.502120] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 10:25:01.502162] Expired keys check completed successfully
+[2025-09-28 10:30:02.038219] Starting expired keys check...
+[2025-09-28 10:30:02.040280] No expired keys found
+[2025-09-28 10:30:02.043825] No orphaned keys found
+[2025-09-28 10:30:02.046245] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 10:30:02.053623] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 10:30:02.053667] Expired keys check completed successfully
+[2025-09-28 10:35:01.479927] Starting expired keys check...
+[2025-09-28 10:35:01.481847] No expired keys found
+[2025-09-28 10:35:01.483115] No orphaned keys found
+[2025-09-28 10:35:01.484042] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 10:35:01.484777] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 10:35:01.484806] Expired keys check completed successfully
+[2025-09-28 10:40:01.940910] Starting expired keys check...
+[2025-09-28 10:40:01.942778] No expired keys found
+[2025-09-28 10:40:01.944891] No orphaned keys found
+[2025-09-28 10:40:01.946013] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 10:40:01.949757] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 10:40:01.949897] Expired keys check completed successfully
+[2025-09-28 10:45:01.358801] Starting expired keys check...
+[2025-09-28 10:45:01.360840] No expired keys found
+[2025-09-28 10:45:01.362865] No orphaned keys found
+[2025-09-28 10:45:01.370324] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 10:45:01.372740] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 10:45:01.372787] Expired keys check completed successfully
+[2025-09-28 10:50:01.813721] Starting expired keys check...
+[2025-09-28 10:50:01.815187] No expired keys found
+[2025-09-28 10:50:01.816361] No orphaned keys found
+[2025-09-28 10:50:01.817687] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 10:50:01.820379] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 10:50:01.820431] Expired keys check completed successfully
+[2025-09-28 10:55:02.188097] Starting expired keys check...
+[2025-09-28 10:55:02.189686] No expired keys found
+[2025-09-28 10:55:02.191135] No orphaned keys found
+[2025-09-28 10:55:02.194418] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 10:55:02.202345] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 10:55:02.202434] Expired keys check completed successfully
+[2025-09-28 11:00:01.609283] Starting expired keys check...
+[2025-09-28 11:00:01.611042] No expired keys found
+[2025-09-28 11:00:01.612272] No orphaned keys found
+[2025-09-28 11:00:01.613354] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 11:00:01.614914] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 11:00:01.614996] Expired keys check completed successfully
+[2025-09-28 11:05:02.058602] Starting expired keys check...
+[2025-09-28 11:05:02.060234] No expired keys found
+[2025-09-28 11:05:02.061353] No orphaned keys found
+[2025-09-28 11:05:02.062742] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 11:05:02.065105] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 11:05:02.065212] Expired keys check completed successfully
+[2025-09-28 11:10:01.516892] Starting expired keys check...
+[2025-09-28 11:10:01.520957] No expired keys found
+[2025-09-28 11:10:01.523335] No orphaned keys found
+[2025-09-28 11:10:01.525330] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 11:10:01.526479] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 11:10:01.526530] Expired keys check completed successfully
+[2025-09-28 11:15:01.909786] Starting expired keys check...
+[2025-09-28 11:15:01.911018] No expired keys found
+[2025-09-28 11:15:01.912058] No orphaned keys found
+[2025-09-28 11:15:01.913272] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 11:15:01.915081] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 11:15:01.915127] Expired keys check completed successfully
+[2025-09-28 11:20:01.388422] Starting expired keys check...
+[2025-09-28 11:20:01.391115] No expired keys found
+[2025-09-28 11:20:01.392454] No orphaned keys found
+[2025-09-28 11:20:01.395133] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 11:20:01.398746] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 11:20:01.398867] Expired keys check completed successfully
+[2025-09-28 11:25:01.787949] Starting expired keys check...
+[2025-09-28 11:25:01.795245] No expired keys found
+[2025-09-28 11:25:01.796694] No orphaned keys found
+[2025-09-28 11:25:01.797427] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 11:25:01.798249] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 11:25:01.798282] Expired keys check completed successfully
+[2025-09-28 11:30:02.152051] Starting expired keys check...
+[2025-09-28 11:30:02.154409] No expired keys found
+[2025-09-28 11:30:02.156079] No orphaned keys found
+[2025-09-28 11:30:02.157666] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 11:30:02.159508] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 11:30:02.159605] Expired keys check completed successfully
+[2025-09-28 11:35:01.600624] Starting expired keys check...
+[2025-09-28 11:35:01.602768] No expired keys found
+[2025-09-28 11:35:01.604894] No orphaned keys found
+[2025-09-28 11:35:01.606713] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 11:35:01.609835] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 11:35:01.610003] Expired keys check completed successfully
+[2025-09-28 11:40:02.097026] Starting expired keys check...
+[2025-09-28 11:40:02.098254] No expired keys found
+[2025-09-28 11:40:02.099254] No orphaned keys found
+[2025-09-28 11:40:02.100615] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 11:40:02.102112] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 11:40:02.102166] Expired keys check completed successfully
+[2025-09-28 11:45:01.529735] Starting expired keys check...
+[2025-09-28 11:45:01.532721] No expired keys found
+[2025-09-28 11:45:01.541490] No orphaned keys found
+[2025-09-28 11:45:01.543352] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 11:45:01.544674] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 11:45:01.544723] Expired keys check completed successfully
+[2025-09-28 11:50:01.965257] Starting expired keys check...
+[2025-09-28 11:50:01.967229] No expired keys found
+[2025-09-28 11:50:01.974798] No orphaned keys found
+[2025-09-28 11:50:01.975713] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 11:50:01.977097] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 11:50:01.977180] Expired keys check completed successfully
+[2025-09-28 11:55:01.361968] Starting expired keys check...
+[2025-09-28 11:55:01.363120] No expired keys found
+[2025-09-28 11:55:01.364745] No orphaned keys found
+[2025-09-28 11:55:01.366341] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 11:55:01.367529] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 11:55:01.367614] Expired keys check completed successfully
+[2025-09-28 12:00:01.837403] Starting expired keys check...
+[2025-09-28 12:00:01.839635] No expired keys found
+[2025-09-28 12:00:01.840629] No orphaned keys found
+[2025-09-28 12:00:01.843877] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 12:00:01.846627] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 12:00:01.846679] Expired keys check completed successfully
+[2025-09-28 12:05:02.288953] Starting expired keys check...
+[2025-09-28 12:05:02.290238] No expired keys found
+[2025-09-28 12:05:02.291507] No orphaned keys found
+[2025-09-28 12:05:02.292757] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 12:05:02.294649] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 12:05:02.294692] Expired keys check completed successfully
+[2025-09-28 12:10:01.829261] Starting expired keys check...
+[2025-09-28 12:10:01.836941] No expired keys found
+[2025-09-28 12:10:01.838299] No orphaned keys found
+[2025-09-28 12:10:01.840933] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 12:10:01.845012] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 12:10:01.845054] Expired keys check completed successfully
+[2025-09-28 12:15:02.387381] Starting expired keys check...
+[2025-09-28 12:15:02.389678] No expired keys found
+[2025-09-28 12:15:02.391252] No orphaned keys found
+[2025-09-28 12:15:02.393353] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 12:15:02.401781] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 12:15:02.401824] Expired keys check completed successfully
+[2025-09-28 12:20:01.991635] Starting expired keys check...
+[2025-09-28 12:20:01.993260] No expired keys found
+[2025-09-28 12:20:01.995489] No orphaned keys found
+[2025-09-28 12:20:01.996501] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 12:20:01.997637] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 12:20:01.997683] Expired keys check completed successfully
+[2025-09-28 12:25:01.451994] Starting expired keys check...
+[2025-09-28 12:25:01.454587] No expired keys found
+[2025-09-28 12:25:01.456178] No orphaned keys found
+[2025-09-28 12:25:01.457270] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 12:25:01.458564] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 12:25:01.458618] Expired keys check completed successfully
+[2025-09-28 12:30:01.840982] Starting expired keys check...
+[2025-09-28 12:30:01.842068] No expired keys found
+[2025-09-28 12:30:01.843012] No orphaned keys found
+[2025-09-28 12:30:01.843870] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 12:30:01.844848] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 12:30:01.844887] Expired keys check completed successfully
+[2025-09-28 12:35:02.213052] Starting expired keys check...
+[2025-09-28 12:35:02.214123] No expired keys found
+[2025-09-28 12:35:02.215091] No orphaned keys found
+[2025-09-28 12:35:02.216053] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 12:35:02.217112] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 12:35:02.217154] Expired keys check completed successfully
+[2025-09-28 12:40:01.756672] Starting expired keys check...
+[2025-09-28 12:40:01.758803] No expired keys found
+[2025-09-28 12:40:01.767390] No orphaned keys found
+[2025-09-28 12:40:01.768635] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 12:40:01.770093] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 12:40:01.770253] Expired keys check completed successfully
+[2025-09-28 12:45:02.213561] Starting expired keys check...
+[2025-09-28 12:45:02.215773] No expired keys found
+[2025-09-28 12:45:02.217407] No orphaned keys found
+[2025-09-28 12:45:02.218806] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 12:45:02.220784] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 12:45:02.220842] Expired keys check completed successfully
+[2025-09-28 12:50:01.954182] Starting expired keys check...
+[2025-09-28 12:50:01.956067] No expired keys found
+[2025-09-28 12:50:01.957112] No orphaned keys found
+[2025-09-28 12:50:01.958004] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 12:50:01.959030] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 12:50:01.959071] Expired keys check completed successfully
+[2025-09-28 12:55:01.491054] Starting expired keys check...
+[2025-09-28 12:55:01.493402] No expired keys found
+[2025-09-28 12:55:01.501151] No orphaned keys found
+[2025-09-28 12:55:01.502213] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 12:55:01.503328] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 12:55:01.503407] Expired keys check completed successfully
+[2025-09-28 13:00:01.992312] Starting expired keys check...
+[2025-09-28 13:00:01.993970] No expired keys found
+[2025-09-28 13:00:01.998628] No orphaned keys found
+[2025-09-28 13:00:02.001663] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 13:00:02.004731] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 13:00:02.004828] Expired keys check completed successfully
+[2025-09-28 13:05:01.513813] Starting expired keys check...
+[2025-09-28 13:05:01.515216] No expired keys found
+[2025-09-28 13:05:01.522833] No orphaned keys found
+[2025-09-28 13:05:01.524078] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 13:05:01.525858] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 13:05:01.525966] Expired keys check completed successfully
+[2025-09-28 13:10:01.964675] Starting expired keys check...
+[2025-09-28 13:10:01.975881] No expired keys found
+[2025-09-28 13:10:01.976942] No orphaned keys found
+[2025-09-28 13:10:01.977950] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 13:10:01.981825] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 13:10:01.982003] Expired keys check completed successfully
+[2025-09-28 13:15:01.420448] Starting expired keys check...
+[2025-09-28 13:15:01.421627] No expired keys found
+[2025-09-28 13:15:01.423328] No orphaned keys found
+[2025-09-28 13:15:01.427143] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 13:15:01.430428] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 13:15:01.430492] Expired keys check completed successfully
+[2025-09-28 13:20:01.897334] Starting expired keys check...
+[2025-09-28 13:20:01.899054] No expired keys found
+[2025-09-28 13:20:01.900782] No orphaned keys found
+[2025-09-28 13:20:01.902489] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 13:20:01.904679] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 13:20:01.904793] Expired keys check completed successfully
+[2025-09-28 13:25:02.284566] Starting expired keys check...
+[2025-09-28 13:25:02.287913] No expired keys found
+[2025-09-28 13:25:02.290583] No orphaned keys found
+[2025-09-28 13:25:02.298182] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 13:25:02.299666] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 13:25:02.299733] Expired keys check completed successfully
+[2025-09-28 13:30:01.775489] Starting expired keys check...
+[2025-09-28 13:30:01.776577] No expired keys found
+[2025-09-28 13:30:01.778954] No orphaned keys found
+[2025-09-28 13:30:01.780370] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 13:30:01.783332] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 13:30:01.783590] Expired keys check completed successfully
+[2025-09-28 13:35:02.219956] Starting expired keys check...
+[2025-09-28 13:35:02.229356] No expired keys found
+[2025-09-28 13:35:02.230347] No orphaned keys found
+[2025-09-28 13:35:02.231412] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 13:35:02.233137] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 13:35:02.233231] Expired keys check completed successfully
+[2025-09-28 13:40:01.744114] Starting expired keys check...
+[2025-09-28 13:40:01.745280] No expired keys found
+[2025-09-28 13:40:01.747139] No orphaned keys found
+[2025-09-28 13:40:01.755989] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 13:40:01.761918] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 13:40:01.762059] Expired keys check completed successfully
+[2025-09-28 13:45:02.252295] Starting expired keys check...
+[2025-09-28 13:45:02.255871] No expired keys found
+[2025-09-28 13:45:02.258189] No orphaned keys found
+[2025-09-28 13:45:02.266547] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 13:45:02.267570] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 13:45:02.267613] Expired keys check completed successfully
+[2025-09-28 13:50:01.825730] Starting expired keys check...
+[2025-09-28 13:50:01.826889] No expired keys found
+[2025-09-28 13:50:01.828665] No orphaned keys found
+[2025-09-28 13:50:01.830311] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 13:50:01.832160] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 13:50:01.832196] Expired keys check completed successfully
+[2025-09-28 13:55:02.275930] Starting expired keys check...
+[2025-09-28 13:55:02.277750] No expired keys found
+[2025-09-28 13:55:02.279425] No orphaned keys found
+[2025-09-28 13:55:02.280660] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 13:55:02.282673] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 13:55:02.282759] Expired keys check completed successfully
+[2025-09-28 14:00:01.677338] Starting expired keys check...
+[2025-09-28 14:00:01.680956] No expired keys found
+[2025-09-28 14:00:01.682920] No orphaned keys found
+[2025-09-28 14:00:01.684267] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 14:00:01.686277] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 14:00:01.686357] Expired keys check completed successfully
+[2025-09-28 14:05:02.057892] Starting expired keys check...
+[2025-09-28 14:05:02.059253] No expired keys found
+[2025-09-28 14:05:02.061193] No orphaned keys found
+[2025-09-28 14:05:02.062218] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 14:05:02.063245] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 14:05:02.063287] Expired keys check completed successfully
+[2025-09-28 14:10:01.514087] Starting expired keys check...
+[2025-09-28 14:10:01.515269] No expired keys found
+[2025-09-28 14:10:01.517282] No orphaned keys found
+[2025-09-28 14:10:01.520844] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 14:10:01.523213] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 14:10:01.523315] Expired keys check completed successfully
+[2025-09-28 14:15:01.998113] Starting expired keys check...
+[2025-09-28 14:15:01.999850] No expired keys found
+[2025-09-28 14:15:02.001503] No orphaned keys found
+[2025-09-28 14:15:02.002506] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 14:15:02.005598] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 14:15:02.005685] Expired keys check completed successfully
+[2025-09-28 14:20:01.531543] Starting expired keys check...
+[2025-09-28 14:20:01.534967] No expired keys found
+[2025-09-28 14:20:01.538153] No orphaned keys found
+[2025-09-28 14:20:01.540604] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 14:20:01.548706] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 14:20:01.548811] Expired keys check completed successfully
+[2025-09-28 14:25:01.959142] Starting expired keys check...
+[2025-09-28 14:25:01.960480] No expired keys found
+[2025-09-28 14:25:01.961997] No orphaned keys found
+[2025-09-28 14:25:01.963682] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 14:25:01.965064] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 14:25:01.965116] Expired keys check completed successfully
+[2025-09-28 14:30:01.607117] Starting expired keys check...
+[2025-09-28 14:30:01.608416] No expired keys found
+[2025-09-28 14:30:01.609530] No orphaned keys found
+[2025-09-28 14:30:01.610232] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 14:30:01.618779] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 14:30:01.618822] Expired keys check completed successfully
+[2025-09-28 14:35:02.099112] Starting expired keys check...
+[2025-09-28 14:35:02.100392] No expired keys found
+[2025-09-28 14:35:02.102065] No orphaned keys found
+[2025-09-28 14:35:02.103947] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 14:35:02.105719] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 14:35:02.105761] Expired keys check completed successfully
+[2025-09-28 14:40:01.574525] Starting expired keys check...
+[2025-09-28 14:40:01.575830] No expired keys found
+[2025-09-28 14:40:01.577011] No orphaned keys found
+[2025-09-28 14:40:01.578446] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 14:40:01.584732] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 14:40:01.584817] Expired keys check completed successfully
+[2025-09-28 14:45:02.041550] Starting expired keys check...
+[2025-09-28 14:45:02.045116] No expired keys found
+[2025-09-28 14:45:02.046736] No orphaned keys found
+[2025-09-28 14:45:02.049885] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 14:45:02.056305] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 14:45:02.056356] Expired keys check completed successfully
+[2025-09-28 14:50:01.508893] Starting expired keys check...
+[2025-09-28 14:50:01.510224] No expired keys found
+[2025-09-28 14:50:01.511585] No orphaned keys found
+[2025-09-28 14:50:01.512837] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 14:50:01.522280] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 14:50:01.522325] Expired keys check completed successfully
+[2025-09-28 14:55:01.985005] Starting expired keys check...
+[2025-09-28 14:55:01.986387] No expired keys found
+[2025-09-28 14:55:01.987868] No orphaned keys found
+[2025-09-28 14:55:01.989952] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 14:55:01.991250] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 14:55:01.991301] Expired keys check completed successfully
+[2025-09-28 15:00:01.478878] Starting expired keys check...
+[2025-09-28 15:00:01.480251] No expired keys found
+[2025-09-28 15:00:01.481608] No orphaned keys found
+[2025-09-28 15:00:01.483261] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 15:00:01.484399] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 15:00:01.484445] Expired keys check completed successfully
+[2025-09-28 15:05:01.945239] Starting expired keys check...
+[2025-09-28 15:05:01.946732] No expired keys found
+[2025-09-28 15:05:01.948350] No orphaned keys found
+[2025-09-28 15:05:01.955671] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 15:05:01.956682] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 15:05:01.956733] Expired keys check completed successfully
+[2025-09-28 15:10:01.356978] Starting expired keys check...
+[2025-09-28 15:10:01.358503] No expired keys found
+[2025-09-28 15:10:01.359770] No orphaned keys found
+[2025-09-28 15:10:01.360981] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 15:10:01.362363] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 15:10:01.362431] Expired keys check completed successfully
+[2025-09-28 15:15:01.523622] Starting expired keys check...
+[2025-09-28 15:15:01.524312] No expired keys found
+[2025-09-28 15:15:01.524846] No orphaned keys found
+[2025-09-28 15:15:01.525315] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 15:15:01.525876] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 15:15:01.525893] Expired keys check completed successfully
+[2025-09-28 15:20:01.692746] Starting expired keys check...
+[2025-09-28 15:20:01.694535] No expired keys found
+[2025-09-28 15:20:01.695925] No orphaned keys found
+[2025-09-28 15:20:01.697618] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 15:20:01.699081] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 15:20:01.699124] Expired keys check completed successfully
+[2025-09-28 15:25:01.726164] Starting expired keys check...
+[2025-09-28 15:25:01.726892] No expired keys found
+[2025-09-28 15:25:01.727618] No orphaned keys found
+[2025-09-28 15:25:01.728240] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 15:25:01.728900] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 15:25:01.728927] Expired keys check completed successfully
+[2025-09-28 15:30:01.985158] Starting expired keys check...
+[2025-09-28 15:30:01.986325] No expired keys found
+[2025-09-28 15:30:01.987399] No orphaned keys found
+[2025-09-28 15:30:01.988308] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 15:30:01.990142] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 15:30:01.990237] Expired keys check completed successfully
+[2025-09-28 15:35:01.165182] Starting expired keys check...
+[2025-09-28 15:35:01.166700] No expired keys found
+[2025-09-28 15:35:01.167682] No orphaned keys found
+[2025-09-28 15:35:01.168537] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 15:35:01.169617] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 15:35:01.169670] Expired keys check completed successfully
+[2025-09-28 15:40:01.410350] Starting expired keys check...
+[2025-09-28 15:40:01.411578] No expired keys found
+[2025-09-28 15:40:01.412742] No orphaned keys found
+[2025-09-28 15:40:01.413864] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 15:40:01.415060] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 15:40:01.415106] Expired keys check completed successfully
+[2025-09-28 15:45:01.584962] Starting expired keys check...
+[2025-09-28 15:45:01.585691] No expired keys found
+[2025-09-28 15:45:01.586271] No orphaned keys found
+[2025-09-28 15:45:01.586766] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 15:45:01.587350] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 15:45:01.587369] Expired keys check completed successfully
+[2025-09-28 15:50:01.731510] Starting expired keys check...
+[2025-09-28 15:50:01.732257] No expired keys found
+[2025-09-28 15:50:01.732851] No orphaned keys found
+[2025-09-28 15:50:01.733346] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 15:50:01.733971] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 15:50:01.733999] Expired keys check completed successfully
+[2025-09-28 15:55:01.892949] Starting expired keys check...
+[2025-09-28 15:55:01.893629] No expired keys found
+[2025-09-28 15:55:01.894278] No orphaned keys found
+[2025-09-28 15:55:01.894807] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 15:55:01.895365] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 15:55:01.895386] Expired keys check completed successfully
+[2025-09-28 16:00:02.032907] Starting expired keys check...
+[2025-09-28 16:00:02.033772] No expired keys found
+[2025-09-28 16:00:02.034616] No orphaned keys found
+[2025-09-28 16:00:02.035251] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 16:00:02.035964] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 16:00:02.035992] Expired keys check completed successfully
+[2025-09-28 16:05:01.229532] Starting expired keys check...
+[2025-09-28 16:05:01.230629] No expired keys found
+[2025-09-28 16:05:01.231767] No orphaned keys found
+[2025-09-28 16:05:01.233508] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 16:05:01.235025] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 16:05:01.235083] Expired keys check completed successfully
+[2025-09-28 16:10:01.408034] Starting expired keys check...
+[2025-09-28 16:10:01.408812] No expired keys found
+[2025-09-28 16:10:01.409506] No orphaned keys found
+[2025-09-28 16:10:01.410157] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 16:10:01.410878] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 16:10:01.410901] Expired keys check completed successfully
+[2025-09-28 16:15:01.580844] Starting expired keys check...
+[2025-09-28 16:15:01.581648] No expired keys found
+[2025-09-28 16:15:01.582775] No orphaned keys found
+[2025-09-28 16:15:01.583829] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 16:15:01.584813] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 16:15:01.584854] Expired keys check completed successfully
+[2025-09-28 16:20:01.718772] Starting expired keys check...
+[2025-09-28 16:20:01.719543] No expired keys found
+[2025-09-28 16:20:01.720181] No orphaned keys found
+[2025-09-28 16:20:01.720849] Found 1 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 1 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+[2025-09-28 16:20:01.721819] Statistics:
+  - Active plans: 8
+  - Total VPN keys: 8
+  - Used keys: 8
+  - Available keys: 0
+[2025-09-28 16:20:01.721858] Expired keys check completed successfully
+[2025-09-28 16:25:01.943164] Starting expired keys check...
+[2025-09-28 16:25:01.944298] No expired keys found
+[2025-09-28 16:25:01.975002] Cleaned up 3 orphaned keys
+  - Orphaned key: dfhjodijhoij (Plan ID: 6)
+  - Orphaned key: piojdphjpoijh (Plan ID: 6)
+  - Orphaned key: dhpiojdpioj (Plan ID: 6)
+[2025-09-28 16:25:01.976974] Found 2 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 2 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-29 09:22:28
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+  - @shortwave_amm: Test Plan (expires: 2025-09-29 09:22:28)
+[2025-09-28 16:25:01.978265] Statistics:
+  - Active plans: 9
+  - Total VPN keys: 9
+  - Used keys: 9
+  - Available keys: 0
+[2025-09-28 16:25:01.978345] Expired keys check completed successfully
+[2025-09-28 16:30:01.259608] Starting expired keys check...
+[2025-09-28 16:30:01.261987] No expired keys found
+[2025-09-28 16:30:01.263768] No orphaned keys found
+[2025-09-28 16:30:01.265487] Found 2 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 2 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-29 09:22:28
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+  - @shortwave_amm: Test Plan (expires: 2025-09-29 09:22:28)
+[2025-09-28 16:30:01.266755] Statistics:
+  - Active plans: 9
+  - Total VPN keys: 9
+  - Used keys: 9
+  - Available keys: 0
+[2025-09-28 16:30:01.266807] Expired keys check completed successfully
+[2025-09-28 16:35:01.427441] Starting expired keys check...
+[2025-09-28 16:35:01.428197] No expired keys found
+[2025-09-28 16:35:01.429014] No orphaned keys found
+[2025-09-28 16:35:01.429813] Found 2 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 2 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-29 09:22:28
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+  - @shortwave_amm: Test Plan (expires: 2025-09-29 09:22:28)
+[2025-09-28 16:35:01.430749] Statistics:
+  - Active plans: 9
+  - Total VPN keys: 9
+  - Used keys: 9
+  - Available keys: 0
+[2025-09-28 16:35:01.430805] Expired keys check completed successfully
+[2025-09-28 16:40:01.697752] Starting expired keys check...
+[2025-09-28 16:40:01.699027] No expired keys found
+[2025-09-28 16:40:01.700858] No orphaned keys found
+[2025-09-28 16:40:01.701938] Found 2 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 2 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-29 09:22:28
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+  - @shortwave_amm: Test Plan (expires: 2025-09-29 09:22:28)
+[2025-09-28 16:40:01.703144] Statistics:
+  - Active plans: 9
+  - Total VPN keys: 9
+  - Used keys: 9
+  - Available keys: 0
+[2025-09-28 16:40:01.703195] Expired keys check completed successfully
+[2025-09-28 16:45:01.839897] Starting expired keys check...
+[2025-09-28 16:45:01.840620] No expired keys found
+[2025-09-28 16:45:01.841190] No orphaned keys found
+[2025-09-28 16:45:01.841673] Found 2 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 2 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-29 09:22:28
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+  - @shortwave_amm: Test Plan (expires: 2025-09-29 09:22:28)
+[2025-09-28 16:45:01.842228] Statistics:
+  - Active plans: 9
+  - Total VPN keys: 9
+  - Used keys: 9
+  - Available keys: 0
+[2025-09-28 16:45:01.842246] Expired keys check completed successfully
+[2025-09-28 16:50:01.977002] Starting expired keys check...
+[2025-09-28 16:50:01.978310] No expired keys found
+[2025-09-28 16:50:01.979217] No orphaned keys found
+[2025-09-28 16:50:01.980025] Found 2 keys expiring soon
+[ADMIN NOTIFICATION] ⚠️ **Keys Expiring Soon**
+
+Found 2 keys expiring in the next 3 days:
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-28 14:28:13
+
+• @shortwave_amm
+  Plan: Test Plan
+  Expires: 2025-09-29 09:22:28
+
+
+  - @shortwave_amm: Test Plan (expires: 2025-09-28 14:28:13)
+  - @shortwave_amm: Test Plan (expires: 2025-09-29 09:22:28)
+[2025-09-28 16:50:01.980942] Statistics:
+  - Active plans: 9
+  - Total VPN keys: 9
+  - Used keys: 9
+  - Available keys: 0
+[2025-09-28 16:50:01.980978] Expired keys check completed successfully

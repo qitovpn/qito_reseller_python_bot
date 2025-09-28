@@ -12,6 +12,8 @@ services:
       - ADMIN_TELEGRAM_ID=${ADMIN_TELEGRAM_ID}
     volumes:
       - ./data:/app/data  # Persist database and other data
+      - ./logs:/app/logs  # Persist logs
+      - ./apk_files:/app/apk_files  # Persist APK files
     env_file:
       - .env
     healthcheck:

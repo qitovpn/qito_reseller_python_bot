@@ -13,36 +13,43 @@
             <div class="card-body">
                 <form method="POST">
                     <div class="mb-3">
+                        <label for="plan_id_number" class="form-label">Plan ID Number</label>
+                        <input type="text" class="form-control" id="plan_id_number" name="plan_id_number" 
+                               value="{{ plan[1] }}" required>
+                        <div class="form-text">Unique identifier for this plan (e.g., PLAN001, BASIC, PREMIUM)</div>
+                    </div>
+                    
+                    <div class="mb-3">
                         <label for="name" class="form-label">Plan Name</label>
                         <input type="text" class="form-control" id="name" name="name" 
-                               value="{{ plan[1] }}" required>
+                               value="{{ plan[2] }}" required>
                         <div class="form-text">e.g., Basic Plan, Premium Plan, etc.</div>
                     </div>
                     
                     <div class="mb-3">
                         <label for="description" class="form-label">Description</label>
-                        <textarea class="form-control" id="description" name="description" rows="3">{{ plan[2] or '' }}</textarea>
+                        <textarea class="form-control" id="description" name="description" rows="3">{{ plan[3] or '' }}</textarea>
                         <div class="form-text">Optional description for this plan</div>
                     </div>
                     
                     <div class="mb-3">
                         <label for="credits_required" class="form-label">Credits Required</label>
                         <input type="number" class="form-control" id="credits_required" name="credits_required" 
-                               value="{{ plan[3] }}" required min="1">
+                               value="{{ plan[4] }}" required min="1">
                         <div class="form-text">Number of credits needed to purchase this plan</div>
                     </div>
                     
                     <div class="mb-3">
                         <label for="duration_days" class="form-label">Duration (Days)</label>
                         <input type="number" class="form-control" id="duration_days" name="duration_days" 
-                               value="{{ plan[4] }}" required min="1">
+                               value="{{ plan[5] }}" required min="1">
                         <div class="form-text">How many days the plan is valid for</div>
                     </div>
                     
                     <div class="mb-3">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" id="is_active" name="is_active" 
-                                   {% if plan[5] %}checked{% endif %}>
+                                   {% if plan[6] %}checked{% endif %}>
                             <label class="form-check-label" for="is_active">
                                 Active
                             </label>

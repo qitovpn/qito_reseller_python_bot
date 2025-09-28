@@ -8,7 +8,8 @@ from database import (init_database, ensure_user_exists, get_user_balance, get_t
                      get_pending_payment, update_payment_status, add_user_balance,
                      init_plan_tables, get_active_plans, get_plan, assign_key_to_user, 
                      get_user_plans, get_available_keys, check_low_key_plans, get_plan_key_statistics,
-                     init_contact_tables, get_active_contact_config)
+                     init_contact_tables, get_active_contact_config, check_and_delete_expired_keys,
+                     get_expiring_soon_keys, get_expired_keys_stats, cleanup_orphaned_keys)
 
 # Load environment variables
 load_dotenv()
@@ -57,13 +58,14 @@ def check_and_notify_low_keys():
 # Create the main menu (Reply Keyboard)
 def create_main_menu():
     markup = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
-    item1 = KeyboardButton("💰 ငွေလက်ကျန်")
+    item1 = KeyboardButton("👤 ကျွန်ုပ်၏ credit")
     item2 = KeyboardButton("💳 ငွေဖြည့်")
-    item3 = KeyboardButton("🛒 ပက်ကေ့ချ်ဝယ်")
+    item3 = KeyboardButton("VPN Key ဝယ်ရန်")
     item4 = KeyboardButton("📋 ကျွန်ုပ်၏ပက်ကေ့ချ်")
     item5 = KeyboardButton("📞 ဆက်သွယ်ရန်")
-    markup.add(item1, item2, item3)
-    markup.add(item4, item5)
+    markup.add(item1, item2)
+    markup.add(item3, item4)
+    markup.add(item5)
     return markup
 
 # Create inline keyboard for quick actions
@@ -116,9 +118,9 @@ def send_help(message):
 /help - ဤအကူအညီစာကိုြသပါ
 
 **မူလမီနူး ရွေးချယ်စရာများ:**
-• 💰 ငွေလက်ကျန် - သင့်အကောင့်ငွေလက်ကျန်နှင့် ငွေလွှဲမှုများကို ကြည့်ရှုပါ
+• 👤 ကျွန်ုပ်၏ credit - သင့်အကောင့်ငွေလက်ကျန်နှင့် ငွေလွှဲမှုများကို ကြည့်ရှုပါ
 • 💳 ငွေဖြည့် - သင့်အကောင့်သို့ ငွေထည့်ပါ
-• 🛒 ပက်ကေ့ချ်ဝယ် - VPN ပက်ကေ့ချ်များကို ကြည့်ရှုပြီး ဝယ်ယူပါ
+• VPN Key ဝယ်ရန် - VPN ပက်ကေ့ချ်များကို ကြည့်ရှုပြီး ဝယ်ယူပါ
 • 📋 ကျွန်ုပ်၏ပက်ကေ့ချ် - ဝယ်ယူထားသော ပက်ကေ့ချ်များနှင့် VPN သော့များကို ကြည့်ရှုပါ
 • 📞 ဆက်သွယ်ရန် - ဖောက်သည်ဝန်ဆောင်မှုနှင့် ဆက်သွယ်ရန်အချက်အလက်များကို ရယူပါ
 
@@ -174,6 +176,120 @@ def check_low_keys_command(message):
     bot.send_message(message.chat.id, "✅ Low key check completed. Check your messages for alerts.", 
                     reply_markup=create_main_menu())
 
+@bot.message_handler(commands=['expired'])
+def check_expired_keys_command(message):
+    """Check and delete expired keys"""
+    if str(message.from_user.id) != str(ADMIN_TELEGRAM_ID):
+        bot.send_message(message.chat.id, "❌ Unauthorized access.", reply_markup=create_main_menu())
+        return
+    
+    try:
+        deleted_count, deleted_details = check_and_delete_expired_keys()
+        
+        if deleted_count > 0:
+            deleted_text = f"🗑️ **Expired Keys Deleted**\n\n"
+            deleted_text += f"Found and deleted {deleted_count} expired keys and plans:\n\n"
+            
+            for detail in deleted_details:
+                deleted_text += f"• User ID: {detail['user_id']}\n"
+                deleted_text += f"  Plan: {detail['plan_name']}\n"
+                deleted_text += f"  VPN Key: {detail['vpn_key'] or 'N/A'}\n"
+                deleted_text += f"  Expired: {detail['expiry_date']}\n\n"
+            
+            bot.send_message(message.chat.id, deleted_text, parse_mode='Markdown')
+        else:
+            bot.send_message(message.chat.id, "✅ No expired keys found. All keys are still active.", 
+                           reply_markup=create_main_menu())
+            
+    except Exception as e:
+        bot.send_message(message.chat.id, f"❌ Error checking expired keys: {str(e)}", 
+                       reply_markup=create_main_menu())
+
+@bot.message_handler(commands=['expiring'])
+def check_expiring_keys_command(message):
+    """Check keys expiring soon"""
+    if str(message.from_user.id) != str(ADMIN_TELEGRAM_ID):
+        bot.send_message(message.chat.id, "❌ Unauthorized access.", reply_markup=create_main_menu())
+        return
+    
+    try:
+        expiring_soon = get_expiring_soon_keys(days_ahead=7)  # Check next 7 days
+        
+        if expiring_soon:
+            expiring_text = f"⚠️ **Keys Expiring Soon**\n\n"
+            expiring_text += f"Found {len(expiring_soon)} keys expiring in the next 7 days:\n\n"
+            
+            for plan in expiring_soon:
+                user_id, plan_name, expiry_date, username, first_name = plan
+                user_display = f"@{username}" if username else f"{first_name} (ID: {user_id})"
+                expiring_text += f"• {user_display}\n"
+                expiring_text += f"  Plan: {plan_name}\n"
+                expiring_text += f"  Expires: {expiry_date}\n\n"
+            
+            bot.send_message(message.chat.id, expiring_text, parse_mode='Markdown')
+        else:
+            bot.send_message(message.chat.id, "✅ No keys expiring in the next 7 days.", 
+                           reply_markup=create_main_menu())
+            
+    except Exception as e:
+        bot.send_message(message.chat.id, f"❌ Error checking expiring keys: {str(e)}", 
+                       reply_markup=create_main_menu())
+
+@bot.message_handler(commands=['keystats'])
+def get_key_statistics_command(message):
+    """Get key statistics"""
+    if str(message.from_user.id) != str(ADMIN_TELEGRAM_ID):
+        bot.send_message(message.chat.id, "❌ Unauthorized access.", reply_markup=create_main_menu())
+        return
+    
+    try:
+        stats = get_expired_keys_stats()
+        
+        stats_text = f"📊 **Key Statistics**\n\n"
+        stats_text += f"• Active Plans: {stats['active_plans']}\n"
+        stats_text += f"• Total VPN Keys: {stats['total_keys']}\n"
+        stats_text += f"• Used Keys: {stats['used_keys']}\n"
+        stats_text += f"• Available Keys: {stats['available_keys']}\n\n"
+        
+        # Calculate usage percentage
+        if stats['total_keys'] > 0:
+            usage_percentage = (stats['used_keys'] / stats['total_keys']) * 100
+            stats_text += f"• Key Usage Rate: {usage_percentage:.1f}%\n"
+        
+        bot.send_message(message.chat.id, stats_text, parse_mode='Markdown', 
+                       reply_markup=create_main_menu())
+        
+    except Exception as e:
+        bot.send_message(message.chat.id, f"❌ Error getting key statistics: {str(e)}", 
+                       reply_markup=create_main_menu())
+
+@bot.message_handler(commands=['cleanup'])
+def cleanup_orphaned_keys_command(message):
+    """Clean up orphaned keys"""
+    if str(message.from_user.id) != str(ADMIN_TELEGRAM_ID):
+        bot.send_message(message.chat.id, "❌ Unauthorized access.", reply_markup=create_main_menu())
+        return
+    
+    try:
+        deleted_count, deleted_keys = cleanup_orphaned_keys()
+        
+        if deleted_count > 0:
+            cleanup_text = f"🧹 **Orphaned Keys Cleanup**\n\n"
+            cleanup_text += f"Deleted {deleted_count} orphaned keys:\n\n"
+            
+            for key in deleted_keys:
+                cleanup_text += f"• Key: {key['key_value']}\n"
+                cleanup_text += f"  Plan ID: {key['plan_id']}\n\n"
+            
+            bot.send_message(message.chat.id, cleanup_text, parse_mode='Markdown')
+        else:
+            bot.send_message(message.chat.id, "✅ No orphaned keys found. All keys are properly assigned.", 
+                           reply_markup=create_main_menu())
+            
+    except Exception as e:
+        bot.send_message(message.chat.id, f"❌ Error cleaning up orphaned keys: {str(e)}", 
+                       reply_markup=create_main_menu())
+
 @bot.message_handler(commands=['admin'])
 def admin_commands(message):
     """Handle admin commands"""
@@ -212,7 +328,11 @@ def admin_commands(message):
         
         admin_text += "**Admin Commands:**\n"
         admin_text += "/keys - Check key availability status\n"
-        admin_text += "/lowkeys - Check for plans with low key count"
+        admin_text += "/lowkeys - Check for plans with low key count\n"
+        admin_text += "/expired - Check and delete expired keys\n"
+        admin_text += "/expiring - Check keys expiring soon\n"
+        admin_text += "/keystats - Get key statistics\n"
+        admin_text += "/cleanup - Clean up orphaned keys"
         
         bot.send_message(message.chat.id, admin_text, parse_mode='Markdown')
     else:
@@ -246,7 +366,7 @@ def send_random(message):
                     parse_mode='Markdown', reply_markup=create_main_menu())
 
 # Handle menu button messages
-@bot.message_handler(func=lambda message: message.text == "💰 ငွေလက်ကျန်")
+@bot.message_handler(func=lambda message: message.text == "👤 ကျွန်ုပ်၏ credit")
 def handle_my_balance(message):
     """Handle My Balance button"""
     # Ensure user exists in database
@@ -261,7 +381,7 @@ def handle_my_balance(message):
     current_balance = get_user_balance(message.from_user.id)
     credits = int(current_balance * 100)  # Convert to credits (1 dollar = 100 credits)
     
-    balance_text = f"""💰 သင့်အကောင့်ငွေလက်ကျန်
+    balance_text = f"""👤 သင့်အကောင့်ငွေလက်ကျန်
 
 • လက်ရှိငွေလက်ကျန်: ${current_balance:.2f}
 • ရရှိနိုင်သောခရက်ဒစ်: {credits:,}
@@ -297,9 +417,12 @@ def handle_topup(message):
     for credits, mmk_price in topup_options:
         topup_text += f"\n• 💎 {credits} ခရက်ဒစ် - {mmk_price:,} ကျပ်"
     
-    topup_text += "\n\nငွေပေးချေမှုနည်းလမ်းများ:"
+    topup_text += "\n\n💳 ငွေပေးချေမှုနည်းလမ်းများ:"
     for name, description in payment_methods:
-        topup_text += f"\n• {name}"
+        if description:
+            topup_text += f"\n• **{name}**\n  {description}"
+        else:
+            topup_text += f"\n• **{name}**"
     
     topup_text += "\n\nသင့်ငွေဖြည့်မှုကို ဆက်လက်လုပ်ဆောင်ရန် အောက်ပါခလုတ်များကို နှိပ်ပါ:"
     
@@ -417,7 +540,7 @@ Click below to view detailed order information:
     
     bot.send_message(message.chat.id, orders_text, parse_mode='Markdown', reply_markup=markup)
 
-@bot.message_handler(func=lambda message: message.text == "🛒 ပက်ကေ့ချ်ဝယ်")
+@bot.message_handler(func=lambda message: message.text == "VPN Key ဝယ်ရန်")
 def handle_buy_plans(message):
     """Handle Buy Plans button"""
     # Ensure user exists
@@ -443,7 +566,7 @@ def handle_buy_plans(message):
     # Create inline keyboard for plans
     markup = InlineKeyboardMarkup()
     for plan in plans:
-        plan_id, name, description, credits_required, duration_days, is_active, created_at, updated_at = plan
+        plan_id, plan_id_number, name, description, credits_required, duration_days, is_active, created_at, updated_at = plan
         button_text = f"{name} - {credits_required} Credits ({duration_days} days)"
         button = InlineKeyboardButton(button_text, callback_data=f'buy_plan_{plan_id}')
         markup.add(button)
@@ -465,7 +588,7 @@ def handle_my_plans(message):
     user_plans = get_user_plans(message.from_user.id)
     
     if not user_plans:
-        bot.send_message(message.chat.id, "📋 **ကျွန်ုပ်၏ပက်ကေ့ချ်များ**\n\nသင်သည် မည်သည့်ပက်ကေ့ချ်ကိုမှ မဝယ်ယူရသေးပါ။\n\nရရှိနိုင်သောပက်ကေ့ချ်များကို ကြည့်ရှုရန် '🛒 ပက်ကေ့ချ်ဝယ်' ကို အသုံးပြုပါ။", 
+        bot.send_message(message.chat.id, "📋 **ကျွန်ုပ်၏ပက်ကေ့ချ်များ**\n\nသင်သည် မည်သည့်ပက်ကေ့ချ်ကိုမှ မဝယ်ယူရသေးပါ။\n\nရရှိနိုင်သောပက်ကေ့ချ်များကို ကြည့်ရှုရန် 'VPN Key ဝယ်ရန်' ကို အသုံးပြုပါ။", 
                         parse_mode='Markdown', reply_markup=create_main_menu())
         return
     
@@ -536,6 +659,70 @@ def handle_contact(message):
         fallback_text = "📞 **ဆက်သွယ်ရန်နှင့် ဝန်ဆောင်မှု**\n\nဆက်သွယ်ရန်အချက်အလက်များကို ဖွင့်ရာတွင် ပြဿနာတစ်ခုရှိပါတယ်။ ကျေးဇူးပြု၍ နောက်မှ ပြန်လည်ကြိုးစားပါ သို့မဟုတ် ဝန်ဆောင်မှုကို တိုက်ရိုက်ဆက်သွယ်ပါ။"
         bot.send_message(message.chat.id, fallback_text, reply_markup=create_main_menu())
 
+@bot.message_handler(func=lambda message: message.text == "📱 Download APK")
+def handle_download_apk(message):
+    """Handle Download APK button"""
+    import os
+    
+    apk_file_path = "apk_files/latest.apk"
+    
+    if os.path.exists(apk_file_path):
+        try:
+            # Get file size
+            file_size = os.path.getsize(apk_file_path)
+            file_size_mb = file_size / (1024 * 1024)
+            
+            # Check if file is too large for Telegram (100MB limit)
+            if file_size_mb > 100:
+                large_file_text = f"""📱 Download APK
+
+APK ဖိုင်ရှိပါသည် (Size: {file_size_mb:.1f} MB)
+
+သို့သော် ဖိုင်အရွယ်အစားကြီးလွန်းသောကြောင့် Telegram မှ တိုက်ရိုက်ပို့ပေးနိုင်မည်မဟုတ်ပါ။
+
+အက်မင်မှ ဖိုင်ကို ပို့ပေးရန် ဆက်သွယ်ပါ:
+• Telegram: @admin_username
+• သို့မဟုတ် ဝဘ်ဆိုက်မှ ဒေါင်းလုဒ်လုပ်ပါ
+
+ကျေးဇူးပြု၍ နားလည်မှုရှိပါ။"""
+                
+                bot.send_message(message.chat.id, large_file_text, reply_markup=create_main_menu())
+                return
+            
+            # Send file with timeout handling
+            with open(apk_file_path, 'rb') as apk_file:
+                # Send with longer timeout
+                bot.send_document(
+                    message.chat.id, 
+                    apk_file, 
+                    caption="📱 VPN APK File\n\nဤဖိုင်ကို သင့်ဖုန်းတွင် ထည့်သွင်းပါ။",
+                    timeout=60  # 60 seconds timeout
+                )
+                
+        except Exception as e:
+            error_message = f"""❌ APK ဖိုင်ကို ပို့ပေးရာတွင် ပြဿနာရှိပါသည်
+
+Error: {str(e)}
+
+ဖြစ်နိုင်သော အကြောင်းရင်းများ:
+• ဖိုင်အရွယ်အစားကြီးလွန်းခြင်း
+• ကွန်ယက်ချိတ်ဆက်မှု ပြဿနာ
+• Telegram ဝန်ဆောင်မှု ပြဿနာ
+
+အက်မင်မှ ဖိုင်ကို တိုက်ရိုက်ပို့ပေးရန် ဆက်သွယ်ပါ။"""
+            
+            bot.send_message(message.chat.id, error_message, reply_markup=create_main_menu())
+    else:
+        no_apk_text = """📱 Download APK
+
+လက်ရှိတွင် APK ဖိုင်မရှိပါ။
+
+အက်မင်မှ APK ဖိုင်ကို ပို့ပေးပါက ဤနေရာတွင် ရရှိနိုင်မည်။
+
+ကျေးဇူးပြု၍ နောက်ပိုင်းတွင် ပြန်လည်စမ်းကြည့်ပါ။"""
+        
+        bot.send_message(message.chat.id, no_apk_text, reply_markup=create_main_menu())
+
 # Handle inline keyboard callbacks
 @bot.callback_query_handler(func=lambda call: True)
 def handle_callback(call):
@@ -562,30 +749,33 @@ def handle_callback(call):
             # Get payment methods
             payment_methods = get_payment_methods()
             
-            payment_details = f"""💳 Payment Details
+            payment_details = f"""💳 ငွေပေးချေမှုအသေးစိတ်
 
-Top-up Amount: {credits} Credits
-Price: {mmk_price:,} MMK
+ငွေဖြည့်ပမာဏ: {credits} ခရက်ဒစ်
+ဈေးနှုန်း: {mmk_price:,} ကျပ်
 
-Payment Methods Available:
+💳 ရရှိနိုင်သောငွေပေးချေမှုနည်းလမ်းများ:
 """
             for name, description in payment_methods:
-                payment_details += f"• {name}\n"
+                if description:
+                    payment_details += f"• **{name}**\n  {description}\n"
+                else:
+                    payment_details += f"• **{name}**\n"
             
             payment_details += f"""
-📋 Payment Steps:
+📋 ငွေပေးချေမှုအဆင့်များ:
 
-1. Send {mmk_price:,} MMK to one of the payment methods above
-2. Take a screenshot of your payment confirmation
-3. Send the payment proof image to this bot
-4. Wait for admin approval (usually within 2 hours)
-5. Your credits will be added to your account
+1. အထက်ပါငွေပေးချေမှုနည်းလမ်းများထဲမှ တစ်ခုသို့ {mmk_price:,} ကျပ် ပေးပို့ပါ
+2. သင့်ငွေပေးချေမှုအတည်ပြုချက်ကို ပုံရိုက်ယူပါ
+3. ငွေပေးချေမှုအတည်ပြုပုံကို ဤဘော့သို့ ပို့ပါ
+4. အက်မင်အတည်ပြုချက်ကို စောင့်ပါ (များသောအားဖြင့် ၂ နာရီအတွင်း)
+5. သင့်အကောင့်သို့ ခရက်ဒစ်များ ထည့်သွင်းပေးမည်
 
-Payment ID: #{payment_id}
+ငွေပေးချေမှု ID: #{payment_id}
 
-⚠️ Important: Keep your payment proof until your payment is approved!
+⚠️ အရေးကြီးသည်: သင့်ငွေပေးချေမှုအတည်ပြုချက်ကို အတည်ပြုမခံရမီ အထိ သိမ်းဆည်းထားပါ!
 
-Send your payment proof image now:"""
+သင့်ငွေပေးချေမှုအတည်ပြုပုံကို ယခုပို့ပါ:"""
             
             bot.send_message(call.message.chat.id, payment_details, reply_markup=create_main_menu())
         else:
@@ -764,7 +954,7 @@ You can try making a new payment with a clearer payment proof."""
         plan = get_plan(plan_id)
         
         if plan:
-            plan_id, name, description, credits_required, duration_days, is_active, created_at, updated_at = plan
+            plan_id, plan_id_number, name, description, credits_required, duration_days, is_active, created_at, updated_at = plan
             
             # Check if user has enough balance
             user_balance = get_user_balance(call.from_user.id)
@@ -775,48 +965,33 @@ You can try making a new payment with a clearer payment proof."""
                 available_keys = get_available_keys(plan_id)
                 
                 if available_keys:
-                    # Assign key to user
-                    vpn_key = assign_key_to_user(plan_id, call.from_user.id)
+                    # Show confirmation dialog
+                    confirmation_message = f"""🛒 **ပက်ကေ့ချ်ဝယ်ယူမှု အတည်ပြုခြင်း**
+
+**ပက်ကေ့ချ်အချက်အလက်များ:**
+• ပက်ကေ့ချ် ID: {plan_id_number}
+• ပက်ကေ့ချ်အမည်: {name}
+• ဖော်ပြချက်: {description or 'ဖော်ပြချက်မရှိ'}
+• ကာလ: {duration_days} ရက်
+• ကုန်ကျစရိတ်: {credits_required} ခရက်ဒစ်
+
+**သင့်အကောင့်:**
+• လက်ရှိငွေလက်ကျန်: {user_credits} ခရက်ဒစ်
+• ဝယ်ယူပြီးနောက်: {user_credits - credits_required} ခရက်ဒစ်
+
+**ရရှိနိုင်သောသော့များ:** {len(available_keys)} သော့ရှိ
+
+ကျေးဇူးပြု၍ သင့်ဝယ်ယူမှုကို အတည်ပြုပါ:"""
                     
-                    if vpn_key:
-                        # Deduct credits from user balance
-                        add_user_balance(call.from_user.id, -credits_required)
-                        
-                        # Notify user
-                        success_message = f"""✅ **Plan Purchased Successfully!**
-
-**Plan:** {name}
-**Duration:** {duration_days} days
-**Cost:** {credits_required} Credits
-**VPN Key:** `{vpn_key}`
-
-Your VPN key has been assigned and your account has been updated.
-
-You can view your plans anytime using the "📋 My Plans" button."""
-                        
-                        bot.answer_callback_query(call.id, "Plan purchased successfully!")
-                        bot.send_message(call.message.chat.id, success_message, 
-                                       parse_mode='Markdown', reply_markup=create_main_menu())
-                        
-                        # Notify admin
-                        if ADMIN_TELEGRAM_ID:
-                            admin_message = f"""🔔 **New Plan Purchase**
-
-User: {call.from_user.first_name} {call.from_user.last_name or ''}
-Username: @{call.from_user.username or 'Not set'}
-User ID: {call.from_user.id}
-Plan: {name}
-VPN Key: {vpn_key}
-Credits Used: {credits_required}"""
-                            
-                            bot.send_message(ADMIN_TELEGRAM_ID, admin_message)
-                        
-                        # Check for low keys after successful purchase
-                        check_and_notify_low_keys()
-                    else:
-                        bot.answer_callback_query(call.id, "Error assigning VPN key!")
-                        bot.send_message(call.message.chat.id, "❌ Error processing your purchase. Please try again.", 
-                                       reply_markup=create_main_menu())
+                    # Create confirmation keyboard
+                    confirmation_keyboard = InlineKeyboardMarkup()
+                    confirm_btn = InlineKeyboardButton("✅ ဝယ်ယူအတည်ပြုပါ", callback_data=f'confirm_purchase_{plan_id}')
+                    cancel_btn = InlineKeyboardButton("❌ ပယ်ဖျက်ပါ", callback_data='cancel_purchase')
+                    confirmation_keyboard.row(confirm_btn, cancel_btn)
+                    
+                    bot.answer_callback_query(call.id, "ကျေးဇူးပြု၍ သင့်ဝယ်ယူမှုကို အတည်ပြုပါ")
+                    bot.send_message(call.message.chat.id, confirmation_message, 
+                                   parse_mode='Markdown', reply_markup=confirmation_keyboard)
                 else:
                     bot.answer_callback_query(call.id, "No keys available!")
                     bot.send_message(call.message.chat.id, f"❌ Sorry, no VPN keys are available for {name} at the moment. Please try again later.", 
@@ -829,6 +1004,79 @@ Credits Used: {credits_required}"""
             bot.answer_callback_query(call.id, "Plan not found!")
             bot.send_message(call.message.chat.id, "❌ Plan not found. Please try again.", 
                            reply_markup=create_main_menu())
+    
+    # Plan purchase confirmation callbacks
+    elif call.data.startswith('confirm_purchase_'):
+        plan_id = call.data.split('_')[2]
+        plan = get_plan(plan_id)
+        
+        if plan:
+            plan_id, plan_id_number, name, description, credits_required, duration_days, is_active, created_at, updated_at = plan
+            
+            # Double-check balance and key availability
+            user_balance = get_user_balance(call.from_user.id)
+            user_credits = int(user_balance * 100)
+            available_keys = get_available_keys(plan_id)
+            
+            if user_credits >= credits_required and available_keys:
+                # Assign key to user
+                vpn_key = assign_key_to_user(plan_id, call.from_user.id)
+                
+                if vpn_key:
+                    # Deduct credits from user balance
+                    add_user_balance(call.from_user.id, -credits_required)
+                    
+                    # Notify user
+                    success_message = f"""✅ **ပက်ကေ့ချ်ဝယ်ယူမှု အောင်မြင်ပါတယ်!**
+
+**ပက်ကေ့ချ် ID:** {plan_id_number}
+**ပက်ကေ့ချ်:** {name}
+**ကာလ:** {duration_days} ရက်
+**ကုန်ကျစရိတ်:** {credits_required} ခရက်ဒစ်
+**VPN သော့:** `{vpn_key}`
+
+သင့်အကောင့်သို့ VPN သော့ပပ်ပြီး အကောင့်အချက်အလက်များ မွမ်းမံပြီးပါပြီ။
+
+"📋 ကျွန်ုပ်၏ပက်ကေ့ချ်" ခလုတ်ကို အသုံးပြု၍ သင့်ပက်ကေ့ချ်များကို မည်သည့်အချိန်တွင်မဆို ကြည့်ရှုနိုင်ပါတယ်။"""
+                    
+                    bot.answer_callback_query(call.id, "ပက်ကေ့ချ်ဝယ်ယူမှု အောင်မြင်ပါတယ်!")
+                    bot.send_message(call.message.chat.id, success_message, 
+                                   parse_mode='Markdown', reply_markup=create_main_menu())
+                    
+                    # Notify admin
+                    if ADMIN_TELEGRAM_ID:
+                        admin_message = f"""🔔 **New Plan Purchase**
+
+User: {call.from_user.first_name} {call.from_user.last_name or ''}
+Username: @{call.from_user.username or 'Not set'}
+User ID: {call.from_user.id}
+Plan ID: {plan_id_number}
+Plan: {name}
+VPN Key: {vpn_key}
+Credits Used: {credits_required}"""
+                        
+                        bot.send_message(ADMIN_TELEGRAM_ID, admin_message)
+                    
+                    # Check for low keys after successful purchase
+                    check_and_notify_low_keys()
+                else:
+                    bot.answer_callback_query(call.id, "Error assigning VPN key!")
+                    bot.send_message(call.message.chat.id, "❌ Error processing your purchase. Please try again.", 
+                                   reply_markup=create_main_menu())
+            else:
+                bot.answer_callback_query(call.id, "Plan no longer available!")
+                bot.send_message(call.message.chat.id, "❌ Sorry, this plan is no longer available or you don't have enough credits. Please try again.", 
+                               reply_markup=create_main_menu())
+        else:
+            bot.answer_callback_query(call.id, "Plan not found!")
+            bot.send_message(call.message.chat.id, "❌ Plan not found. Please try again.", 
+                           reply_markup=create_main_menu())
+    
+    # Cancel purchase callback
+    elif call.data == 'cancel_purchase':
+        bot.answer_callback_query(call.id, "ဝယ်ယူမှုပယ်ဖျက်ပြီး")
+        bot.send_message(call.message.chat.id, "❌ ဝယ်ယူမှုပယ်ဖျက်ပြီးပါပြီ။ မည်သည့်အချိန်တွင်မဆို အခြားပက်ကေ့ချ်များကို ကြည့်ရှုနိုင်ပါတယ်။", 
+                       reply_markup=create_main_menu())
 
 @bot.message_handler(content_types=['photo'])
 def handle_payment_proof(message):

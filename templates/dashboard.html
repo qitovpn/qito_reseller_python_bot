@@ -58,8 +58,8 @@
             <div class="card-body">
                 <div class="d-flex justify-content-between">
                     <div>
-                        <h4 class="card-title">{{ payment_methods|length }}</h4>
-                        <p class="card-text">Payment Methods</p>
+                        <h4 class="card-title">{{ active_payment_methods_count }}</h4>
+                        <p class="card-text">Active Payment Methods</p>
                     </div>
                     <div class="align-self-center">
                         <i class="fas fa-credit-card fa-2x"></i>
@@ -68,6 +68,7 @@
             </div>
         </div>
     </div>
+    
 </div>
 
 <div class="row">
@@ -153,4 +154,212 @@
         </div>
     </div>
 </div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Most Purchased Plans</h5>
+            </div>
+            <div class="card-body">
+                {% if most_purchased_plans %}
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Plan ID</th>
+                                    <th>Plan Name</th>
+                                    <th>Purchases</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for plan in most_purchased_plans %}
+                                <tr>
+                                    <td><span class="badge bg-primary">{{ plan.plan_id_number }}</span></td>
+                                    <td>{{ plan.name }}</td>
+                                    <td>
+                                        <span class="badge bg-success">{{ plan.purchase_count }} purchases</span>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <p class="text-muted">No plan purchases yet.</p>
+                {% endif %}
+                <a href="{{ url_for('plan_management') }}" class="btn btn-primary btn-sm">Manage Plans</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Recent Purchases</h5>
+            </div>
+            <div class="card-body">
+                {% if recent_purchases %}
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Plan</th>
+                                    <th>User</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for purchase in recent_purchases %}
+                                <tr>
+                                    <td>{{ purchase.purchase_date[:10] }}</td>
+                                    <td>
+                                        <span class="badge bg-primary">{{ purchase.plan_id_number }}</span>
+                                        <br><small>{{ purchase.name }}</small>
+                                    </td>
+                                    <td>
+                                        {% if purchase.username %}
+                                            @{{ purchase.username }}
+                                        {% else %}
+                                            ID: {{ purchase.telegram_id }}
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <p class="text-muted">No recent purchases.</p>
+                {% endif %}
+                <a href="{{ url_for('user_management') }}" class="btn btn-primary btn-sm">View All Users</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Database Management</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h6>Database Management</h6>
+                        <p class="text-muted">Manage your database with backup, restore, and download functions.</p>
+                        
+                        {% if db_info %}
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <p class="mb-1"><strong>File Size:</strong> {{ db_info.size_mb }} MB</p>
+                                <p class="mb-1"><strong>Last Modified:</strong> {{ db_info.modified }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="mb-1"><strong>Status:</strong> <span class="badge bg-success">Available</span></p>
+                                <p class="mb-1"><strong>Records:</strong> {{ users }} users</p>
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        <ul class="small text-muted mt-3">
+                            <li>Includes all user accounts and balances</li>
+                            <li>Contains all VPN plans and keys</li>
+                            <li>Includes payment history and transactions</li>
+                            <li>Backup files are timestamped for easy identification</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <div class="btn-group-vertical w-100" role="group">
+                            <a href="{{ url_for('download_database') }}" class="btn btn-success mb-2">
+                                <i class="fas fa-download me-2"></i>Download Database
+                            </a>
+                            <a href="{{ url_for('list_backups') }}" class="btn btn-info mb-2">
+                                <i class="fas fa-history me-2"></i>View Backups
+                            </a>
+                        </div>
+                        <div class="mt-2">
+                            <small class="text-muted">File: bot_database.db</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Backup and Restore Forms -->
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h6 class="card-title mb-0">Create Backup</h6>
+                            </div>
+                            <div class="card-body">
+                                <p class="text-muted small">Create a timestamped backup of the current database.</p>
+                                <form method="POST" action="{{ url_for('backup_database') }}">
+                                    <button type="submit" class="btn btn-primary w-100">
+                                        <i class="fas fa-save me-2"></i>Create Backup
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h6 class="card-title mb-0">Restore Database</h6>
+                            </div>
+                            <div class="card-body">
+                                <p class="text-muted small">Upload a database file to restore from backup.</p>
+                                <form method="POST" action="{{ url_for('restore_database') }}" enctype="multipart/form-data" id="restoreForm">
+                                    <div class="mb-3">
+                                        <input type="file" class="form-control" name="database_file" accept=".db" required id="databaseFile">
+                                        <div class="form-text">Only .db files are allowed (max 100MB)</div>
+                                    </div>
+                                    <button type="submit" class="btn btn-warning w-100" 
+                                            onclick="return confirmRestore()">
+                                        <i class="fas fa-upload me-2"></i>Restore Database
+                                    </button>
+                                </form>
+                                
+                                <div class="alert alert-info mt-3">
+                                    <i class="fas fa-info-circle me-2"></i>
+                                    <strong>Important:</strong> This will replace your current database. A backup will be created automatically before restoration.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function confirmRestore() {
+    const fileInput = document.getElementById('databaseFile');
+    const file = fileInput.files[0];
+    
+    if (!file) {
+        alert('Please select a database file first!');
+        return false;
+    }
+    
+    if (!file.name.toLowerCase().endsWith('.db')) {
+        alert('Please select a valid .db file!');
+        return false;
+    }
+    
+    if (file.size === 0) {
+        alert('The selected file is empty!');
+        return false;
+    }
+    
+    if (file.size > 100 * 1024 * 1024) {
+        alert('File is too large! Maximum size is 100MB.');
+        return false;
+    }
+    
+    return confirm('Are you sure you want to restore the database? This will replace the current database!');
+}
+</script>
 {% endblock %}

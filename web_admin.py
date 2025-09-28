@@ -4,13 +4,24 @@ import os
 from datetime import datetime
 from database import (init_plan_tables, create_plan, get_all_plans, get_plan, update_plan, 
                      delete_plan, add_vpn_keys, get_all_keys_for_plan, delete_vpn_key,
-                     init_contact_tables, get_contact_config, update_contact_config)
+                     init_contact_tables, get_contact_config, update_contact_config,
+                     get_active_payment_methods_count)
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 app.secret_key = 'your-secret-key-change-this'  # Change this to a secure secret key
 
 # Database file path
 DB_FILE = 'bot_database.db'
+
+# APK upload configuration
+UPLOAD_FOLDER = 'apk_files'
+ALLOWED_EXTENSIONS = {'apk'}
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['MAX_CONTENT_LENGTH'] = 100 * 1024 * 1024  # 100MB max file size
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 def get_db_connection():
     """Get database connection"""
@@ -87,19 +98,57 @@ def dashboard():
     users = conn.execute('SELECT COUNT(*) as count FROM users').fetchone()
     total_balance = conn.execute('SELECT SUM(balance) as total FROM users').fetchone()
     
+    # Get most purchased plans
+    most_purchased_plans = conn.execute('''
+        SELECT p.plan_id_number, p.name, COUNT(up.id) as purchase_count
+        FROM plans p
+        LEFT JOIN user_plans up ON p.id = up.plan_id
+        WHERE p.is_active = 1
+        GROUP BY p.id, p.plan_id_number, p.name
+        ORDER BY purchase_count DESC
+        LIMIT 5
+    ''').fetchall()
+    
+    # Get recent purchases
+    recent_purchases = conn.execute('''
+        SELECT up.purchase_date, p.plan_id_number, p.name, u.telegram_id, u.username
+        FROM user_plans up
+        JOIN plans p ON up.plan_id = p.id
+        JOIN users u ON up.user_id = u.telegram_id
+        ORDER BY up.purchase_date DESC
+        LIMIT 10
+    ''').fetchall()
+    
     # Get topup options
     topup_options = conn.execute('SELECT * FROM topup_options ORDER BY credits').fetchall()
     
     # Get payment methods
     payment_methods = conn.execute('SELECT * FROM payment_methods ORDER BY name').fetchall()
     
+    # Get active payment methods count
+    active_payment_methods_count = get_active_payment_methods_count()
+    
+    # Get database file information
+    db_info = None
+    if os.path.exists(DB_FILE):
+        stat = os.stat(DB_FILE)
+        db_info = {
+            'size': stat.st_size,
+            'size_mb': round(stat.st_size / (1024 * 1024), 2),
+            'modified': datetime.fromtimestamp(stat.st_mtime).strftime('%Y-%m-%d %H:%M:%S')
+        }
+    
     conn.close()
     
     return render_template('dashboard.html', 
                          users=users['count'], 
                          total_balance=total_balance['total'] or 0,
+                         most_purchased_plans=most_purchased_plans,
+                         recent_purchases=recent_purchases,
                          topup_options=topup_options,
-                         payment_methods=payment_methods)
+                         payment_methods=payment_methods,
+                         active_payment_methods_count=active_payment_methods_count,
+                         db_info=db_info)
 
 @app.route('/topup')
 def topup_management():
@@ -271,6 +320,116 @@ def api_payment_methods():
     
     return jsonify(methods)
 
+# User Management API endpoints
+@app.route('/api/user/<int:user_id>')
+def api_get_user(user_id):
+    """API endpoint to get user details with purchased plans"""
+    conn = get_db_connection()
+    user = conn.execute('SELECT * FROM users WHERE id = ?', (user_id,)).fetchone()
+    
+    if user:
+        # Get user's purchased plans
+        user_plans = conn.execute('''
+            SELECT up.id, p.plan_id_number, p.name, p.description, vk.key_value, 
+                   up.purchase_date, up.expiry_date, up.status
+            FROM user_plans up
+            JOIN plans p ON up.plan_id = p.id
+            LEFT JOIN vpn_keys vk ON up.vpn_key_id = vk.id
+            WHERE up.user_id = ?
+            ORDER BY up.purchase_date DESC
+        ''', (user['telegram_id'],)).fetchall()
+        
+        conn.close()
+        
+        # Format user plans
+        plans = []
+        for plan in user_plans:
+            plans.append({
+                'id': plan[0],
+                'plan_id_number': plan[1],
+                'name': plan[2],
+                'description': plan[3],
+                'vpn_key': plan[4],
+                'purchase_date': plan[5],
+                'expiry_date': plan[6],
+                'status': plan[7]
+            })
+        
+        return jsonify({
+            'success': True,
+            'user': {
+                'id': user['id'],
+                'telegram_id': user['telegram_id'],
+                'username': user['username'],
+                'first_name': user['first_name'],
+                'last_name': user['last_name'],
+                'balance': user['balance'],
+                'created_at': user['created_at'],
+                'updated_at': user['updated_at'],
+                'purchased_plans': plans
+            }
+        })
+    else:
+        conn.close()
+        return jsonify({'success': False, 'message': 'User not found'})
+
+@app.route('/api/user/update-balance', methods=['POST'])
+def api_update_user_balance():
+    """API endpoint to update user balance"""
+    try:
+        data = request.get_json()
+        user_id = data.get('user_id')
+        new_balance = float(data.get('balance'))
+        
+        if not user_id or new_balance < 0:
+            return jsonify({'success': False, 'message': 'Invalid data provided'})
+        
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        
+        # Check if user exists
+        user = cursor.execute('SELECT * FROM users WHERE id = ?', (user_id,)).fetchone()
+        if not user:
+            conn.close()
+            return jsonify({'success': False, 'message': 'User not found'})
+        
+        # Update user balance
+        cursor.execute('''
+            UPDATE users 
+            SET balance = ?, updated_at = CURRENT_TIMESTAMP 
+            WHERE id = ?
+        ''', (new_balance, user_id))
+        
+        conn.commit()
+        conn.close()
+        
+        return jsonify({'success': True, 'message': 'User balance updated successfully'})
+        
+    except Exception as e:
+        return jsonify({'success': False, 'message': f'Error updating balance: {str(e)}'})
+
+@app.route('/api/users/all')
+def api_get_all_users():
+    """API endpoint to get all users for search"""
+    conn = get_db_connection()
+    users = conn.execute('SELECT * FROM users ORDER BY created_at DESC').fetchall()
+    conn.close()
+    
+    user_list = []
+    for user in users:
+        user_list.append({
+            'id': user['id'],
+            'telegram_id': user['telegram_id'],
+            'username': user['username'],
+            'first_name': user['first_name'],
+            'last_name': user['last_name'],
+            'balance': user['balance'],
+            'created_at': user['created_at'],
+            'updated_at': user['updated_at']
+        })
+    
+    return jsonify({'success': True, 'users': user_list})
+
 # Plan Management Routes
 @app.route('/plans')
 def plan_management():
@@ -282,14 +441,19 @@ def plan_management():
 def add_plan():
     """Add new plan"""
     if request.method == 'POST':
+        plan_id_number = request.form['plan_id_number']
         name = request.form['name']
         description = request.form['description']
         credits_required = int(request.form['credits_required'])
         duration_days = int(request.form['duration_days'])
         
-        create_plan(name, description, credits_required, duration_days)
-        flash('Plan added successfully!', 'success')
-        return redirect(url_for('plan_management'))
+        try:
+            create_plan(plan_id_number, name, description, credits_required, duration_days)
+            flash('Plan added successfully!', 'success')
+            return redirect(url_for('plan_management'))
+        except sqlite3.IntegrityError:
+            flash('Plan ID number already exists! Please use a different ID number.', 'error')
+            return render_template('add_plan.html')
     
     return render_template('add_plan.html')
 
@@ -297,15 +461,21 @@ def add_plan():
 def edit_plan(plan_id):
     """Edit plan"""
     if request.method == 'POST':
+        plan_id_number = request.form['plan_id_number']
         name = request.form['name']
         description = request.form['description']
         credits_required = int(request.form['credits_required'])
         duration_days = int(request.form['duration_days'])
         is_active = request.form.get('is_active') == 'on'
         
-        update_plan(plan_id, name, description, credits_required, duration_days, is_active)
-        flash('Plan updated successfully!', 'success')
-        return redirect(url_for('plan_management'))
+        try:
+            update_plan(plan_id, plan_id_number, name, description, credits_required, duration_days, is_active)
+            flash('Plan updated successfully!', 'success')
+            return redirect(url_for('plan_management'))
+        except sqlite3.IntegrityError:
+            flash('Plan ID number already exists! Please use a different ID number.', 'error')
+            plan = get_plan(plan_id)
+            return render_template('edit_plan.html', plan=plan)
     
     plan = get_plan(plan_id)
     if plan is None:
@@ -381,6 +551,340 @@ def edit_contact(contact_id):
         return redirect(url_for('contact_management'))
     
     return render_template('edit_contact.html', contact=contact)
+
+# APK Management Routes
+@app.route('/apk')
+def apk_management():
+    """APK management page"""
+    # Check if APK file exists
+    apk_path = os.path.join(app.config['UPLOAD_FOLDER'], 'latest.apk')
+    apk_exists = os.path.exists(apk_path)
+    
+    apk_info = None
+    if apk_exists:
+        stat = os.stat(apk_path)
+        apk_info = {
+            'name': 'latest.apk',
+            'size': stat.st_size,
+            'size_mb': round(stat.st_size / (1024 * 1024), 2),
+            'modified': datetime.fromtimestamp(stat.st_mtime).strftime('%Y-%m-%d %H:%M:%S')
+        }
+    
+    return render_template('apk_management.html', apk_info=apk_info)
+
+@app.route('/apk/upload', methods=['POST'])
+def upload_apk():
+    """Upload APK file"""
+    if 'apk_file' not in request.files:
+        flash('No file selected!', 'error')
+        return redirect(url_for('apk_management'))
+    
+    file = request.files['apk_file']
+    if file.filename == '':
+        flash('No file selected!', 'error')
+        return redirect(url_for('apk_management'))
+    
+    if file and allowed_file(file.filename):
+        # Create upload directory if it doesn't exist
+        os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+        
+        # Save file as latest.apk
+        filename = secure_filename('latest.apk')
+        filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        file.save(filepath)
+        
+        flash('APK file uploaded successfully!', 'success')
+    else:
+        flash('Invalid file type! Only APK files are allowed.', 'error')
+    
+    return redirect(url_for('apk_management'))
+
+@app.route('/apk/delete', methods=['POST'])
+def delete_apk():
+    """Delete APK file"""
+    apk_path = os.path.join(app.config['UPLOAD_FOLDER'], 'latest.apk')
+    
+    if os.path.exists(apk_path):
+        os.remove(apk_path)
+        flash('APK file deleted successfully!', 'success')
+    else:
+        flash('APK file not found!', 'error')
+    
+    return redirect(url_for('apk_management'))
+
+@app.route('/apk/download')
+def download_apk():
+    """Download APK file"""
+    from flask import send_file
+    
+    apk_path = os.path.join(app.config['UPLOAD_FOLDER'], 'latest.apk')
+    
+    if os.path.exists(apk_path):
+        return send_file(apk_path, as_attachment=True, download_name='vpn_app.apk')
+    else:
+        flash('APK file not found!', 'error')
+        return redirect(url_for('apk_management'))
+
+@app.route('/database/download')
+def download_database():
+    """Download database file"""
+    from flask import send_file
+    import shutil
+    from datetime import datetime
+    
+    try:
+        # Check if database file exists
+        if not os.path.exists(DB_FILE):
+            flash('Database file not found!', 'error')
+            return redirect(url_for('dashboard'))
+        
+        # Create a backup copy with timestamp
+        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+        backup_filename = f'bot_database_backup_{timestamp}.db'
+        backup_path = os.path.join('/tmp', backup_filename)
+        
+        # Copy database file to temp location
+        shutil.copy2(DB_FILE, backup_path)
+        
+        # Send the backup file
+        return send_file(
+            backup_path,
+            as_attachment=True,
+            download_name=backup_filename,
+            mimetype='application/octet-stream'
+        )
+        
+    except Exception as e:
+        flash(f'Error creating database backup: {str(e)}', 'error')
+        return redirect(url_for('dashboard'))
+
+@app.route('/database/backup', methods=['POST'])
+def backup_database():
+    """Create a backup of the database"""
+    from datetime import datetime
+    import shutil
+    
+    try:
+        # Check if database file exists
+        if not os.path.exists(DB_FILE):
+            flash('Database file not found!', 'error')
+            return redirect(url_for('dashboard'))
+        
+        # Create backup directory if it doesn't exist
+        backup_dir = 'database_backups'
+        os.makedirs(backup_dir, exist_ok=True)
+        
+        # Create timestamped backup filename
+        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+        backup_filename = f'bot_database_backup_{timestamp}.db'
+        backup_path = os.path.join(backup_dir, backup_filename)
+        
+        # Copy database file to backup location
+        shutil.copy2(DB_FILE, backup_path)
+        
+        # Get backup file size
+        backup_size = os.path.getsize(backup_path)
+        backup_size_mb = round(backup_size / (1024 * 1024), 2)
+        
+        flash(f'Database backup created successfully! File: {backup_filename} ({backup_size_mb} MB)', 'success')
+        
+    except Exception as e:
+        flash(f'Error creating database backup: {str(e)}', 'error')
+    
+    return redirect(url_for('dashboard'))
+
+@app.route('/database/restore', methods=['POST'])
+def restore_database():
+    """Restore database from uploaded file"""
+    from werkzeug.utils import secure_filename
+    import shutil
+    from datetime import datetime
+    
+    try:
+        # Check if file was uploaded
+        if 'database_file' not in request.files:
+            flash('No database file selected!', 'error')
+            return redirect(url_for('dashboard'))
+        
+        file = request.files['database_file']
+        if file.filename == '':
+            flash('No database file selected!', 'error')
+            return redirect(url_for('dashboard'))
+        
+        # Check if file is a database file
+        if not file.filename.lower().endswith('.db'):
+            flash('Invalid file type! Only .db files are allowed.', 'error')
+            return redirect(url_for('dashboard'))
+        
+        # Check file size (basic validation)
+        file.seek(0, 2)  # Seek to end
+        file_size = file.tell()
+        file.seek(0)  # Reset to beginning
+        
+        if file_size == 0:
+            flash('Uploaded file is empty!', 'error')
+            return redirect(url_for('dashboard'))
+        
+        if file_size > 100 * 1024 * 1024:  # 100MB limit
+            flash('File too large! Maximum size is 100MB.', 'error')
+            return redirect(url_for('dashboard'))
+        
+        # Create backup of current database before restore
+        if os.path.exists(DB_FILE):
+            timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+            backup_filename = f'bot_database_before_restore_{timestamp}.db'
+            backup_dir = 'database_backups'
+            os.makedirs(backup_dir, exist_ok=True)
+            backup_path = os.path.join(backup_dir, backup_filename)
+            shutil.copy2(DB_FILE, backup_path)
+            flash(f'Current database backed up as: {backup_filename}', 'info')
+        
+        # Save uploaded file as new database
+        temp_path = DB_FILE + '.temp'
+        file.save(temp_path)
+        
+        # Verify the uploaded file before replacing current database
+        try:
+            conn = sqlite3.connect(temp_path)
+            cursor = conn.cursor()
+            cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
+            tables = cursor.fetchall()
+            conn.close()
+            
+            if not tables:
+                os.remove(temp_path)
+                flash('Uploaded database appears to be empty or corrupted!', 'error')
+                return redirect(url_for('dashboard'))
+            
+            # If verification passes, replace the current database
+            shutil.move(temp_path, DB_FILE)
+            flash(f'Database restored successfully! Found {len(tables)} tables.', 'success')
+            
+        except Exception as e:
+            # Clean up temp file if verification fails
+            if os.path.exists(temp_path):
+                os.remove(temp_path)
+            flash(f'Uploaded database appears to be corrupted: {str(e)}', 'error')
+            return redirect(url_for('dashboard'))
+        
+    except Exception as e:
+        flash(f'Error restoring database: {str(e)}', 'error')
+    
+    return redirect(url_for('dashboard'))
+
+@app.route('/database/backups')
+def list_backups():
+    """List all database backups"""
+    backup_dir = 'database_backups'
+    
+    if not os.path.exists(backup_dir):
+        return render_template('database_backups.html', backups=[])
+    
+    backups = []
+    for filename in os.listdir(backup_dir):
+        if filename.endswith('.db'):
+            filepath = os.path.join(backup_dir, filename)
+            stat = os.stat(filepath)
+            backups.append({
+                'filename': filename,
+                'size': round(stat.st_size / (1024 * 1024), 2),
+                'modified': datetime.fromtimestamp(stat.st_mtime).strftime('%Y-%m-%d %H:%M:%S'),
+                'path': filepath
+            })
+    
+    # Sort by modification time (newest first)
+    backups.sort(key=lambda x: x['modified'], reverse=True)
+    
+    return render_template('database_backups.html', backups=backups)
+
+@app.route('/database/backup/<filename>/download')
+def download_backup(filename):
+    """Download a specific backup file"""
+    from flask import send_file
+    import os
+    
+    backup_dir = 'database_backups'
+    backup_path = os.path.join(backup_dir, filename)
+    
+    if not os.path.exists(backup_path):
+        flash('Backup file not found!', 'error')
+        return redirect(url_for('list_backups'))
+    
+    return send_file(
+        backup_path,
+        as_attachment=True,
+        download_name=filename,
+        mimetype='application/octet-stream'
+    )
+
+@app.route('/database/backup/<filename>/restore', methods=['POST'])
+def restore_from_backup(filename):
+    """Restore database from a specific backup"""
+    import shutil
+    from datetime import datetime
+    
+    try:
+        backup_dir = 'database_backups'
+        backup_path = os.path.join(backup_dir, filename)
+        
+        if not os.path.exists(backup_path):
+            flash('Backup file not found!', 'error')
+            return redirect(url_for('list_backups'))
+        
+        # Create backup of current database before restore
+        if os.path.exists(DB_FILE):
+            timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+            current_backup_filename = f'bot_database_before_restore_{timestamp}.db'
+            current_backup_path = os.path.join(backup_dir, current_backup_filename)
+            shutil.copy2(DB_FILE, current_backup_path)
+            flash(f'Current database backed up as: {current_backup_filename}', 'info')
+        
+        # Copy backup to current database location
+        shutil.copy2(backup_path, DB_FILE)
+        
+        # Verify the restored database
+        try:
+            conn = sqlite3.connect(DB_FILE)
+            cursor = conn.cursor()
+            cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
+            tables = cursor.fetchall()
+            conn.close()
+            
+            if not tables:
+                flash('Restored database appears to be empty or corrupted!', 'error')
+                return redirect(url_for('list_backups'))
+            
+            flash(f'Database restored successfully from {filename}! Found {len(tables)} tables.', 'success')
+            
+        except Exception as e:
+            flash(f'Restored database appears to be corrupted: {str(e)}', 'error')
+            return redirect(url_for('list_backups'))
+        
+    except Exception as e:
+        flash(f'Error restoring database: {str(e)}', 'error')
+    
+    return redirect(url_for('list_backups'))
+
+@app.route('/database/backup/<filename>/delete', methods=['POST'])
+def delete_backup(filename):
+    """Delete a specific backup file"""
+    import os
+    
+    try:
+        backup_dir = 'database_backups'
+        backup_path = os.path.join(backup_dir, filename)
+        
+        if not os.path.exists(backup_path):
+            flash('Backup file not found!', 'error')
+            return redirect(url_for('list_backups'))
+        
+        os.remove(backup_path)
+        flash(f'Backup {filename} deleted successfully!', 'success')
+        
+    except Exception as e:
+        flash(f'Error deleting backup: {str(e)}', 'error')
+    
+    return redirect(url_for('list_backups'))
 
 if __name__ == '__main__':
     init_admin_tables()

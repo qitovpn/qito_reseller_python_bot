@@ -18,7 +18,7 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>Plan ID</th>
                             <th>Name</th>
                             <th>Description</th>
                             <th>Credits</th>
@@ -31,19 +31,19 @@
                     <tbody>
                         {% for plan in plans %}
                         <tr>
-                            <td>{{ plan[0] }}</td>
-                            <td>{{ plan[1] }}</td>
-                            <td>{{ plan[2] or '-' }}</td>
-                            <td>{{ plan[3] }}</td>
-                            <td>{{ plan[4] }} days</td>
+                            <td><strong>{{ plan[1] }}</strong></td>
+                            <td>{{ plan[2] }}</td>
+                            <td>{{ plan[3] or '-' }}</td>
+                            <td>{{ plan[4] }}</td>
+                            <td>{{ plan[5] }} days</td>
                             <td>
-                                {% if plan[5] %}
+                                {% if plan[6] %}
                                     <span class="badge bg-success">Active</span>
                                 {% else %}
                                     <span class="badge bg-secondary">Inactive</span>
                                 {% endif %}
                             </td>
-                            <td>{{ plan[6][:10] }}</td>
+                            <td>{{ plan[7][:10] }}</td>
                             <td>
                                 <a href="{{ url_for('plan_keys', plan_id=plan[0]) }}" class="btn btn-sm btn-outline-info me-1" title="Manage Keys">
                                     <i class="fas fa-key"></i>

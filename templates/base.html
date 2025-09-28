@@ -77,6 +77,24 @@
                                 Users
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.endpoint == 'apk_management' %}active{% endif %}" href="{{ url_for('apk_management') }}">
+                                <i class="fas fa-mobile-alt me-2"></i>
+                                APK Management
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('download_database') }}">
+                                <i class="fas fa-database me-2"></i>
+                                Download Database
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.endpoint == 'list_backups' %}active{% endif %}" href="{{ url_for('list_backups') }}">
+                                <i class="fas fa-history me-2"></i>
+                                Database Backups
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </nav>

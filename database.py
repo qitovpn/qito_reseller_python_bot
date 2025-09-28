@@ -102,6 +102,28 @@ def get_payment_methods():
     conn.close()
     return methods
 
+def get_all_payment_methods():
+    """Get all payment methods (active and inactive) for admin purposes"""
+    conn = sqlite3.connect(DB_FILE)
+    cursor = conn.cursor()
+    
+    cursor.execute('SELECT id, name, description, is_active, created_at FROM payment_methods ORDER BY name')
+    methods = cursor.fetchall()
+    
+    conn.close()
+    return methods
+
+def get_active_payment_methods_count():
+    """Get count of active payment methods"""
+    conn = sqlite3.connect(DB_FILE)
+    cursor = conn.cursor()
+    
+    cursor.execute('SELECT COUNT(*) FROM payment_methods WHERE is_active = 1')
+    count = cursor.fetchone()[0]
+    
+    conn.close()
+    return count
+
 def init_payment_tables():
     """Initialize payment-related tables"""
     conn = sqlite3.connect(DB_FILE)
@@ -192,6 +214,7 @@ def init_plan_tables():
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS plans (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
+            plan_id_number TEXT UNIQUE NOT NULL,
             name TEXT NOT NULL,
             description TEXT,
             credits_required INTEGER NOT NULL,
@@ -201,6 +224,41 @@ def init_plan_tables():
             updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     ''')
+    
+    # Add plan_id_number column if it doesn't exist (for existing databases)
+    cursor.execute("PRAGMA table_info(plans)")
+    columns = [column[1] for column in cursor.fetchall()]
+    if 'plan_id_number' not in columns:
+        # First add the column without UNIQUE constraint
+        cursor.execute('ALTER TABLE plans ADD COLUMN plan_id_number TEXT')
+        # Set default values for existing plans
+        cursor.execute('UPDATE plans SET plan_id_number = CAST(id AS TEXT) WHERE plan_id_number IS NULL')
+        
+        # Create a new table with the UNIQUE constraint
+        cursor.execute('''
+            CREATE TABLE plans_new (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                plan_id_number TEXT UNIQUE NOT NULL,
+                name TEXT NOT NULL,
+                description TEXT,
+                credits_required INTEGER NOT NULL,
+                duration_days INTEGER NOT NULL,
+                is_active BOOLEAN DEFAULT 1,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        ''')
+        
+        # Copy data from old table to new table
+        cursor.execute('''
+            INSERT INTO plans_new (id, plan_id_number, name, description, credits_required, duration_days, is_active, created_at, updated_at)
+            SELECT id, plan_id_number, name, description, credits_required, duration_days, is_active, created_at, updated_at
+            FROM plans
+        ''')
+        
+        # Drop old table and rename new table
+        cursor.execute('DROP TABLE plans')
+        cursor.execute('ALTER TABLE plans_new RENAME TO plans')
     
     # Create vpn_keys table
     cursor.execute('''
@@ -237,15 +295,15 @@ def init_plan_tables():
     conn.close()
 
 # Plan management functions
-def create_plan(name, description, credits_required, duration_days):
+def create_plan(plan_id_number, name, description, credits_required, duration_days):
     """Create a new plan"""
     conn = sqlite3.connect(DB_FILE)
     cursor = conn.cursor()
     
     cursor.execute('''
-        INSERT INTO plans (name, description, credits_required, duration_days)
-        VALUES (?, ?, ?, ?)
-    ''', (name, description, credits_required, duration_days))
+        INSERT INTO plans (plan_id_number, name, description, credits_required, duration_days)
+        VALUES (?, ?, ?, ?, ?)
+    ''', (plan_id_number, name, description, credits_required, duration_days))
     
     plan_id = cursor.lastrowid
     conn.commit()
@@ -258,7 +316,7 @@ def get_all_plans():
     conn = sqlite3.connect(DB_FILE)
     cursor = conn.cursor()
     
-    cursor.execute('SELECT * FROM plans ORDER BY credits_required')
+    cursor.execute('SELECT * FROM plans ORDER BY plan_id_number')
     plans = cursor.fetchall()
     
     conn.close()
@@ -269,7 +327,7 @@ def get_active_plans():
     conn = sqlite3.connect(DB_FILE)
     cursor = conn.cursor()
     
-    cursor.execute('SELECT * FROM plans WHERE is_active = 1 ORDER BY credits_required')
+    cursor.execute('SELECT * FROM plans WHERE is_active = 1 ORDER BY plan_id_number')
     plans = cursor.fetchall()
     
     conn.close()
@@ -286,17 +344,17 @@ def get_plan(plan_id):
     conn.close()
     return plan
 
-def update_plan(plan_id, name, description, credits_required, duration_days, is_active):
+def update_plan(plan_id, plan_id_number, name, description, credits_required, duration_days, is_active):
     """Update plan"""
     conn = sqlite3.connect(DB_FILE)
     cursor = conn.cursor()
     
     cursor.execute('''
         UPDATE plans 
-        SET name = ?, description = ?, credits_required = ?, duration_days = ?, 
+        SET plan_id_number = ?, name = ?, description = ?, credits_required = ?, duration_days = ?, 
             is_active = ?, updated_at = CURRENT_TIMESTAMP 
         WHERE id = ?
-    ''', (name, description, credits_required, duration_days, is_active, plan_id))
+    ''', (plan_id_number, name, description, credits_required, duration_days, is_active, plan_id))
     
     conn.commit()
     conn.close()
@@ -567,3 +625,155 @@ def get_contact_by_type(contact_type):
     
     conn.close()
     return result[0] if result else None
+
+# Expired key management functions
+def check_and_delete_expired_keys():
+    """Check for expired keys and delete them completely"""
+    conn = sqlite3.connect(DB_FILE)
+    cursor = conn.cursor()
+    
+    # Get all active user plans that have expired
+    cursor.execute('''
+        SELECT up.id, up.user_id, up.plan_id, up.vpn_key_id, p.name, up.expiry_date
+        FROM user_plans up
+        JOIN plans p ON up.plan_id = p.id
+        WHERE up.status = 'active' 
+        AND up.expiry_date IS NOT NULL 
+        AND datetime(up.expiry_date) < datetime('now')
+    ''')
+    expired_plans = cursor.fetchall()
+    
+    deleted_count = 0
+    deleted_details = []
+    
+    for plan in expired_plans:
+        plan_id, user_id, plan_id_num, vpn_key_id, plan_name, expiry_date = plan
+        
+        # Get VPN key details before deletion
+        key_details = None
+        if vpn_key_id:
+            cursor.execute('SELECT key_value FROM vpn_keys WHERE id = ?', (vpn_key_id,))
+            key_result = cursor.fetchone()
+            if key_result:
+                key_details = key_result[0]
+        
+        # Delete the user plan record
+        cursor.execute('DELETE FROM user_plans WHERE id = ?', (plan_id,))
+        
+        # Delete the VPN key if it exists
+        if vpn_key_id:
+            cursor.execute('DELETE FROM vpn_keys WHERE id = ?', (vpn_key_id,))
+        
+        deleted_count += 1
+        deleted_details.append({
+            'user_id': user_id,
+            'plan_name': plan_name,
+            'vpn_key': key_details,
+            'expiry_date': expiry_date
+        })
+    
+    conn.commit()
+    conn.close()
+    
+    return deleted_count, deleted_details
+
+def check_and_update_expired_keys():
+    """Legacy function - now calls the delete function"""
+    return check_and_delete_expired_keys()
+
+def get_expiring_soon_keys(days_ahead=3):
+    """Get keys that will expire soon"""
+    conn = sqlite3.connect(DB_FILE)
+    cursor = conn.cursor()
+    
+    cursor.execute('''
+        SELECT up.user_id, p.name, up.expiry_date, u.username, u.first_name
+        FROM user_plans up
+        JOIN plans p ON up.plan_id = p.id
+        JOIN users u ON up.user_id = u.telegram_id
+        WHERE up.status = 'active' 
+        AND up.expiry_date IS NOT NULL 
+        AND datetime(up.expiry_date) BETWEEN datetime('now') AND datetime('now', '+{} days')
+        ORDER BY up.expiry_date ASC
+    '''.format(days_ahead))
+    
+    expiring_plans = cursor.fetchall()
+    conn.close()
+    
+    return expiring_plans
+
+def cleanup_orphaned_keys():
+    """Clean up VPN keys that are not assigned to any user plan"""
+    conn = sqlite3.connect(DB_FILE)
+    cursor = conn.cursor()
+    
+    # Find VPN keys that are not referenced by any user plan
+    cursor.execute('''
+        SELECT vk.id, vk.key_value, vk.plan_id
+        FROM vpn_keys vk
+        LEFT JOIN user_plans up ON vk.id = up.vpn_key_id
+        WHERE up.vpn_key_id IS NULL
+    ''')
+    orphaned_keys = cursor.fetchall()
+    
+    deleted_count = 0
+    deleted_keys = []
+    
+    for key in orphaned_keys:
+        key_id, key_value, plan_id = key
+        
+        # Delete the orphaned key
+        cursor.execute('DELETE FROM vpn_keys WHERE id = ?', (key_id,))
+        
+        deleted_count += 1
+        deleted_keys.append({
+            'key_id': key_id,
+            'key_value': key_value,
+            'plan_id': plan_id
+        })
+    
+    conn.commit()
+    conn.close()
+    
+    return deleted_count, deleted_keys
+
+def get_expired_keys_stats():
+    """Get statistics about expired keys"""
+    conn = sqlite3.connect(DB_FILE)
+    cursor = conn.cursor()
+    
+    # Get count of active user plans
+    cursor.execute('''
+        SELECT COUNT(*) FROM user_plans 
+        WHERE status = 'active'
+    ''')
+    active_count = cursor.fetchone()[0]
+    
+    # Get count of total VPN keys
+    cursor.execute('''
+        SELECT COUNT(*) FROM vpn_keys
+    ''')
+    total_keys = cursor.fetchone()[0]
+    
+    # Get count of used VPN keys
+    cursor.execute('''
+        SELECT COUNT(*) FROM vpn_keys 
+        WHERE is_used = 1
+    ''')
+    used_keys = cursor.fetchone()[0]
+    
+    # Get count of available VPN keys
+    cursor.execute('''
+        SELECT COUNT(*) FROM vpn_keys 
+        WHERE is_used = 0
+    ''')
+    available_keys = cursor.fetchone()[0]
+    
+    conn.close()
+    
+    return {
+        'active_plans': active_count,
+        'total_keys': total_keys,
+        'used_keys': used_keys,
+        'available_keys': available_keys
+    }
