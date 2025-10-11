@@ -121,14 +121,14 @@ def send_help(message):
 • 👤 ကျွန်ုပ်၏ credit - သင့်အကောင့်ငွေလက်ကျန်နှင့် ငွေလွှဲမှုများကို ကြည့်ရှုပါ
 • 💳 ငွေဖြည့် - သင့်အကောင့်သို့ ငွေထည့်ပါ
 • VPN Key ဝယ်ရန် - VPN ပက်ကေ့ချ်များကို ကြည့်ရှုပြီး ဝယ်ယူပါ
-• 📋 ကျွန်ုပ်၏ပက်ကေ့ချ် - ဝယ်ယူထားသော ပက်ကေ့ချ်များနှင့် VPN သော့များကို ကြည့်ရှုပါ
+• 📋 ကျွန်ုပ်၏ပက်ကေ့ချ် - ဝယ်ယူထားသော ပက်ကေ့ချ်များနှင့် VPN Keyများကို ကြည့်ရှုပါ
 • 📞 ဆက်သွယ်ရန် - ဖောက်သည်ဝန်ဆောင်မှုနှင့် ဆက်သွယ်ရန်အချက်အလက်များကို ရယူပါ
 
 **အင်္ဂါရပ်များ:**
 • အပြန်အလှန်ပြုလုပ်နိုင်သော ပြန်လည်အသုံးပြုနိုင်သော ကီးဘုတ်များ
 • မြန်ဆန်သောလုပ်ဆောင်မှုများအတွက် အတွင်းပိုင်းကီးဘုတ်များ
 • အကောင့်ငွေလက်ကျန် စီမံခန့်ခွဲမှု
-• ပက်ကေ့ချ်ဝယ်ယူမှုနှင့် VPN သော့ပေးအပ်မှု
+• ပက်ကေ့ချ်ဝယ်ယူမှုနှင့် VPN Keyပေးအပ်မှု
 • ဖောက်သည်ဝန်ဆောင်မှု ပေါင်းစပ်မှု
 
     """
@@ -383,8 +383,7 @@ def handle_my_balance(message):
     
     balance_text = f"""👤 သင့်အကောင့်ငွေလက်ကျန်
 
-• လက်ရှိငွေလက်ကျန်: ${current_balance:.2f}
-• ရရှိနိုင်သောခရက်ဒစ်: {credits:,}
+• လက်ကျန် Credits: {credits:,}
 • အကောင့်အခြေအနေ: ✅ လုပ်ဆောင်နေ
 
 အကောင့်အချက်အလက်:
@@ -412,19 +411,9 @@ def handle_topup(message):
 
 သင့်ငွေဖြည့်မှုပမာဏကို ရွေးချယ်ပါ:
 
-မြန်ဆန်သောငွေဖြည့်ရွေးချယ်စရာများ:"""
+သင့်ငွေဖြည့်မှုကို ဆက်လက်လုပ်ဆောင်ရန် အောက်ပါခလုတ်များကို နှိပ်ပါ:"""
     
-    for credits, mmk_price in topup_options:
-        topup_text += f"\n• 💎 {credits} ခရက်ဒစ် - {mmk_price:,} ကျပ်"
-    
-    topup_text += "\n\n💳 ငွေပေးချေမှုနည်းလမ်းများ:"
-    for name, description in payment_methods:
-        if description:
-            topup_text += f"\n• **{name}**\n  {description}"
-        else:
-            topup_text += f"\n• **{name}**"
-    
-    topup_text += "\n\nသင့်ငွေဖြည့်မှုကို ဆက်လက်လုပ်ဆောင်ရန် အောက်ပါခလုတ်များကို နှိပ်ပါ:"
+
     
     # Create inline keyboard for top-up options
     markup = InlineKeyboardMarkup()
@@ -751,7 +740,7 @@ def handle_callback(call):
             
             payment_details = f"""💳 ငွေပေးချေမှုအသေးစိတ်
 
-ငွေဖြည့်ပမာဏ: {credits} ခရက်ဒစ်
+ငွေဖြည့်ပမာဏ: {credits} Credits
 ဈေးနှုန်း: {mmk_price:,} ကျပ်
 
 💳 ရရှိနိုင်သောငွေပေးချေမှုနည်းလမ်းများ:
@@ -763,19 +752,11 @@ def handle_callback(call):
                     payment_details += f"• **{name}**\n"
             
             payment_details += f"""
-📋 ငွေပေးချေမှုအဆင့်များ:
+:clipboard: ငွေပေးချေရန် အောက်ပါအတိုင်းလုပ်ဆောင်ပါ
+1. ငွေလွှဲထားသော screenshot ပို့ပေးထားပါ
+2. အက်မင်အတည်ပြုချက်ကို စောင့်ပါ(Admin ဘက်မှအတည်ပြုပြီးသည်နှင့် Credit များထည့်သွင်းပေးထားပါမည်)
 
-1. အထက်ပါငွေပေးချေမှုနည်းလမ်းများထဲမှ တစ်ခုသို့ {mmk_price:,} ကျပ် ပေးပို့ပါ
-2. သင့်ငွေပေးချေမှုအတည်ပြုချက်ကို ပုံရိုက်ယူပါ
-3. ငွေပေးချေမှုအတည်ပြုပုံကို ဤဘော့သို့ ပို့ပါ
-4. အက်မင်အတည်ပြုချက်ကို စောင့်ပါ (များသောအားဖြင့် ၂ နာရီအတွင်း)
-5. သင့်အကောင့်သို့ ခရက်ဒစ်များ ထည့်သွင်းပေးမည်
-
-ငွေပေးချေမှု ID: #{payment_id}
-
-⚠️ အရေးကြီးသည်: သင့်ငွေပေးချေမှုအတည်ပြုချက်ကို အတည်ပြုမခံရမီ အထိ သိမ်းဆည်းထားပါ!
-
-သင့်ငွေပေးချေမှုအတည်ပြုပုံကို ယခုပို့ပါ:"""
+ငွေပေးချေမှု ID: #{payment_id}"""
             
             bot.send_message(call.message.chat.id, payment_details, reply_markup=create_main_menu())
         else:
@@ -883,13 +864,15 @@ def handle_callback(call):
                     # Notify user
                     user_message = f"""✅ Payment Approved!
 
+✅  Credits ထပ်ပေါင်းထည့်ပြီးပါပြီဗျ
+
 Payment ID: #{payment_id}
-Credits Added: {payment[2]} Credits
+Credit Added: {payment[2]} Credits
 Amount Paid: {payment[3]:,} MMK
 
-Your balance has been updated. You can check your balance using the "💰 My Balance" button.
+👤ကျွန်ုပ်၏ Credit ကိုနှိပ်၍ Credit လက်ကျန်စစ်ဆေးနိုင်ပါသည်
 
-Thank you for your payment!"""
+❤️ဝယ်ယူအားပေးမှုအတွက် ကျေးဇူးပါဗျ"""
                     
                     bot.send_message(payment[1], user_message, reply_markup=create_main_menu())
                     
@@ -966,20 +949,18 @@ You can try making a new payment with a clearer payment proof."""
                 
                 if available_keys:
                     # Show confirmation dialog
-                    confirmation_message = f"""🛒 **ပက်ကေ့ချ်ဝယ်ယူမှု အတည်ပြုခြင်း**
+                    confirmation_message = f"""🛒 **Key ဝယ်ယူမှု အတည်ပြုခြင်း!**
 
-**ပက်ကေ့ချ်အချက်အလက်များ:**
 • ပက်ကေ့ချ် ID: {plan_id_number}
-• ပက်ကေ့ချ်အမည်: {name}
-• ဖော်ပြချက်: {description or 'ဖော်ပြချက်မရှိ'}
-• ကာလ: {duration_days} ရက်
-• ကုန်ကျစရိတ်: {credits_required} ခရက်ဒစ်
+• Key အမျိုးအစား : {name}
+• ဖော်ပြချက်     : {description or 'ဖော်ပြချက်မရှိ'}
+• သက်တမ်း      : {duration_days} ရက်
+• ကုန်ကျစရိတ်: {credits_required} Credits
 
 **သင့်အကောင့်:**
-• လက်ရှိငွေလက်ကျန်: {user_credits} ခရက်ဒစ်
-• ဝယ်ယူပြီးနောက်: {user_credits - credits_required} ခရက်ဒစ်
+• လက်ကျန် Credit : {user_credits} Credits
 
-**ရရှိနိုင်သောသော့များ:** {len(available_keys)} သော့ရှိ
+Key Avaliable: {len(available_keys)} Keys
 
 ကျေးဇူးပြု၍ သင့်ဝယ်ယူမှုကို အတည်ပြုပါ:"""
                     
@@ -1027,19 +1008,17 @@ You can try making a new payment with a clearer payment proof."""
                     add_user_balance(call.from_user.id, -credits_required)
                     
                     # Notify user
-                    success_message = f"""✅ **ပက်ကေ့ချ်ဝယ်ယူမှု အောင်မြင်ပါတယ်!**
+                    success_message = f"""✅ **Key ဝယ်ယူမှု အောင်မြင်ပါသည်!!**
 
 **ပက်ကေ့ချ် ID:** {plan_id_number}
-**ပက်ကေ့ချ်:** {name}
-**ကာလ:** {duration_days} ရက်
-**ကုန်ကျစရိတ်:** {credits_required} ခရက်ဒစ်
-**VPN သော့:** `{vpn_key}`
+**Key အမျိုးအစား :** {name}
+**သက်တမ်း:** {duration_days} ရက်
+**ကုန်ကျစရိတ်:** {credits_required} Credits
+**VPN Key ⬇️** 
 
-သင့်အကောင့်သို့ VPN သော့ပပ်ပြီး အကောင့်အချက်အလက်များ မွမ်းမံပြီးပါပြီ။
-
-"📋 ကျွန်ုပ်၏ပက်ကေ့ချ်" ခလုတ်ကို အသုံးပြု၍ သင့်ပက်ကေ့ချ်များကို မည်သည့်အချိန်တွင်မဆို ကြည့်ရှုနိုင်ပါတယ်။"""
+`{vpn_key}`"""
                     
-                    bot.answer_callback_query(call.id, "ပက်ကေ့ချ်ဝယ်ယူမှု အောင်မြင်ပါတယ်!")
+                    bot.answer_callback_query(call.id, "Key ဝယ်ယူမှု အောင်မြင်ပါသည်!!")
                     bot.send_message(call.message.chat.id, success_message, 
                                    parse_mode='Markdown', reply_markup=create_main_menu())
                     
@@ -1117,7 +1096,7 @@ def handle_payment_proof(message):
         
         # Notify user
         bot.send_message(message.chat.id, 
-                        f"✅ Payment proof received!\n\nPayment ID: #{payment_id}\nAmount: {credits} Credits ({mmk_price:,} MMK)\n\nYour payment is now under review. You will be notified once it's processed.", 
+                        f"✅ငွေပေးချေမှုအတည်ပြုရန် ခေတ္တစောင့်ဆိုင်းပေးပါ!\n\nPayment ID: #{payment_id}\nထည့်မည့်ပမာဏ: {credits} Credits", 
                         reply_markup=create_main_menu())
         
         # Notify admin
