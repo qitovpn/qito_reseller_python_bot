@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+
+{% block title %}QITO Plan Management - VPN Bot Admin{% endblock %}
+{% block page_title %}🗝 QITO Plan Management{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">QITO Plans Overview</h5>
+            <a href="{{ url_for('add_qito_plan') }}" class="btn btn-primary">
+                <i class="fas fa-plus me-2"></i>Add QITO Plan
+            </a>
+        </div>
+    </div>
+</div>
+
+{% if qito_plans %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Plan ID</th>
+                                <th>Plan Name</th>
+                                <th>Description</th>
+                                <th>Credits Required</th>
+                                <th>Duration</th>
+                                <th>Device Limit</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for plan in qito_plans %}
+                            <tr>
+                                <td>
+                                    <span class="badge bg-primary">{{ plan.plan_id_number }}</span>
+                                </td>
+                                <td>
+                                    <strong>{{ plan.name }}</strong>
+                                </td>
+                                <td>
+                                    <small class="text-muted">{{ plan.description or 'No description' }}</small>
+                                </td>
+                                <td>
+                                    <span class="badge bg-info">{{ plan.credits_required }} credits</span>
+                                </td>
+                                <td>{{ plan.duration_days }} days</td>
+                                <td>
+                                    <span class="badge bg-info">{{ plan.device_limit or 1 }} devices</span>
+                                </td>
+                                <td>
+                                    {% if plan.is_active %}
+                                        <span class="badge bg-success">Active</span>
+                                    {% else %}
+                                        <span class="badge bg-secondary">Inactive</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <div class="btn-group btn-group-sm" role="group">
+                                        <a href="{{ url_for('edit_qito_plan', plan_id=plan.id) }}" 
+                                           class="btn btn-outline-primary" title="Edit Plan">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="{{ url_for('delete_qito_plan', plan_id=plan.id) }}" 
+                                           class="btn btn-outline-danger" 
+                                           onclick="return confirm('Are you sure you want to delete this QITO plan? This action cannot be undone!')"
+                                           title="Delete Plan">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Actions -->
+<div class="row mt-4">
+    <div class="col-md-4">
+        <div class="card bg-primary text-white">
+            <div class="card-body text-center">
+                <h4>{{ qito_plans|length }}</h4>
+                <p class="mb-0">Total QITO Plans</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card bg-success text-white">
+            <div class="card-body text-center">
+                <h4>{{ qito_plans|selectattr('is_active')|list|length }}</h4>
+                <p class="mb-0">Active Plans</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card bg-warning text-white">
+            <div class="card-body text-center">
+                <h4>{{ qito_plans|sum(attribute='device_limit') or 0 }}</h4>
+                <p class="mb-0">Total Device Slots</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% else %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body text-center">
+                <i class="fas fa-key fa-3x text-muted mb-3"></i>
+                <h5 class="text-muted">No QITO Plans Found</h5>
+                <p class="text-muted">Create your first QITO plan to start managing QITO keys.</p>
+                <a href="{{ url_for('add_qito_plan') }}" class="btn btn-primary">
+                    <i class="fas fa-plus me-2"></i>Add First QITO Plan
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- Quick Links -->
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h6 class="card-title mb-0">Quick Actions</h6>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <a href="{{ url_for('qito_statistics') }}" class="btn btn-info w-100 mb-2">
+                            <i class="fas fa-chart-bar me-2"></i>QITO Statistics
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="{{ url_for('plan_management') }}" class="btn btn-secondary w-100 mb-2">
+                            <i class="fas fa-list me-2"></i>All Plans
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="{{ url_for('dashboard') }}" class="btn btn-outline-primary w-100 mb-2">
+                            <i class="fas fa-home me-2"></i>Dashboard
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

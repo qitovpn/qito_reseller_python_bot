@@ -128,6 +128,30 @@ def dashboard():
     # Get active payment methods count
     active_payment_methods_count = get_active_payment_methods_count()
     
+    # Get QITO plans (plans with "QITO" in the name)
+    qito_plans = conn.execute('''
+        SELECT p.*, 
+               COUNT(CASE WHEN vk.is_used = 0 THEN 1 END) as available_keys
+        FROM plans p
+        LEFT JOIN vpn_keys vk ON p.id = vk.plan_id
+        WHERE p.name LIKE '%QITO%' AND p.is_active = 1
+        GROUP BY p.id
+        ORDER BY p.plan_id_number
+    ''').fetchall()
+    
+    # Get QITO plans count
+    qito_plans_count = conn.execute('''
+        SELECT COUNT(*) FROM plans WHERE name LIKE '%QITO%' AND is_active = 1
+    ''').fetchone()[0]
+    
+    # Get total available QITO keys count
+    qito_keys_count = conn.execute('''
+        SELECT COUNT(*) 
+        FROM vpn_keys vk
+        JOIN plans p ON vk.plan_id = p.id
+        WHERE p.name LIKE '%QITO%' AND vk.is_used = 0
+    ''').fetchone()[0]
+    
     # Get database file information
     db_info = None
     if os.path.exists(DB_FILE):
@@ -148,6 +172,9 @@ def dashboard():
                          topup_options=topup_options,
                          payment_methods=payment_methods,
                          active_payment_methods_count=active_payment_methods_count,
+                         qito_plans=qito_plans,
+                         qito_plans_count=qito_plans_count,
+                         qito_keys_count=qito_keys_count,
                          db_info=db_info)
 
 @app.route('/topup')
@@ -522,6 +549,126 @@ def delete_key(key_id):
     delete_vpn_key(key_id)
     flash('Key deleted successfully!', 'success')
     return redirect(request.referrer or url_for('plan_management'))
+
+# QITO Plan Management Routes
+@app.route('/qito')
+def qito_plan_management():
+    """QITO plan management page"""
+    conn = get_db_connection()
+    qito_plans = conn.execute('''
+        SELECT p.*, 
+               COALESCE(p.device_limit, 1) as device_limit
+        FROM plans p
+        WHERE p.name LIKE '%QITO%'
+        ORDER BY p.plan_id_number
+    ''').fetchall()
+    conn.close()
+    return render_template('qito_plan_management.html', qito_plans=qito_plans)
+
+@app.route('/qito/add', methods=['GET', 'POST'])
+def add_qito_plan():
+    """Add new QITO plan"""
+    if request.method == 'POST':
+        plan_id_number = request.form['plan_id_number']
+        name = f"QITO {request.form['name']}"  # Automatically prefix with QITO
+        description = request.form['description']
+        credits_required = int(request.form['credits_required'])
+        duration_days = int(request.form['duration_days'])
+        device_limit = int(request.form.get('device_limit', 1))
+        
+        try:
+            create_plan(plan_id_number, name, description, credits_required, duration_days, device_limit)
+            flash('QITO plan added successfully!', 'success')
+            return redirect(url_for('qito_plan_management'))
+        except sqlite3.IntegrityError:
+            flash('Plan ID number already exists! Please use a different ID number.', 'error')
+            return render_template('add_qito_plan.html')
+    
+    return render_template('add_qito_plan.html')
+
+@app.route('/qito/edit/<int:plan_id>', methods=['GET', 'POST'])
+def edit_qito_plan(plan_id):
+    """Edit QITO plan"""
+    if request.method == 'POST':
+        plan_id_number = request.form['plan_id_number']
+        name = f"QITO {request.form['name']}"  # Automatically prefix with QITO
+        description = request.form['description']
+        credits_required = int(request.form['credits_required'])
+        duration_days = int(request.form['duration_days'])
+        device_limit = int(request.form.get('device_limit', 1))
+        is_active = request.form.get('is_active') == 'on'
+        
+        try:
+            update_plan(plan_id, plan_id_number, name, description, credits_required, duration_days, is_active, device_limit)
+            flash('QITO plan updated successfully!', 'success')
+            return redirect(url_for('qito_plan_management'))
+        except sqlite3.IntegrityError:
+            flash('Plan ID number already exists! Please use a different ID number.', 'error')
+            plan = get_plan(plan_id)
+            return render_template('edit_qito_plan.html', plan=plan)
+    
+    plan = get_plan(plan_id)
+    if plan is None:
+        flash('QITO plan not found!', 'error')
+        return redirect(url_for('qito_plan_management'))
+    
+    return render_template('edit_qito_plan.html', plan=plan)
+
+@app.route('/qito/delete/<int:plan_id>')
+def delete_qito_plan(plan_id):
+    """Delete QITO plan"""
+    delete_plan(plan_id)
+    flash('QITO plan deleted successfully!', 'success')
+    return redirect(url_for('qito_plan_management'))
+
+
+@app.route('/qito/statistics')
+def qito_statistics():
+    """QITO statistics page"""
+    conn = get_db_connection()
+    
+    # Get QITO plan statistics
+    qito_stats = conn.execute('''
+        SELECT 
+            COUNT(DISTINCT p.id) as total_plans,
+            COUNT(CASE WHEN p.is_active = 1 THEN 1 END) as active_plans,
+            SUM(COALESCE(p.device_limit, 1)) as total_device_slots
+        FROM plans p
+        WHERE p.name LIKE '%QITO%'
+    ''').fetchone()
+    
+    # Get QITO purchase statistics
+    qito_purchases = conn.execute('''
+        SELECT 
+            DATE(up.purchase_date) as purchase_date,
+            COUNT(*) as purchase_count
+        FROM user_plans up
+        JOIN plans p ON up.plan_id = p.id
+        WHERE p.name LIKE '%QITO%'
+        GROUP BY DATE(up.purchase_date)
+        ORDER BY purchase_date DESC
+        LIMIT 30
+    ''').fetchall()
+    
+    # Get most popular QITO plans
+    popular_qito_plans = conn.execute('''
+        SELECT 
+            p.plan_id_number,
+            p.name,
+            COUNT(up.id) as purchase_count
+        FROM plans p
+        LEFT JOIN user_plans up ON p.id = up.plan_id
+        WHERE p.name LIKE '%QITO%'
+        GROUP BY p.id
+        ORDER BY purchase_count DESC
+    ''').fetchall()
+    
+    conn.close()
+    
+    return render_template('qito_statistics.html', 
+                         qito_stats=qito_stats,
+                         qito_purchases=qito_purchases,
+                         popular_qito_plans=popular_qito_plans)
 
 # Contact Management Routes
 @app.route('/contact')

@@ -1,9 +1,26 @@
 import sqlite3
 import os
+import time
 from datetime import datetime
 
 # Database file path
 DB_FILE = 'bot_database.db'
+
+def get_db_connection_with_retry(max_retries=3, timeout=5):
+    """Get database connection with retry logic for handling locked database"""
+    for attempt in range(max_retries):
+        try:
+            conn = sqlite3.connect(DB_FILE, timeout=timeout)
+            conn.execute('PRAGMA journal_mode=WAL')  # Use WAL mode for better concurrency
+            return conn
+        except sqlite3.OperationalError as e:
+            if "database is locked" in str(e) and attempt < max_retries - 1:
+                print(f"⚠️ Database locked, retrying in 1 second... (attempt {attempt + 1}/{max_retries})")
+                time.sleep(1)
+                continue
+            else:
+                raise e
+    return None
 
 def init_database():
     """Initialize the database and create tables if they don't exist"""
@@ -190,20 +207,35 @@ def update_payment_status(payment_id, status):
 
 def add_user_balance(telegram_id, credits):
     """Add credits to user balance"""
-    conn = sqlite3.connect(DB_FILE)
+    print(f"🔧 add_user_balance called for user {telegram_id} with credits {credits}")
+    conn = get_db_connection_with_retry()
+    print("✅ Database connection created for add_user_balance")
     cursor = conn.cursor()
+    print("✅ Cursor created for add_user_balance")
     
-    # Convert credits to dollars (assuming 1 credit = $0.01)
-    dollars = credits * 0.01
-    
-    cursor.execute('''
-        UPDATE users 
-        SET balance = balance + ?, updated_at = CURRENT_TIMESTAMP 
-        WHERE telegram_id = ?
-    ''', (dollars, telegram_id))
-    
-    conn.commit()
-    conn.close()
+    try:
+        # Convert credits to dollars (assuming 1 credit = $0.01)
+        dollars = credits * 0.01
+        print(f"🔧 Converting {credits} credits to ${dollars}")
+        
+        print("🔧 Executing UPDATE query...")
+        cursor.execute('''
+            UPDATE users 
+            SET balance = balance + ?, updated_at = CURRENT_TIMESTAMP 
+            WHERE telegram_id = ?
+        ''', (dollars, telegram_id))
+        print("✅ UPDATE query executed successfully")
+        
+        print("🔧 Committing transaction...")
+        conn.commit()
+        print("✅ Transaction committed successfully")
+    except Exception as e:
+        print(f"❌ Error in add_user_balance: {e}")
+        raise
+    finally:
+        print("🔧 Closing database connection in add_user_balance...")
+        conn.close()
+        print("✅ Database connection closed in add_user_balance")
 
 def init_plan_tables():
     """Initialize plan and key management tables"""
@@ -219,6 +251,7 @@ def init_plan_tables():
             description TEXT,
             credits_required INTEGER NOT NULL,
             duration_days INTEGER NOT NULL,
+            device_limit INTEGER DEFAULT 1,
             is_active BOOLEAN DEFAULT 1,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -260,6 +293,22 @@ def init_plan_tables():
         cursor.execute('DROP TABLE plans')
         cursor.execute('ALTER TABLE plans_new RENAME TO plans')
     
+    # Add device_limit column if it doesn't exist (for existing databases)
+    cursor.execute("PRAGMA table_info(plans)")
+    columns = [column[1] for column in cursor.fetchall()]
+    if 'device_limit' not in columns:
+        cursor.execute('ALTER TABLE plans ADD COLUMN device_limit INTEGER DEFAULT 1')
+    
+    # Add api_response column to user_plans table if it doesn't exist
+    cursor.execute("PRAGMA table_info(user_plans)")
+    columns = [column[1] for column in cursor.fetchall()]
+    if 'api_response' not in columns:
+        cursor.execute('ALTER TABLE user_plans ADD COLUMN api_response TEXT')
+    
+    # Add vpn_key column to user_plans table if it doesn't exist
+    if 'vpn_key' not in columns:
+        cursor.execute('ALTER TABLE user_plans ADD COLUMN vpn_key TEXT')
+    
     # Create vpn_keys table
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS vpn_keys (
@@ -295,15 +344,15 @@ def init_plan_tables():
     conn.close()
 
 # Plan management functions
-def create_plan(plan_id_number, name, description, credits_required, duration_days):
+def create_plan(plan_id_number, name, description, credits_required, duration_days, device_limit=1):
     """Create a new plan"""
     conn = sqlite3.connect(DB_FILE)
     cursor = conn.cursor()
     
     cursor.execute('''
-        INSERT INTO plans (plan_id_number, name, description, credits_required, duration_days)
-        VALUES (?, ?, ?, ?, ?)
-    ''', (plan_id_number, name, description, credits_required, duration_days))
+        INSERT INTO plans (plan_id_number, name, description, credits_required, duration_days, device_limit)
+        VALUES (?, ?, ?, ?, ?, ?)
+    ''', (plan_id_number, name, description, credits_required, duration_days, device_limit))
     
     plan_id = cursor.lastrowid
     conn.commit()
@@ -344,7 +393,7 @@ def get_plan(plan_id):
     conn.close()
     return plan
 
-def update_plan(plan_id, plan_id_number, name, description, credits_required, duration_days, is_active):
+def update_plan(plan_id, plan_id_number, name, description, credits_required, duration_days, is_active, device_limit=1):
     """Update plan"""
     conn = sqlite3.connect(DB_FILE)
     cursor = conn.cursor()
@@ -352,9 +401,9 @@ def update_plan(plan_id, plan_id_number, name, description, credits_required, du
     cursor.execute('''
         UPDATE plans 
         SET plan_id_number = ?, name = ?, description = ?, credits_required = ?, duration_days = ?, 
-            is_active = ?, updated_at = CURRENT_TIMESTAMP 
+            device_limit = ?, is_active = ?, updated_at = CURRENT_TIMESTAMP 
         WHERE id = ?
-    ''', (plan_id_number, name, description, credits_required, duration_days, is_active, plan_id))
+    ''', (plan_id_number, name, description, credits_required, duration_days, device_limit, is_active, plan_id))
     
     conn.commit()
     conn.close()
@@ -462,7 +511,9 @@ def get_user_plans(user_id):
     cursor = conn.cursor()
     
     cursor.execute('''
-        SELECT up.id, p.name, p.description, vk.key_value, up.purchase_date, up.expiry_date, up.status
+        SELECT up.id, p.name, p.description, 
+               COALESCE(up.vpn_key, vk.key_value) as key_value, 
+               up.purchase_date, up.expiry_date, up.status, up.api_response
         FROM user_plans up
         JOIN plans p ON up.plan_id = p.id
         LEFT JOIN vpn_keys vk ON up.vpn_key_id = vk.id

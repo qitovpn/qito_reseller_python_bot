@@ -43,8 +43,8 @@ if __name__ == '__main__':
         # Start bot as subprocess
         print("🤖 Starting Telegram Bot...")
         bot_process = subprocess.Popen([sys.executable, 'bot.py'], 
-                                     stdout=subprocess.PIPE, 
-                                     stderr=subprocess.PIPE)
+                                     stdout=None,  # Don't capture stdout - let it show
+                                     stderr=None)  # Don't capture stderr - let it show
         
         # Give bot time to start
         time.sleep(3)
@@ -54,8 +54,7 @@ if __name__ == '__main__':
             print("✅ Telegram Bot started successfully!")
         else:
             print("❌ Telegram Bot failed to start!")
-            stdout, stderr = bot_process.communicate()
-            print(f"Bot error: {stderr.decode()}")
+            print("Check the console output above for error details.")
         
         # Initialize admin tables
         init_admin_tables()
@@ -67,7 +66,7 @@ if __name__ == '__main__':
         print("💳 Payment Management: http://localhost:5000/payments")
         print("👥 User Management: http://localhost:5000/users")
         
-        app.run(debug=False, host='0.0.0.0', port=5000, use_reloader=False)
+        app.run(debug=True, host='0.0.0.0', port=5000, use_reloader=False)
         
     except Exception as e:
         print(f"❌ Error running system: {e}")

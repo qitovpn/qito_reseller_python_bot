@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% block title %}Add QITO Plan - VPN Bot Admin{% endblock %}
+{% block page_title %}🗝 Add QITO Plan{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Create New QITO Plan</h5>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="plan_id_number" class="form-label">Plan ID Number *</label>
+                        <input type="text" class="form-control" id="plan_id_number" name="plan_id_number" 
+                               placeholder="e.g., QITO001, QITO002" required>
+                        <div class="form-text">Unique identifier for the QITO plan (will be prefixed with "QITO")</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Plan Name *</label>
+                        <input type="text" class="form-control" id="name" name="name" 
+                               placeholder="e.g., Premium, Basic, Pro" required>
+                        <div class="form-text">The plan name (will be automatically prefixed with "QITO")</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea class="form-control" id="description" name="description" rows="3" 
+                                  placeholder="Describe the QITO plan features and benefits..."></textarea>
+                        <div class="form-text">Optional description of the QITO plan</div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="credits_required" class="form-label">Credits Required *</label>
+                                <input type="number" class="form-control" id="credits_required" name="credits_required" 
+                                       min="1" placeholder="e.g., 100, 200, 500" required>
+                                <div class="form-text">Number of credits required to purchase this QITO plan</div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="duration_days" class="form-label">Duration (Days) *</label>
+                                <input type="number" class="form-control" id="duration_days" name="duration_days" 
+                                       min="1" placeholder="e.g., 30, 90, 365" required>
+                                <div class="form-text">How many days the QITO plan is valid</div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="device_limit" class="form-label">Device Limit *</label>
+                                <input type="number" class="form-control" id="device_limit" name="device_limit" 
+                                       min="1" placeholder="e.g., 1, 3, 5" value="1" required>
+                                <div class="form-text">Maximum number of devices allowed</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        <strong>Note:</strong> The plan name will be automatically prefixed with "QITO" when created. 
+                        For example, if you enter "Premium", it will become "QITO Premium".
+                    </div>
+                    
+                    <div class="d-flex justify-content-between">
+                        <a href="{{ url_for('qito_plan_management') }}" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left me-2"></i>Back to QITO Plans
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save me-2"></i>Create QITO Plan
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- QITO Plan Examples -->
+<div class="row mt-4">
+    <div class="col-md-8 mx-auto">
+        <div class="card">
+            <div class="card-header">
+                <h6 class="card-title mb-0">QITO Plan Examples</h6>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                            <div class="card bg-light">
+                                <div class="card-body text-center">
+                                    <h6 class="text-primary">QITO Basic</h6>
+                                    <p class="mb-1"><strong>100 Credits</strong></p>
+                                    <p class="mb-1">30 Days</p>
+                                    <p class="mb-1">1 Device</p>
+                                    <small class="text-muted">Entry-level QITO plan</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card bg-light">
+                                <div class="card-body text-center">
+                                    <h6 class="text-success">QITO Premium</h6>
+                                    <p class="mb-1"><strong>300 Credits</strong></p>
+                                    <p class="mb-1">90 Days</p>
+                                    <p class="mb-1">3 Devices</p>
+                                    <small class="text-muted">Popular QITO plan</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card bg-light">
+                                <div class="card-body text-center">
+                                    <h6 class="text-warning">QITO Pro</h6>
+                                    <p class="mb-1"><strong>500 Credits</strong></p>
+                                    <p class="mb-1">365 Days</p>
+                                    <p class="mb-1">5 Devices</p>
+                                    <small class="text-muted">Premium QITO plan</small>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

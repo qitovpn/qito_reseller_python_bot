@@ -1,0 +1,273 @@
+{% extends "base.html" %}
+
+{% block title %}QITO Statistics - VPN Bot Admin{% endblock %}
+{% block page_title %}🗝 QITO Statistics{% endblock %}
+
+{% block content %}
+<!-- QITO Statistics Overview -->
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="card bg-primary text-white">
+            <div class="card-body text-center">
+                <h4>{{ qito_stats.total_plans or 0 }}</h4>
+                <p class="mb-0">Total QITO Plans</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-success text-white">
+            <div class="card-body text-center">
+                <h4>{{ qito_stats.active_plans or 0 }}</h4>
+                <p class="mb-0">Active Plans</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-info text-white">
+            <div class="card-body text-center">
+                <h4>{{ qito_stats.total_device_slots or 0 }}</h4>
+                <p class="mb-0">Total Device Slots</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-warning text-white">
+            <div class="card-body text-center">
+                <h4>{{ qito_purchases|length or 0 }}</h4>
+                <p class="mb-0">Recent Purchases</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Most Popular QITO Plans -->
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h6 class="card-title mb-0">Most Popular QITO Plans</h6>
+            </div>
+            <div class="card-body">
+                {% if popular_qito_plans %}
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Plan ID</th>
+                                    <th>Plan Name</th>
+                                    <th>Purchases</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for plan in popular_qito_plans %}
+                                <tr>
+                                    <td><span class="badge bg-primary">{{ plan.plan_id_number }}</span></td>
+                                    <td>{{ plan.name }}</td>
+                                    <td>
+                                        <span class="badge bg-success">{{ plan.purchase_count }} purchases</span>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <p class="text-muted text-center">No QITO plan purchases yet.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+    <!-- QITO Device Slots -->
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h6 class="card-title mb-0">QITO Device Slots</h6>
+            </div>
+            <div class="card-body">
+                {% if qito_stats.total_device_slots > 0 %}
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between">
+                            <span>Total Device Slots</span>
+                            <span>{{ qito_stats.total_device_slots }}</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar bg-info" style="width: 100%"></div>
+                        </div>
+                        <small class="text-muted">Available across all QITO plans</small>
+                    </div>
+                    
+                    <div class="row text-center">
+                        <div class="col-6">
+                            <h5 class="text-info">{{ qito_stats.total_device_slots }}</h5>
+                            <small class="text-muted">Total Slots</small>
+                        </div>
+                        <div class="col-6">
+                            <h5 class="text-success">{{ qito_stats.active_plans or 0 }}</h5>
+                            <small class="text-muted">Active Plans</small>
+                        </div>
+                    </div>
+                {% else %}
+                    <p class="text-muted text-center">No QITO device slots configured yet.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Recent QITO Purchases -->
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h6 class="card-title mb-0">Recent QITO Purchases (Last 30 Days)</h6>
+            </div>
+            <div class="card-body">
+                {% if qito_purchases %}
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Purchases</th>
+                                    <th>Trend</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for purchase in qito_purchases %}
+                                <tr>
+                                    <td>{{ purchase.purchase_date }}</td>
+                                    <td>
+                                        <span class="badge bg-primary">{{ purchase.purchase_count }} purchases</span>
+                                    </td>
+                                    <td>
+                                        {% if purchase.purchase_count > 5 %}
+                                            <i class="fas fa-arrow-up text-success"></i>
+                                        {% elif purchase.purchase_count > 2 %}
+                                            <i class="fas fa-minus text-warning"></i>
+                                        {% else %}
+                                            <i class="fas fa-arrow-down text-danger"></i>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <p class="text-muted text-center">No QITO purchases in the last 30 days.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Actions -->
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h6 class="card-title mb-0">Quick Actions</h6>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <a href="{{ url_for('qito_plan_management') }}" class="btn btn-primary w-100 mb-2">
+                            <i class="fas fa-list me-2"></i>Manage QITO Plans
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="{{ url_for('qito_keys_management') }}" class="btn btn-success w-100 mb-2">
+                            <i class="fas fa-plus me-2"></i>Add QITO Keys
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="{{ url_for('add_qito_plan') }}" class="btn btn-info w-100 mb-2">
+                            <i class="fas fa-plus me-2"></i>Create QITO Plan
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary w-100 mb-2">
+                            <i class="fas fa-home me-2"></i>Dashboard
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- QITO Performance Insights -->
+{% if qito_stats.total_keys > 0 %}
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h6 class="card-title mb-0">QITO Performance Insights</h6>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="text-center">
+                            <h5 class="text-primary">
+                                {% if qito_stats.available_keys < 10 %}
+                                    <i class="fas fa-exclamation-triangle text-warning"></i>
+                                {% else %}
+                                    <i class="fas fa-check-circle text-success"></i>
+                                {% endif %}
+                            </h5>
+                            <h6>Key Availability</h6>
+                            <p class="text-muted">
+                                {% if qito_stats.available_keys < 10 %}
+                                    Low key count! Consider adding more QITO keys.
+                                {% else %}
+                                    Good key availability for QITO plans.
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="text-center">
+                            <h5 class="text-info">
+                                {% if qito_stats.active_plans > 0 %}
+                                    <i class="fas fa-check-circle text-success"></i>
+                                {% else %}
+                                    <i class="fas fa-times-circle text-danger"></i>
+                                {% endif %}
+                            </h5>
+                            <h6>Plan Status</h6>
+                            <p class="text-muted">
+                                {% if qito_stats.active_plans > 0 %}
+                                    {{ qito_stats.active_plans }} active QITO plans available.
+                                {% else %}
+                                    No active QITO plans. Create some plans to start selling.
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="text-center">
+                            <h5 class="text-warning">
+                                {% if (qito_stats.used_keys or 0) > 0 %}
+                                    <i class="fas fa-chart-line text-success"></i>
+                                {% else %}
+                                    <i class="fas fa-chart-line text-muted"></i>
+                                {% endif %}
+                            </h5>
+                            <h6>Usage Rate</h6>
+                            <p class="text-muted">
+                                {% if (qito_stats.used_keys or 0) > 0 %}
+                                    {{ "%.1f"|format(((qito_stats.used_keys or 0) / qito_stats.total_keys * 100)) }}% of QITO keys are in use.
+                                {% else %}
+                                    No QITO keys have been used yet.
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

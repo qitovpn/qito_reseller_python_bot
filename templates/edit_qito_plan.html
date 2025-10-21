@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block title %}Edit QITO Plan - VPN Bot Admin{% endblock %}
+{% block page_title %}🗝 Edit QITO Plan{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Edit QITO Plan: {{ plan.name }}</h5>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="plan_id_number" class="form-label">Plan ID Number *</label>
+                        <input type="text" class="form-control" id="plan_id_number" name="plan_id_number" 
+                               value="{{ plan.plan_id_number }}" required>
+                        <div class="form-text">Unique identifier for the QITO plan</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Plan Name *</label>
+                        <input type="text" class="form-control" id="name" name="name" 
+                               value="{{ plan.name.replace('QITO ', '') }}" required>
+                        <div class="form-text">The plan name (will be automatically prefixed with "QITO")</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea class="form-control" id="description" name="description" rows="3" 
+                                  placeholder="Describe the QITO plan features and benefits...">{{ plan.description or '' }}</textarea>
+                        <div class="form-text">Optional description of the QITO plan</div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="credits_required" class="form-label">Credits Required *</label>
+                                <input type="number" class="form-control" id="credits_required" name="credits_required" 
+                                       value="{{ plan.credits_required }}" min="1" required>
+                                <div class="form-text">Number of credits required to purchase this QITO plan</div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="duration_days" class="form-label">Duration (Days) *</label>
+                                <input type="number" class="form-control" id="duration_days" name="duration_days" 
+                                       value="{{ plan.duration_days }}" min="1" required>
+                                <div class="form-text">How many days the QITO plan is valid</div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="device_limit" class="form-label">Device Limit *</label>
+                                <input type="number" class="form-control" id="device_limit" name="device_limit" 
+                                       value="{{ plan.device_limit or 1 }}" min="1" required>
+                                <div class="form-text">Maximum number of devices allowed</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="is_active" name="is_active" 
+                                   {% if plan.is_active %}checked{% endif %}>
+                            <label class="form-check-label" for="is_active">
+                                Active Plan
+                            </label>
+                        </div>
+                        <div class="form-text">Uncheck to deactivate this QITO plan</div>
+                    </div>
+                    
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        <strong>Note:</strong> The plan name will be automatically prefixed with "QITO" when saved. 
+                        For example, if you enter "Premium", it will become "QITO Premium".
+                    </div>
+                    
+                    <div class="d-flex justify-content-between">
+                        <a href="{{ url_for('qito_plan_management') }}" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left me-2"></i>Back to QITO Plans
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save me-2"></i>Update QITO Plan
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Plan Information -->
+<div class="row mt-4">
+    <div class="col-md-8 mx-auto">
+        <div class="card">
+            <div class="card-header">
+                <h6 class="card-title mb-0">Plan Information</h6>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="mb-1"><strong>Created:</strong> {{ plan.created_at[:10] }}</p>
+                        <p class="mb-1"><strong>Last Updated:</strong> {{ plan.updated_at[:10] }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p class="mb-1"><strong>Plan ID:</strong> {{ plan.id }}</p>
+                        <p class="mb-1"><strong>Status:</strong> 
+                            {% if plan.is_active %}
+                                <span class="badge bg-success">Active</span>
+                            {% else %}
+                                <span class="badge bg-secondary">Inactive</span>
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

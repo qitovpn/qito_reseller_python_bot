@@ -1,6 +1,8 @@
 import os
 import sqlite3
 import telebot
+import requests
+import json
 from telebot.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
 from dotenv import load_dotenv
 from database import (init_database, ensure_user_exists, get_user_balance, get_topup_options, 
@@ -13,6 +15,9 @@ from database import (init_database, ensure_user_exists, get_user_balance, get_t
 
 # Load environment variables
 load_dotenv()
+
+# QITO API Configuration
+QITO_API_URL = os.getenv('QITO_API_URL', 'http://localhost:3000/api/users')
 
 # Initialize database
 init_database()
@@ -55,6 +60,46 @@ def check_and_notify_low_keys():
     except Exception as e:
         print(f"Error checking low keys: {e}")
 
+def create_qito_user_api(device_limit, duration_days):
+    """Create QITO user via API"""
+    try:
+        from datetime import datetime, timedelta
+        # Calculate expiry date
+        expiry_date = datetime.now() + timedelta(days=duration_days)
+        expiry_date_str = expiry_date.strftime('%Y-%m-%dT%H:%M')
+        
+        # Prepare API request data
+        api_data = {
+            "expire_date": expiry_date_str,
+            "device_limit": device_limit
+        }
+        
+        # Make API request
+        headers = {
+            'Accept': '*/*',
+            'Accept-Language': 'en-US,en;q=0.9',
+            'Connection': 'keep-alive',
+            'Content-Type': 'application/json',
+            'Sec-Fetch-Dest': 'empty',
+            'Sec-Fetch-Mode': 'cors',
+            'Sec-Fetch-Site': 'same-origin',
+            'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Mobile Safari/537.36',
+            'sec-ch-ua': '"Google Chrome";v="137", "Chromium";v="137", "Not/A)Brand";v="24"',
+            'sec-ch-ua-mobile': '?1',
+        }
+        
+        response = requests.post(QITO_API_URL, headers=headers, json=api_data, timeout=30)
+        
+        if response.status_code == 200 or response.status_code == 201:
+            return response.json()
+        else:
+            print(f"API request failed with status {response.status_code}: {response.text}")
+            return None
+            
+    except Exception as e:
+        print(f"Error creating QITO user via API: {e}")
+        return None
+
 # Create the main menu (Reply Keyboard)
 def create_main_menu():
     markup = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
@@ -63,9 +108,10 @@ def create_main_menu():
     item3 = KeyboardButton("VPN Key ဝယ်ရန်")
     item4 = KeyboardButton("📋 ကျွန်ုပ်၏ပက်ကေ့ချ်")
     item5 = KeyboardButton("📞 ဆက်သွယ်ရန်")
+    item6 = KeyboardButton("🗝 QITO Key")
     markup.add(item1, item2)
-    markup.add(item3, item4)
-    markup.add(item5)
+    markup.add(item3, item6)
+    markup.add(item4, item5)
     return markup
 
 # Create inline keyboard for quick actions
@@ -555,7 +601,7 @@ def handle_buy_plans(message):
     # Create inline keyboard for plans
     markup = InlineKeyboardMarkup()
     for plan in plans:
-        plan_id, plan_id_number, name, description, credits_required, duration_days, is_active, created_at, updated_at = plan
+        plan_id, plan_id_number, name, description, credits_required, duration_days, is_active, created_at, updated_at, device_limit = plan
         button_text = f"{name} - {credits_required} Credits ({duration_days} days)"
         button = InlineKeyboardButton(button_text, callback_data=f'buy_plan_{plan_id}')
         markup.add(button)
@@ -586,16 +632,89 @@ def handle_my_plans(message):
 သင့်လုပ်ဆောင်နေသော ပက်ကေ့ချ်များ:"""
     
     for plan in user_plans:
-        plan_id, name, description, key_value, purchase_date, expiry_date, status = plan
+        plan_id, name, description, key_value, purchase_date, expiry_date, status, api_response = plan
+        
         plans_text += f"\n\n**{name}**"
         if description:
             plans_text += f"\n{description}"
-        plans_text += f"\n🔑 VPN Key: `{key_value}`"
+        
+        # Check if this is a QITO plan with API response
+        if api_response and 'QITO' in name:
+            try:
+                api_data = json.loads(api_response)
+                username = api_data.get('username', 'N/A')
+                password = api_data.get('password', 'N/A')
+                plans_text += f"\n🗝 QITO Username: `{username}`"
+                plans_text += f"\n🗝 QITO Password: `{password}`"
+            except:
+                # Fallback to key_value if API response parsing fails
+                if key_value:
+                    plans_text += f"\n🔑 VPN Key: `{key_value}`"
+        else:
+            # Regular VPN plan
+            if key_value:
+                plans_text += f"\n🔑 VPN Key: `{key_value}`"
+        
         plans_text += f"\n📅 Purchased: {purchase_date[:10]}"
         plans_text += f"\n⏰ Expires: {expiry_date[:10] if expiry_date else 'Never'}"
         plans_text += f"\n📊 Status: {status.title()}"
     
     bot.send_message(message.chat.id, plans_text, parse_mode='Markdown', reply_markup=create_main_menu())
+
+@bot.message_handler(func=lambda message: message.text == "🗝 QITO Key")
+def handle_qito_key(message):
+    """Handle QITO Key button"""
+    print("=" * 50)
+    print(f"🔔 QITO Key button pressed!")
+    print(f"👤 User: {message.from_user.first_name} {message.from_user.last_name or ''}")
+    print(f"🆔 User ID: {message.from_user.id}")
+    print(f"📱 Username: @{message.from_user.username or 'Not set'}")
+    print(f"💬 Chat ID: {message.chat.id}")
+    print("=" * 50)
+    # Ensure user exists
+    ensure_user_exists(
+        telegram_id=message.from_user.id,
+        username=message.from_user.username,
+        first_name=message.from_user.first_name,
+        last_name=message.from_user.last_name
+    )
+    
+    # Get QITO plans (plans with "QITO" in the name)
+    conn = sqlite3.connect('bot_database.db')
+    cursor = conn.cursor()
+    cursor.execute('''
+        SELECT p.*, 
+               COALESCE(p.device_limit, 1) as device_limit
+        FROM plans p
+        WHERE p.name LIKE '%QITO%' AND p.is_active = 1
+        ORDER BY p.plan_id_number
+    ''')
+    qito_plans = cursor.fetchall()
+    conn.close()
+    
+    if not qito_plans:
+        bot.send_message(message.chat.id, "❌ လက်ရှိတွင် QITO ပက်ကေ့ချ်များ မရှိပါ။ ကျေးဇူးပြု၍ ဝန်ဆောင်မှုကို ဆက်သွယ်ပါ။", 
+                        reply_markup=create_main_menu())
+        return
+    
+    qito_text = """🗝 **QITO ပက်ကေ့ချ်များ**
+
+QITO ပက်ကေ့ချ်များကို ကြည့်ရှုပြီး ရွေးချယ်ပါ:"""
+    
+    # Create inline keyboard for QITO plans
+    print(f"📋 Creating QITO plan buttons for {len(qito_plans)} plans...")
+    markup = InlineKeyboardMarkup()
+    for plan in qito_plans:
+        plan_id, plan_id_number, name, description, credits_required, duration_days, is_active, created_at, updated_at, device_limit, device_limit_alias = plan
+        button_text = f"{name} - {credits_required} Credits ({duration_days} days, {device_limit_alias} devices)"
+        button = InlineKeyboardButton(button_text, callback_data=f'qito_plan_{plan_id}')
+        markup.add(button)
+        print(f"  ✅ Added: {button_text}")
+        print(f"     🔗 Callback: qito_plan_{plan_id}")
+    
+    print(f"📤 Sending QITO plans message to user {message.from_user.id}")
+    bot.send_message(message.chat.id, qito_text, parse_mode='Markdown', reply_markup=markup)
+    print("✅ QITO plans message sent successfully!")
 
 @bot.message_handler(func=lambda message: message.text == "📞 ဆက်သွယ်ရန်")
 def handle_contact(message):
@@ -732,6 +851,12 @@ def handle_callback(call):
         if mmk_price:
             bot.answer_callback_query(call.id, f"Top-up {credits} credits selected!")
             
+            # Delete the original topup message
+            try:
+                bot.delete_message(call.message.chat.id, call.message.message_id)
+            except Exception as e:
+                print(f"Could not delete message: {e}")
+            
             # Create pending payment record
             payment_id = create_pending_payment(call.from_user.id, int(credits), mmk_price)
             
@@ -752,7 +877,7 @@ def handle_callback(call):
                     payment_details += f"• **{name}**\n"
             
             payment_details += f"""
-:clipboard: ငွေပေးချေရန် အောက်ပါအတိုင်းလုပ်ဆောင်ပါ
+ငွေပေးချေရန် အောက်ပါအတိုင်းလုပ်ဆောင်ပါ
 1. ငွေလွှဲထားသော screenshot ပို့ပေးထားပါ
 2. အက်မင်အတည်ပြုချက်ကို စောင့်ပါ(Admin ဘက်မှအတည်ပြုပြီးသည်နှင့် Credit များထည့်သွင်းပေးထားပါမည်)
 
@@ -937,7 +1062,7 @@ You can try making a new payment with a clearer payment proof."""
         plan = get_plan(plan_id)
         
         if plan:
-            plan_id, plan_id_number, name, description, credits_required, duration_days, is_active, created_at, updated_at = plan
+            plan_id, plan_id_number, name, description, credits_required, duration_days, is_active, created_at, updated_at, device_limit = plan
             
             # Check if user has enough balance
             user_balance = get_user_balance(call.from_user.id)
@@ -948,6 +1073,12 @@ You can try making a new payment with a clearer payment proof."""
                 available_keys = get_available_keys(plan_id)
                 
                 if available_keys:
+                    # Delete the original plans message
+                    try:
+                        bot.delete_message(call.message.chat.id, call.message.message_id)
+                    except Exception as e:
+                        print(f"Could not delete message: {e}")
+                    
                     # Show confirmation dialog
                     confirmation_message = f"""🛒 **Key ဝယ်ယူမှု အတည်ပြုခြင်း!**
 
@@ -992,7 +1123,7 @@ Key Avaliable: {len(available_keys)} Keys
         plan = get_plan(plan_id)
         
         if plan:
-            plan_id, plan_id_number, name, description, credits_required, duration_days, is_active, created_at, updated_at = plan
+            plan_id, plan_id_number, name, description, credits_required, duration_days, is_active, created_at, updated_at, device_limit = plan
             
             # Double-check balance and key availability
             user_balance = get_user_balance(call.from_user.id)
@@ -1006,6 +1137,12 @@ Key Avaliable: {len(available_keys)} Keys
                 if vpn_key:
                     # Deduct credits from user balance
                     add_user_balance(call.from_user.id, -credits_required)
+                    
+                    # Delete the original confirmation message
+                    try:
+                        bot.delete_message(call.message.chat.id, call.message.message_id)
+                    except Exception as e:
+                        print(f"Could not delete message: {e}")
                     
                     # Notify user
                     success_message = f"""✅ **Key ဝယ်ယူမှု အောင်မြင်ပါသည်!!**
@@ -1055,6 +1192,217 @@ Credits Used: {credits_required}"""
     elif call.data == 'cancel_purchase':
         bot.answer_callback_query(call.id, "ဝယ်ယူမှုပယ်ဖျက်ပြီး")
         bot.send_message(call.message.chat.id, "❌ ဝယ်ယူမှုပယ်ဖျက်ပြီးပါပြီ။ မည်သည့်အချိန်တွင်မဆို အခြားပက်ကေ့ချ်များကို ကြည့်ရှုနိုင်ပါတယ်။", 
+                       reply_markup=create_main_menu())
+    
+    # QITO plan callbacks
+    elif call.data.startswith('qito_plan_'):
+        print("=" * 60)
+        print(f"🎯 QITO PLAN CALLBACK RECEIVED!")
+        print(f"📞 Callback Data: {call.data}")
+        print(f"👤 User: {call.from_user.first_name} {call.from_user.last_name or ''}")
+        print(f"🆔 User ID: {call.from_user.id}")
+        print(f"📱 Username: @{call.from_user.username or 'Not set'}")
+        print(f"💬 Chat ID: {call.message.chat.id}")
+        print(f"📝 Message ID: {call.message.message_id}")
+        
+        plan_id = call.data.split('_')[2]
+        print(f"🔍 Extracted Plan ID: {plan_id}")
+        
+        plan = get_plan(plan_id)
+        if plan:
+            print(f"✅ Plan Found: {plan[2]} (ID: {plan[0]})")
+            print(f"💰 Credits Required: {plan[4]}")
+            print(f"⏰ Duration: {plan[5]} days")
+        else:
+            print(f"❌ Plan NOT Found for ID: {plan_id}")
+        print("=" * 60)
+        
+        if plan:
+            plan_id, plan_id_number, name, description, credits_required, duration_days, is_active, created_at, updated_at, device_limit = plan
+            
+            print(f"🔧 Device Limit: {device_limit}")
+            
+            # Check if user has enough balance
+            user_balance = get_user_balance(call.from_user.id)
+            user_credits = int(user_balance * 100)  # Convert to credits
+            
+            print(f"💰 User Balance Check:")
+            print(f"   💵 User Balance: {user_balance}")
+            print(f"   🪙 User Credits: {user_credits}")
+            print(f"   💰 Required Credits: {credits_required}")
+            print(f"   ✅ Sufficient Balance: {user_credits >= credits_required}")
+            
+            if user_credits >= credits_required:
+                # Delete the original QITO plans message
+                print(f"🗑️ Deleting original QITO plans message...")
+                try:
+                    bot.delete_message(call.message.chat.id, call.message.message_id)
+                    print(f"✅ Message deleted successfully!")
+                except Exception as e:
+                    print(f"❌ Could not delete message: {e}")
+                
+                # Show QITO confirmation dialog
+                print(f"📝 Showing QITO confirmation dialog...")
+                confirmation_message = f"""🗝 **QITO ပက်ကေ့ချ် ဝယ်ယူမှု အတည်ပြုခြင်း!**
+
+• ပက်ကေ့ချ် ID: {plan_id_number}
+• QITO ပက်ကေ့ချ် : {name}
+• ဖော်ပြချက်     : {description or 'ဖော်ပြချက်မရှိ'}
+• သက်တမ်း      : {duration_days} ရက်
+• ကုန်ကျစရိတ်: {credits_required} Credits
+• စက်အရေအတွက်: {device_limit} စက်
+
+**သင့်အကောင့်:**
+• လက်ကျန် Credit : {user_credits} Credits
+
+QITO ပက်ကေ့ချ်သည် subscription-based ဖြစ်ပြီး သီးခြား key မလိုအပ်ပါ။
+
+ကျေးဇူးပြု၍ သင့်ဝယ်ယူမှုကို အတည်ပြုပါ:"""
+                
+                # Create confirmation keyboard
+                confirmation_keyboard = InlineKeyboardMarkup()
+                confirm_btn = InlineKeyboardButton("✅ QITO ပက်ကေ့ချ် ဝယ်ယူအတည်ပြုပါ", callback_data=f'confirm_qito_purchase_{plan_id}')
+                cancel_btn = InlineKeyboardButton("❌ ပယ်ဖျက်ပါ", callback_data='cancel_qito_purchase')
+                confirmation_keyboard.row(confirm_btn, cancel_btn)
+                
+                print(f"📤 Sending confirmation message...")
+                bot.answer_callback_query(call.id, "ကျေးဇူးပြု၍ သင့်ဝယ်ယူမှုကို အတည်ပြုပါ")
+                bot.send_message(call.message.chat.id, confirmation_message, 
+                               parse_mode='Markdown', reply_markup=confirmation_keyboard)
+                print(f"✅ QITO confirmation message sent successfully!")
+            else:
+                bot.answer_callback_query(call.id, "Insufficient balance!")
+                bot.send_message(call.message.chat.id, f"❌ Insufficient balance!\n\nYou need {credits_required} credits but only have {user_credits} credits.\n\nUse '💳 ငွေဖြည့်' to add more credits.", 
+                               reply_markup=create_main_menu())
+        else:
+            bot.answer_callback_query(call.id, "QITO plan not found!")
+            bot.send_message(call.message.chat.id, "❌ QITO plan not found. Please try again.", 
+                           reply_markup=create_main_menu())
+    
+    # QITO purchase confirmation callbacks
+    elif call.data.startswith('confirm_qito_purchase_'):
+        plan_id = call.data.split('_')[3]
+        plan = get_plan(plan_id)
+        
+        if plan:
+            plan_id, plan_id_number, name, description, credits_required, duration_days, is_active, created_at, updated_at, device_limit = plan
+            
+            # Get device limit from database
+            from database import get_db_connection_with_retry
+            conn = get_db_connection_with_retry()
+            cursor = conn.cursor()
+            cursor.execute('SELECT COALESCE(device_limit, 1) FROM plans WHERE id = ?', (plan_id,))
+            device_limit = cursor.fetchone()[0]
+            conn.close()
+            
+            # Double-check balance
+            user_balance = get_user_balance(call.from_user.id)
+            user_credits = int(user_balance * 100)
+            
+            if user_credits >= credits_required:
+                # Create QITO user via API
+                api_response = create_qito_user_api(device_limit, duration_days)
+                
+                if api_response:
+                    # API call successful, store the response data
+                    from datetime import datetime, timedelta
+                    purchase_date = datetime.now()
+                    expiry_date = purchase_date + timedelta(days=duration_days)
+                    
+                    # Create user plan record with API response data
+                    print("🔧 Creating database connection for user plan insert...")
+                    conn2 = get_db_connection_with_retry()
+                    print("✅ Database connection created successfully")
+                    cursor2 = conn2.cursor()
+                    print("✅ Cursor created successfully")
+                    print("🔧 Executing INSERT query...")
+                    cursor2.execute('''
+                        INSERT INTO user_plans (user_id, plan_id, purchase_date, expiry_date, status, vpn_key, api_response)
+                        VALUES (?, ?, ?, ?, ?, ?, ?)
+                    ''', (call.from_user.id, plan_id, purchase_date, expiry_date, 'active', 
+                          f"{api_response.get('username', '')}|{api_response.get('password', '')}", 
+                          json.dumps(api_response)))
+                    print("✅ INSERT query executed successfully")
+                    print("🔧 Committing transaction...")
+                    conn2.commit()
+                    print("✅ Transaction committed successfully")
+                    print("🔧 Closing database connection...")
+                    conn2.close()
+                    print("✅ Database connection closed successfully")
+                    
+                    # Deduct credits from user balance
+                    add_user_balance(call.from_user.id, -credits_required)
+                    
+                    # Delete the original confirmation message
+                    try:
+                        bot.delete_message(call.message.chat.id, call.message.message_id)
+                    except Exception as e:
+                        print(f"Could not delete message: {e}")
+                    
+                    # Notify user with credentials
+                    success_message = f"""✅ **QITO ပက်ကေ့ချ် ဝယ်ယူမှု အောင်မြင်ပါသည်!!**
+
+**ပက်ကေ့ချ် ID:** {plan_id_number}
+**QITO ပက်ကေ့ချ် :** {name}
+**သက်တမ်း:** {duration_days} ရက်
+**ကုန်ကျစရိတ်:** {credits_required} Credits
+**စက်အရေအတွက်:** {device_limit} စက်
+**သက်တမ်းကုန်ဆုံးရက်:** {expiry_date.strftime('%Y-%m-%d')}
+
+**QITO အကောင့်အသေးစိတ် ⬇️**
+
+**Username:** `{api_response.get('username', 'N/A')}`
+**Password:** `{api_response.get('password', 'N/A')}`
+
+**QITO ပက်ကေ့ချ်အသုံးပြုနည်း:**
+• QITO ပက်ကေ့ချ်သည် subscription-based ဖြစ်ပါသည်
+• သင့်အကောင့်နှင့် ချိတ်ဆက်ပြီး အသုံးပြုနိုင်ပါသည်
+• စက်အရေအတွက်: {device_limit} စက် အထိ အသုံးပြုနိုင်ပါသည်
+
+**အကူအညီလိုအပ်ပါက ဆက်သွယ်ပါ:**
+📞 ဆက်သွယ်ရန် ခလုတ်ကို နှိပ်ပါ"""
+                    
+                    bot.answer_callback_query(call.id, "QITO ပက်ကေ့ချ် ဝယ်ယူမှု အောင်မြင်ပါသည်!!")
+                    bot.send_message(call.message.chat.id, success_message, 
+                                   parse_mode='Markdown', reply_markup=create_main_menu())
+                    
+                    # Notify admin
+                    if ADMIN_TELEGRAM_ID:
+                        admin_message = f"""🔔 **New QITO Plan Purchase**
+
+User: {call.from_user.first_name} {call.from_user.last_name or ''}
+Username: @{call.from_user.username or 'Not set'}
+User ID: {call.from_user.id}
+Plan ID: {plan_id_number}
+Plan: {name}
+Device Limit: {device_limit} devices
+Duration: {duration_days} days
+Expiry Date: {expiry_date.strftime('%Y-%m-%d')}
+Credits Used: {credits_required}
+QITO Username: {api_response.get('username', 'N/A')}
+QITO Password: {api_response.get('password', 'N/A')}"""
+                        
+                        bot.send_message(ADMIN_TELEGRAM_ID, admin_message)
+                else:
+                    # API call failed
+                    conn.close()
+                    bot.answer_callback_query(call.id, "API Error!")
+                    bot.send_message(call.message.chat.id, "❌ QITO service is temporarily unavailable. Please try again later.", 
+                                   reply_markup=create_main_menu())
+            else:
+                conn.close()
+                bot.answer_callback_query(call.id, "Insufficient balance!")
+                bot.send_message(call.message.chat.id, "❌ Sorry, you don't have enough credits. Please top up your account.", 
+                               reply_markup=create_main_menu())
+        else:
+            bot.answer_callback_query(call.id, "QITO plan not found!")
+            bot.send_message(call.message.chat.id, "❌ QITO plan not found. Please try again.", 
+                           reply_markup=create_main_menu())
+    
+    # Cancel QITO purchase callback
+    elif call.data == 'cancel_qito_purchase':
+        bot.answer_callback_query(call.id, "QITO ဝယ်ယူမှုပယ်ဖျက်ပြီး")
+        bot.send_message(call.message.chat.id, "❌ QITO ဝယ်ယူမှုပယ်ဖျက်ပြီးပါပြီ။ မည်သည့်အချိန်တွင်မဆို အခြားပက်ကေ့ချ်များကို ကြည့်ရှုနိုင်ပါတယ်။", 
                        reply_markup=create_main_menu())
 
 @bot.message_handler(content_types=['photo'])
