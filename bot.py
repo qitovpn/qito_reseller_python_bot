@@ -103,12 +103,12 @@ def create_qito_user_api(device_limit, duration_days):
 # Create the main menu (Reply Keyboard)
 def create_main_menu():
     markup = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
-    item1 = KeyboardButton("👤 ကျွန်ုပ်၏ credit")
+    item1 = KeyboardButton("👤 ကျွန်ုပ်၏ Credit")
     item2 = KeyboardButton("💳 ငွေဖြည့်")
     item3 = KeyboardButton("VPN Key ဝယ်ရန်")
     item4 = KeyboardButton("📋 ကျွန်ုပ်၏ပက်ကေ့ချ်")
     item5 = KeyboardButton("📞 ဆက်သွယ်ရန်")
-    item6 = KeyboardButton("🗝 QITO Key")
+    item6 = KeyboardButton("🗝 QITO Net")
     markup.add(item1, item2)
     markup.add(item3, item6)
     markup.add(item4, item5)
@@ -164,7 +164,7 @@ def send_help(message):
 /help - ဤအကူအညီစာကိုြသပါ
 
 **မူလမီနူး ရွေးချယ်စရာများ:**
-• 👤 ကျွန်ုပ်၏ credit - သင့်အကောင့်ငွေလက်ကျန်နှင့် ငွေလွှဲမှုများကို ကြည့်ရှုပါ
+• 👤 ကျွန်ုပ်၏ Credit - သင့်အကောင့်ငွေလက်ကျန်နှင့် ငွေလွှဲမှုများကို ကြည့်ရှုပါ
 • 💳 ငွေဖြည့် - သင့်အကောင့်သို့ ငွေထည့်ပါ
 • VPN Key ဝယ်ရန် - VPN ပက်ကေ့ချ်များကို ကြည့်ရှုပြီး ဝယ်ယူပါ
 • 📋 ကျွန်ုပ်၏ပက်ကေ့ချ် - ဝယ်ယူထားသော ပက်ကေ့ချ်များနှင့် VPN Keyများကို ကြည့်ရှုပါ
@@ -412,7 +412,7 @@ def send_random(message):
                     parse_mode='Markdown', reply_markup=create_main_menu())
 
 # Handle menu button messages
-@bot.message_handler(func=lambda message: message.text == "👤 ကျွန်ုပ်၏ credit")
+@bot.message_handler(func=lambda message: message.text == "👤 ကျွန်ုပ်၏ Credit")
 def handle_my_balance(message):
     """Handle My Balance button"""
     # Ensure user exists in database
@@ -586,11 +586,12 @@ def handle_buy_plans(message):
         last_name=message.from_user.last_name
     )
     
-    # Get active plans
-    plans = get_active_plans()
+    # Get active plans (excluding QITO plans)
+    all_plans = get_active_plans()
+    plans = [plan for plan in all_plans if 'QITO' not in plan[2]]  # Filter out QITO plans (plan[2] is name)
     
     if not plans:
-        bot.send_message(message.chat.id, "❌ လက်ရှိတွင် ပက်ကေ့ချ်များ မရှိပါ။ ကျေးဇူးပြု၍ ဝန်ဆောင်မှုကို ဆက်သွယ်ပါ။", 
+        bot.send_message(message.chat.id, "❌ လက်ရှိတွင် VPN ပက်ကေ့ချ်များ မရှိပါ။ ကျေးဇူးပြု၍ ဝန်ဆောင်မှုကို ဆက်သွယ်ပါ။", 
                         reply_markup=create_main_menu())
         return
     
@@ -661,7 +662,7 @@ def handle_my_plans(message):
     
     bot.send_message(message.chat.id, plans_text, parse_mode='Markdown', reply_markup=create_main_menu())
 
-@bot.message_handler(func=lambda message: message.text == "🗝 QITO Key")
+@bot.message_handler(func=lambda message: message.text == "🗝 QITO Net")
 def handle_qito_key(message):
     """Handle QITO Key button"""
     print("=" * 50)
@@ -870,11 +871,13 @@ def handle_callback(call):
 
 💳 ရရှိနိုင်သောငွေပေးချေမှုနည်းလမ်းများ:
 """
-            for name, description in payment_methods:
+            for name, description, account_number in payment_methods:
+                payment_details += f"• **{name}**\n"
                 if description:
-                    payment_details += f"• **{name}**\n  {description}\n"
-                else:
-                    payment_details += f"• **{name}**\n"
+                    payment_details += f"  {description}\n"
+                if account_number:
+                    payment_details += f"  📋 Account: `{account_number}`\n"
+                payment_details += "\n"
             
             payment_details += f"""
 ငွေပေးချေရန် အောက်ပါအတိုင်းလုပ်ဆောင်ပါ
@@ -883,7 +886,7 @@ def handle_callback(call):
 
 ငွေပေးချေမှု ID: #{payment_id}"""
             
-            bot.send_message(call.message.chat.id, payment_details, reply_markup=create_main_menu())
+            bot.send_message(call.message.chat.id, payment_details, parse_mode='Markdown', reply_markup=create_main_menu())
         else:
             bot.answer_callback_query(call.id, "Topup option not found!")
             bot.send_message(call.message.chat.id, "❌ Topup option not available. Please try again.", 
@@ -1310,25 +1313,16 @@ QITO ပက်ကေ့ချ်သည် subscription-based ဖြစ်ပြ�
                     expiry_date = purchase_date + timedelta(days=duration_days)
                     
                     # Create user plan record with API response data
-                    print("🔧 Creating database connection for user plan insert...")
                     conn2 = get_db_connection_with_retry()
-                    print("✅ Database connection created successfully")
                     cursor2 = conn2.cursor()
-                    print("✅ Cursor created successfully")
-                    print("🔧 Executing INSERT query...")
                     cursor2.execute('''
                         INSERT INTO user_plans (user_id, plan_id, purchase_date, expiry_date, status, vpn_key, api_response)
                         VALUES (?, ?, ?, ?, ?, ?, ?)
                     ''', (call.from_user.id, plan_id, purchase_date, expiry_date, 'active', 
                           f"{api_response.get('username', '')}|{api_response.get('password', '')}", 
                           json.dumps(api_response)))
-                    print("✅ INSERT query executed successfully")
-                    print("🔧 Committing transaction...")
                     conn2.commit()
-                    print("✅ Transaction committed successfully")
-                    print("🔧 Closing database connection...")
                     conn2.close()
-                    print("✅ Database connection closed successfully")
                     
                     # Deduct credits from user balance
                     add_user_balance(call.from_user.id, -credits_required)

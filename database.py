@@ -113,7 +113,7 @@ def get_payment_methods():
     conn = sqlite3.connect(DB_FILE)
     cursor = conn.cursor()
     
-    cursor.execute('SELECT name, description FROM payment_methods WHERE is_active = 1 ORDER BY name')
+    cursor.execute('SELECT name, description, account_number FROM payment_methods WHERE is_active = 1 ORDER BY name')
     methods = cursor.fetchall()
     
     conn.close()
@@ -207,35 +207,25 @@ def update_payment_status(payment_id, status):
 
 def add_user_balance(telegram_id, credits):
     """Add credits to user balance"""
-    print(f"🔧 add_user_balance called for user {telegram_id} with credits {credits}")
     conn = get_db_connection_with_retry()
-    print("✅ Database connection created for add_user_balance")
     cursor = conn.cursor()
-    print("✅ Cursor created for add_user_balance")
     
     try:
         # Convert credits to dollars (assuming 1 credit = $0.01)
         dollars = credits * 0.01
-        print(f"🔧 Converting {credits} credits to ${dollars}")
         
-        print("🔧 Executing UPDATE query...")
         cursor.execute('''
             UPDATE users 
             SET balance = balance + ?, updated_at = CURRENT_TIMESTAMP 
             WHERE telegram_id = ?
         ''', (dollars, telegram_id))
-        print("✅ UPDATE query executed successfully")
         
-        print("🔧 Committing transaction...")
         conn.commit()
-        print("✅ Transaction committed successfully")
     except Exception as e:
         print(f"❌ Error in add_user_balance: {e}")
         raise
     finally:
-        print("🔧 Closing database connection in add_user_balance...")
         conn.close()
-        print("✅ Database connection closed in add_user_balance")
 
 def init_plan_tables():
     """Initialize plan and key management tables"""

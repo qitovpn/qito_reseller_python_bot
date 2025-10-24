@@ -52,11 +52,18 @@ def init_admin_tables():
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL,
             description TEXT,
+            account_number TEXT,
             is_active BOOLEAN DEFAULT 1,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     ''')
+    
+    # Add account_number column if it doesn't exist (for existing databases)
+    cursor.execute("PRAGMA table_info(payment_methods)")
+    columns = [column[1] for column in cursor.fetchall()]
+    if 'account_number' not in columns:
+        cursor.execute('ALTER TABLE payment_methods ADD COLUMN account_number TEXT')
     
     # Insert default topup options if table is empty
     cursor.execute('SELECT COUNT(*) FROM topup_options')
@@ -73,12 +80,12 @@ def init_admin_tables():
     cursor.execute('SELECT COUNT(*) FROM payment_methods')
     if cursor.fetchone()[0] == 0:
         default_payments = [
-            ('KBZ Pay', 'KBZ Bank mobile payment'),
-            ('Wave Money', 'Wave Money mobile payment'),
-            ('AYA Pay', 'AYA Bank mobile payment'),
-            ('Cash Deposit', 'Cash deposit to bank account')
+            ('KBZ Pay', 'KBZ Bank mobile payment', '09XXXXXXXXX'),
+            ('Wave Money', 'Wave Money mobile payment', '09XXXXXXXXX'),
+            ('AYA Pay', 'AYA Bank mobile payment', '09XXXXXXXXX'),
+            ('Cash Deposit', 'Cash deposit to bank account', 'Account Number: XXXX-XXXX-XXXX')
         ]
-        cursor.executemany('INSERT INTO payment_methods (name, description) VALUES (?, ?)', default_payments)
+        cursor.executemany('INSERT INTO payment_methods (name, description, account_number) VALUES (?, ?, ?)', default_payments)
     
     # Initialize plan tables
     init_plan_tables()
@@ -255,10 +262,11 @@ def add_payment():
     if request.method == 'POST':
         name = request.form['name']
         description = request.form['description']
+        account_number = request.form.get('account_number', '')
         
         conn = get_db_connection()
-        conn.execute('INSERT INTO payment_methods (name, description) VALUES (?, ?)', 
-                    (name, description))
+        conn.execute('INSERT INTO payment_methods (name, description, account_number) VALUES (?, ?, ?)', 
+                    (name, description, account_number))
         conn.commit()
         conn.close()
         
@@ -275,10 +283,11 @@ def edit_payment(payment_id):
     if request.method == 'POST':
         name = request.form['name']
         description = request.form['description']
+        account_number = request.form.get('account_number', '')
         is_active = request.form.get('is_active') == 'on'
         
-        conn.execute('UPDATE payment_methods SET name = ?, description = ?, is_active = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?',
-                    (name, description, is_active, payment_id))
+        conn.execute('UPDATE payment_methods SET name = ?, description = ?, account_number = ?, is_active = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?',
+                    (name, description, account_number, is_active, payment_id))
         conn.commit()
         conn.close()
         
@@ -342,7 +351,8 @@ def api_payment_methods():
         methods.append({
             'id': method['id'],
             'name': method['name'],
-            'description': method['description']
+            'description': method['description'],
+            'account_number': method['account_number']
         })
     
     return jsonify(methods)
