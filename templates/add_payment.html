@@ -24,6 +24,12 @@
                         <div class="form-text">Optional description for this payment method</div>
                     </div>
                     
+                    <div class="mb-3">
+                        <label for="account_number" class="form-label">Account Number</label>
+                        <input type="text" class="form-control" id="account_number" name="account_number" placeholder="e.g., 09XXXXXXXXX or Account Number: XXXX-XXXX-XXXX">
+                        <div class="form-text">Account number, phone number, or account details for this payment method</div>
+                    </div>
+                    
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                         <a href="{{ url_for('payment_management') }}" class="btn btn-secondary me-md-2">Cancel</a>
                         <button type="submit" class="btn btn-primary">Add Payment Method</button>

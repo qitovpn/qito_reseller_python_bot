@@ -10,12 +10,20 @@
         .sidebar {
             min-height: 100vh;
             background-color: #343a40;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            z-index: 1000;
+            transition: transform 0.3s ease;
         }
         .sidebar .nav-link {
             color: #adb5bd;
+            padding: 0.75rem 1rem;
         }
         .sidebar .nav-link:hover {
             color: #fff;
+            background-color: #495057;
         }
         .sidebar .nav-link.active {
             color: #fff;
@@ -23,22 +31,76 @@
         }
         .main-content {
             margin-left: 0;
+            transition: margin-left 0.3s ease;
+        }
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+        }
+        .sidebar-overlay.show {
+            display: block;
+        }
+        .sidebar.collapsed {
+            transform: translateX(-100%);
+        }
+        .sidebar.show {
+            transform: translateX(0);
         }
         @media (min-width: 768px) {
             .main-content {
                 margin-left: 250px;
             }
+            .sidebar-toggle {
+                display: none;
+            }
+            .sidebar-overlay {
+                display: none !important;
+            }
+        }
+        @media (max-width: 767px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            .sidebar.show {
+                transform: translateX(0);
+            }
+            .main-content {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+            .table-responsive {
+                font-size: 0.875rem;
+            }
+            .card-body {
+                padding: 1rem;
+            }
+            .btn-group-sm .btn {
+                padding: 0.25rem 0.5rem;
+                font-size: 0.75rem;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Sidebar Overlay for Mobile -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    
     <div class="container-fluid">
         <div class="row">
             <!-- Sidebar -->
-            <nav class="col-md-3 col-lg-2 d-md-block sidebar collapse">
+            <nav class="sidebar" id="sidebar">
                 <div class="position-sticky pt-3">
                     <div class="text-center mb-4">
                         <h4 class="text-white">VPN Bot Admin</h4>
+                        <button class="btn btn-outline-light btn-sm d-md-none" id="closeSidebar">
+                            <i class="fas fa-times"></i>
+                        </button>
                     </div>
                     <ul class="nav flex-column">
                         <li class="nav-item">
@@ -108,7 +170,12 @@
             <!-- Main content -->
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">{% block page_title %}Dashboard{% endblock %}</h1>
+                    <div class="d-flex align-items-center">
+                        <button class="btn btn-outline-secondary me-3 d-md-none sidebar-toggle" id="toggleSidebar">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                        <h1 class="h2 mb-0">{% block page_title %}Dashboard{% endblock %}</h1>
+                    </div>
                 </div>
 
                 <!-- Flash messages -->
@@ -129,6 +196,58 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Mobile sidebar toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebar = document.getElementById('sidebar');
+            const sidebarOverlay = document.getElementById('sidebarOverlay');
+            const toggleSidebar = document.getElementById('toggleSidebar');
+            const closeSidebar = document.getElementById('closeSidebar');
+            
+            // Toggle sidebar on mobile
+            function toggleSidebarMobile() {
+                sidebar.classList.toggle('show');
+                sidebarOverlay.classList.toggle('show');
+            }
+            
+            // Close sidebar
+            function closeSidebarMobile() {
+                sidebar.classList.remove('show');
+                sidebarOverlay.classList.remove('show');
+            }
+            
+            // Event listeners
+            if (toggleSidebar) {
+                toggleSidebar.addEventListener('click', toggleSidebarMobile);
+            }
+            
+            if (closeSidebar) {
+                closeSidebar.addEventListener('click', closeSidebarMobile);
+            }
+            
+            if (sidebarOverlay) {
+                sidebarOverlay.addEventListener('click', closeSidebarMobile);
+            }
+            
+            // Close sidebar when clicking on nav links (mobile)
+            const navLinks = document.querySelectorAll('.sidebar .nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    if (window.innerWidth < 768) {
+                        closeSidebarMobile();
+                    }
+                });
+            });
+            
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                if (window.innerWidth >= 768) {
+                    sidebar.classList.remove('show');
+                    sidebarOverlay.classList.remove('show');
+                }
+            });
+        });
+    </script>
     {% block scripts %}{% endblock %}
 </body>
 </html>

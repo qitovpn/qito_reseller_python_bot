@@ -26,6 +26,14 @@
                     </div>
                     
                     <div class="mb-3">
+                        <label for="account_number" class="form-label">Account Number</label>
+                        <input type="text" class="form-control" id="account_number" name="account_number" 
+                               value="{{ payment.account_number or '' }}" 
+                               placeholder="e.g., 09XXXXXXXXX or Account Number: XXXX-XXXX-XXXX">
+                        <div class="form-text">Account number, phone number, or account details for this payment method</div>
+                    </div>
+                    
+                    <div class="mb-3">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" id="is_active" name="is_active" 
                                    {% if payment.is_active %}checked{% endif %}>

@@ -21,6 +21,7 @@
                             <th>ID</th>
                             <th>Name</th>
                             <th>Description</th>
+                            <th>Account Number</th>
                             <th>Status</th>
                             <th>Created</th>
                             <th>Actions</th>
@@ -32,6 +33,13 @@
                             <td>{{ method.id }}</td>
                             <td>{{ method.name }}</td>
                             <td>{{ method.description }}</td>
+                            <td>
+                                {% if method.account_number %}
+                                    <code class="text-primary">{{ method.account_number }}</code>
+                                {% else %}
+                                    <span class="text-muted">Not set</span>
+                                {% endif %}
+                            </td>
                             <td>
                                 {% if method.is_active %}
                                     <span class="badge bg-success">Active</span>
