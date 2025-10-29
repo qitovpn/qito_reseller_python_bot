@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+
+{% block title %}Account Setup Configuration - VPN Bot Admin{% endblock %}
+
+{% block page_title %}Account Setup Configuration{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-cog me-2"></i>
+                    Account Setup Configuration
+                </h5>
+            </div>
+            <div class="card-body">
+                <p class="text-muted">
+                    Configure account setup links and instructions that will be displayed to users when they purchase QITO plans.
+                </p>
+                
+                {% if configs %}
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Configuration Key</th>
+                                <th>Value</th>
+                                <th>Description</th>
+                                <th>Status</th>
+                                <th>Last Updated</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for config in configs %}
+                            <tr>
+                                <td>
+                                    <code>{{ config[1] }}</code>
+                                </td>
+                                <td>
+                                    {% if config[1] == 'qito_net_redirect_link' %}
+                                        <a href="{{ config[2] }}" target="_blank" class="text-decoration-none">
+                                            {{ config[2] }}
+                                            <i class="fas fa-external-link-alt ms-1"></i>
+                                        </a>
+                                    {% else %}
+                                        {{ config[2] }}
+                                    {% endif %}
+                                </td>
+                                <td>{{ config[3] or 'No description' }}</td>
+                                <td>
+                                    {% if config[4] %}
+                                        <span class="badge bg-success">Active</span>
+                                    {% else %}
+                                        <span class="badge bg-secondary">Inactive</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ config[6][:19] if config[6] else 'Never' }}</td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary" 
+                                            onclick="editConfig('{{ config[1] }}', '{{ config[2] }}', '{{ config[3] or '' }}')">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle me-2"></i>
+                    No account setup configurations found. The system will use default values.
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Configuration Modal -->
+<div class="modal fade" id="editConfigModal" tabindex="-1" aria-labelledby="editConfigModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editConfigModalLabel">Edit Configuration</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="POST" action="{{ url_for('update_account_setup') }}">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="config_key" class="form-label">Configuration Key</label>
+                        <input type="text" class="form-control" id="config_key" name="config_key" readonly>
+                        <div class="form-text">This field cannot be modified.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="config_value" class="form-label">Configuration Value</label>
+                        <input type="url" class="form-control" id="config_value" name="config_value" required>
+                        <div class="form-text">Enter the URL or value for this configuration.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                        <div class="form-text">Optional description for this configuration.</div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Update Configuration</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Usage Instructions -->
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-info-circle me-2"></i>
+                    Usage Instructions
+                </h5>
+            </div>
+            <div class="card-body">
+                <h6>QITO Net Redirect Link</h6>
+                <p class="text-muted">
+                    The <code>qito_net_redirect_link</code> configuration is used in the bot's success message 
+                    when users purchase QITO plans. This link will be displayed as a clickable redirect link 
+                    in the purchase confirmation message.
+                </p>
+                <div class="alert alert-warning">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    <strong>Important:</strong> Make sure the URL is valid and accessible. Users will click on this link 
+                    to access their QITO Net account setup.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function editConfig(key, value, description) {
+    document.getElementById('config_key').value = key;
+    document.getElementById('config_value').value = value;
+    document.getElementById('description').value = description;
+    
+    var modal = new bootstrap.Modal(document.getElementById('editConfigModal'));
+    modal.show();
+}
+</script>
+{% endblock %}

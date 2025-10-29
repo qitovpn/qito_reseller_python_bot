@@ -3,6 +3,7 @@ import sqlite3
 import telebot
 import requests
 import json
+from datetime import datetime
 from telebot.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
 from dotenv import load_dotenv
 from database import (init_database, ensure_user_exists, get_user_balance, get_topup_options, 
@@ -11,7 +12,9 @@ from database import (init_database, ensure_user_exists, get_user_balance, get_t
                      init_plan_tables, get_active_plans, get_plan, assign_key_to_user, 
                      get_user_plans, get_available_keys, check_low_key_plans, get_plan_key_statistics,
                      init_contact_tables, get_active_contact_config, check_and_delete_expired_keys,
-                     get_expiring_soon_keys, get_expired_keys_stats, cleanup_orphaned_keys)
+                     get_expiring_soon_keys, get_expired_keys_stats, cleanup_orphaned_keys,
+                     init_account_setup_tables, get_account_setup_config, get_all_users,
+                     get_all_active_plans_for_notification)
 
 # Load environment variables
 load_dotenv()
@@ -24,12 +27,20 @@ init_database()
 init_payment_tables()
 init_plan_tables()
 init_contact_tables()
+init_account_setup_tables()
 
 # Initialize bot with token from environment variable
 bot = telebot.TeleBot(os.getenv('TELEGRAM_BOT_TOKEN'))
 
 # Get admin telegram ID
 ADMIN_TELEGRAM_ID = os.getenv('ADMIN_TELEGRAM_ID')
+
+def is_admin(user_id):
+    """Check if user is admin"""
+    return str(user_id) == str(ADMIN_TELEGRAM_ID)
+
+# Simple state management for custom notifications
+admin_custom_notification_state = {}
 
 def send_low_key_notification():
     """Send notification to admin about plans with low key availability"""
@@ -114,6 +125,23 @@ def create_main_menu():
     markup.add(item4, item5)
     return markup
 
+def create_admin_menu():
+    """Create admin menu keyboard with notification button"""
+    markup = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
+    item1 = KeyboardButton("👤 ကျွန်ုပ်၏ Credit")
+    item2 = KeyboardButton("💳 ငွေဖြည့်")
+    item3 = KeyboardButton("VPN Key ဝယ်ရန်")
+    item4 = KeyboardButton("📋 ကျွန်ုပ်၏ပက်ကေ့ချ်")
+    item5 = KeyboardButton("📞 ဆက်သွယ်ရန်")
+    item6 = KeyboardButton("🗝 QITO Net")
+    item7 = KeyboardButton("📢 Notification")  # Admin only
+    item8 = KeyboardButton("✏️ Custom Notification")  # Admin only
+    markup.add(item1, item2)
+    markup.add(item3, item6)
+    markup.add(item4, item5)
+    markup.add(item7, item8)  # Admin notification buttons
+    return markup
+
 # Create inline keyboard for quick actions
 def create_inline_menu():
     markup = InlineKeyboardMarkup()
@@ -152,7 +180,12 @@ def send_welcome(message):
     else:
         welcome_text = f"မင်္ဂလာပါ {message.from_user.first_name}! 👋\n\nကျွန်ုပ်တို့၏ VPN ဝန်ဆောင်မှုဘော့သို့ ကြိုဆိုပါတယ်! သင့်အကောင့်ကို ငွေလက်ကျန် $0.00 ဖြင့် ဖန်တီးပေးပါပြီ။ အောက်ပါမီနူးမှ ရွေးချယ်ပါ။"
     
-    bot.reply_to(message, welcome_text, reply_markup=create_main_menu())
+    # Show admin menu for admin users
+    if is_admin(message.from_user.id):
+        welcome_text += "\n\n🔧 **Admin Mode Activated** - You have access to admin features."
+        bot.reply_to(message, welcome_text, reply_markup=create_admin_menu())
+    else:
+        bot.reply_to(message, welcome_text, reply_markup=create_main_menu())
 
 @bot.message_handler(commands=['help'])
 def send_help(message):
@@ -716,6 +749,167 @@ QITO ပက်ကေ့ချ်များကို ကြည့်ရှု�
     print(f"📤 Sending QITO plans message to user {message.from_user.id}")
     bot.send_message(message.chat.id, qito_text, parse_mode='Markdown', reply_markup=markup)
     print("✅ QITO plans message sent successfully!")
+
+@bot.message_handler(func=lambda message: message.text == "📢 Notification")
+def handle_notification(message):
+    """Handle admin notification button - send all plans to all users"""
+    # Check if user is admin
+    if not is_admin(message.from_user.id):
+        bot.send_message(message.chat.id, "❌ You don't have permission to use this feature.", 
+                        reply_markup=create_main_menu())
+        return
+    
+    print("=" * 50)
+    print(f"🔔 Admin Notification button pressed!")
+    print(f"👤 Admin: {message.from_user.first_name} {message.from_user.last_name or ''}")
+    print(f"🆔 Admin ID: {message.from_user.id}")
+    print("=" * 50)
+    
+    # Get all active plans
+    plans = get_all_active_plans_for_notification()
+    
+    if not plans:
+        bot.send_message(message.chat.id, "❌ No active plans found to send notification.", 
+                        reply_markup=create_admin_menu())
+        return
+    
+    # Create notification message
+    notification_text = """**📢 ရရှိနိုင်သော ပက်ကေ့ချ်များ:**
+
+"""
+    
+    # Separate VPN and QITO plans
+    vpn_plans = []
+    qito_plans = []
+    
+    for plan in plans:
+        plan_id_number, name, description, credits_required, duration_days, device_limit, available_keys = plan
+        if 'QITO' in name:
+            qito_plans.append(plan)
+        else:
+            vpn_plans.append(plan)
+    
+    # Add VPN plans
+    if vpn_plans:
+        notification_text += "**➖➖➖ VPN ပက်ကေ့ချ်များ ➖➖➖**\n"
+        for plan in vpn_plans:
+            plan_id_number, name, description, credits_required, duration_days, device_limit, available_keys = plan
+            notification_text += f"{name} | {credits_required} Credits | {duration_days} ရက် | In stock {available_keys} pcs\n"
+    
+    # Add QITO plans
+    if qito_plans:
+        notification_text += "\n**➖➖➖ QITO ပက်ကေ့ချ်များ ➖➖➖**\n"
+        for plan in qito_plans:
+            plan_id_number, name, description, credits_required, duration_days, device_limit, available_keys = plan
+            notification_text += f"{name} | {credits_required} Credits | {duration_days} ရက် | In stock {available_keys} pcs\n"
+    
+    
+    # Get all users
+    users = get_all_users()
+    
+    if not users:
+        bot.send_message(message.chat.id, "❌ No users found to send notification.", 
+                        reply_markup=create_admin_menu())
+        return
+    
+    # Send notification to all users
+    sent_count = 0
+    failed_count = 0
+    
+    bot.send_message(message.chat.id, f"📤 Sending notification to {len(users)} users...", 
+                    reply_markup=create_admin_menu())
+    
+    for user in users:
+        telegram_id, username, first_name, last_name = user
+        try:
+            # Determine which menu to use based on admin status
+            if is_admin(telegram_id):
+                menu = create_admin_menu()
+            else:
+                menu = create_main_menu()
+            
+            bot.send_message(telegram_id, notification_text, parse_mode='Markdown', reply_markup=menu)
+            sent_count += 1
+            print(f"✅ Notification sent to user {telegram_id} ({first_name})")
+        except Exception as e:
+            failed_count += 1
+            print(f"❌ Failed to send notification to user {telegram_id}: {e}")
+    
+    # Send summary to admin
+    summary_text = f"""📊 **Notification Summary**
+
+✅ Successfully sent: {sent_count} users
+❌ Failed to send: {failed_count} users
+📤 Total users: {len(users)}
+
+Notification sent at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"""
+    
+    bot.send_message(message.chat.id, summary_text, reply_markup=create_admin_menu())
+
+@bot.message_handler(func=lambda message: message.text == "✏️ Custom Notification")
+def handle_custom_notification(message):
+    """Handle custom notification button - ask for custom text"""
+    # Check if user is admin
+    if not is_admin(message.from_user.id):
+        bot.send_message(message.chat.id, "❌ You don't have permission to use this feature.", 
+                        reply_markup=create_main_menu())
+        return
+    
+    print("=" * 50)
+    print(f"🔔 Custom Notification button pressed!")
+    print(f"👤 Admin: {message.from_user.first_name} {message.from_user.last_name or ''}")
+    print(f"🆔 Admin ID: {message.from_user.id}")
+    print("=" * 50)
+    
+    # Set state to waiting for custom text
+    admin_custom_notification_state[message.from_user.id] = "waiting_for_text"
+    
+    # Create cancel keyboard
+    cancel_markup = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
+    cancel_button = KeyboardButton("❌ Cancel")
+    cancel_markup.add(cancel_button)
+    
+    bot.send_message(message.chat.id, 
+                    "✏️ **Custom Notification**\n\n"
+                    "Please enter your custom notification message:\n\n"
+                    "💡 **Tips:**\n"
+                    "• Use Markdown formatting for better appearance\n"
+                    "• Keep it concise and clear\n"
+                    "• Include relevant information for users\n\n"
+                    "Type your message or click ❌ Cancel to abort.",
+                    parse_mode='Markdown', 
+                    reply_markup=cancel_markup)
+
+@bot.message_handler(func=lambda message: message.from_user.id in admin_custom_notification_state and 
+                    admin_custom_notification_state[message.from_user.id] == "waiting_for_text")
+def handle_custom_notification_text(message):
+    """Handle custom notification text input"""
+    if message.text == "❌ Cancel":
+        # Cancel custom notification
+        del admin_custom_notification_state[message.from_user.id]
+        bot.send_message(message.chat.id, "❌ Custom notification cancelled.", 
+                        reply_markup=create_admin_menu())
+        return
+    
+    # Store the custom text and ask for confirmation
+    custom_text = message.text
+    admin_custom_notification_state[message.from_user.id] = f"confirming:{custom_text}"
+    
+    # Create confirmation keyboard
+    confirm_markup = InlineKeyboardMarkup()
+    confirm_btn = InlineKeyboardButton("✅ Send to All Users", callback_data="confirm_custom_notification")
+    cancel_btn = InlineKeyboardButton("❌ Cancel", callback_data="cancel_custom_notification")
+    confirm_markup.add(confirm_btn, cancel_btn)
+    
+    # Show preview
+    preview_text = f"📝 **Custom Notification Preview**\n\n{custom_text}\n\n"
+    preview_text += f"📊 This message will be sent to all users.\n"
+    preview_text += f"👥 Total users: {len(get_all_users())}\n\n"
+    preview_text += "Click ✅ to send or ❌ to cancel:"
+    
+    bot.send_message(message.chat.id, preview_text, 
+                    parse_mode='Markdown', 
+                    reply_markup=confirm_markup)
 
 @bot.message_handler(func=lambda message: message.text == "📞 ဆက်သွယ်ရန်")
 def handle_contact(message):
@@ -1333,6 +1527,9 @@ QITO ပက်ကေ့ချ်သည် subscription-based ဖြစ်ပြ�
                     except Exception as e:
                         print(f"Could not delete message: {e}")
                     
+                    # Get QITO Net redirect link from database
+                    qito_redirect_link = get_account_setup_config('qito_net_redirect_link') or 'https://qito.net'
+                    
                     # Notify user with credentials
                     success_message = f"""✅ **QITO ပက်ကေ့ချ် ဝယ်ယူမှု အောင်မြင်ပါသည်!!**
 
@@ -1348,10 +1545,8 @@ QITO ပက်ကေ့ချ်သည် subscription-based ဖြစ်ပြ�
 **Username:** `{api_response.get('username', 'N/A')}`
 **Password:** `{api_response.get('password', 'N/A')}`
 
-**QITO ပက်ကေ့ချ်အသုံးပြုနည်း:**
-• QITO ပက်ကေ့ချ်သည် subscription-based ဖြစ်ပါသည်
-• သင့်အကောင့်နှင့် ချိတ်ဆက်ပြီး အသုံးပြုနိုင်ပါသည်
-• စက်အရေအတွက်: {device_limit} စက် အထိ အသုံးပြုနိုင်ပါသည်
+**QITO Net Account ထည့်နည်း:**
+[နှိပ်ပါ]({qito_redirect_link})
 
 **အကူအညီလိုအပ်ပါက ဆက်သွယ်ပါ:**
 📞 ဆက်သွယ်ရန် ခလုတ်ကို နှိပ်ပါ"""
@@ -1398,6 +1593,75 @@ QITO Password: {api_response.get('password', 'N/A')}"""
         bot.answer_callback_query(call.id, "QITO ဝယ်ယူမှုပယ်ဖျက်ပြီး")
         bot.send_message(call.message.chat.id, "❌ QITO ဝယ်ယူမှုပယ်ဖျက်ပြီးပါပြီ။ မည်သည့်အချိန်တွင်မဆို အခြားပက်ကေ့ချ်များကို ကြည့်ရှုနိုင်ပါတယ်။", 
                        reply_markup=create_main_menu())
+    
+    # Custom notification callbacks
+    elif call.data == 'confirm_custom_notification':
+        # Check if admin is in confirming state
+        if call.from_user.id in admin_custom_notification_state:
+            state = admin_custom_notification_state[call.from_user.id]
+            if state.startswith('confirming:'):
+                custom_text = state.split(':', 1)[1]
+                
+                # Get all users
+                users = get_all_users()
+                
+                if not users:
+                    bot.answer_callback_query(call.id, "No users found!")
+                    bot.send_message(call.message.chat.id, "❌ No users found to send notification.", 
+                                   reply_markup=create_admin_menu())
+                    del admin_custom_notification_state[call.from_user.id]
+                    return
+                
+                # Send custom notification to all users
+                sent_count = 0
+                failed_count = 0
+                
+                bot.answer_callback_query(call.id, "Sending custom notification...")
+                bot.send_message(call.message.chat.id, f"📤 Sending custom notification to {len(users)} users...", 
+                               reply_markup=create_admin_menu())
+                
+                for user in users:
+                    telegram_id, username, first_name, last_name = user
+                    try:
+                        # Determine which menu to use based on admin status
+                        if is_admin(telegram_id):
+                            menu = create_admin_menu()
+                        else:
+                            menu = create_main_menu()
+                        
+                        bot.send_message(telegram_id, custom_text, parse_mode='Markdown', reply_markup=menu)
+                        sent_count += 1
+                        print(f"✅ Custom notification sent to user {telegram_id} ({first_name})")
+                    except Exception as e:
+                        failed_count += 1
+                        print(f"❌ Failed to send custom notification to user {telegram_id}: {e}")
+                
+                # Send summary to admin
+                summary_text = f"""📊 **Custom Notification Summary**
+
+✅ Successfully sent: {sent_count} users
+❌ Failed to send: {failed_count} users
+📤 Total users: {len(users)}
+
+Custom notification sent at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"""
+                
+                bot.send_message(call.message.chat.id, summary_text, reply_markup=create_admin_menu())
+                
+                # Clear state
+                del admin_custom_notification_state[call.from_user.id]
+            else:
+                bot.answer_callback_query(call.id, "Invalid state!")
+        else:
+            bot.answer_callback_query(call.id, "No custom notification in progress!")
+    
+    elif call.data == 'cancel_custom_notification':
+        # Cancel custom notification
+        if call.from_user.id in admin_custom_notification_state:
+            del admin_custom_notification_state[call.from_user.id]
+        
+        bot.answer_callback_query(call.id, "Custom notification cancelled!")
+        bot.send_message(call.message.chat.id, "❌ Custom notification cancelled.", 
+                       reply_markup=create_admin_menu())
 
 @bot.message_handler(content_types=['photo'])
 def handle_payment_proof(message):

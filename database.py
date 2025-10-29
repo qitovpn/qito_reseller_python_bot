@@ -778,6 +778,124 @@ def cleanup_orphaned_keys():
     
     return deleted_count, deleted_keys
 
+def init_account_setup_tables():
+    """Initialize account setup configuration table"""
+    conn = sqlite3.connect(DB_FILE)
+    cursor = conn.cursor()
+    
+    # Create account_setup_config table
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS account_setup_config (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            config_key TEXT UNIQUE NOT NULL,
+            config_value TEXT NOT NULL,
+            description TEXT,
+            is_active BOOLEAN DEFAULT 1,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    ''')
+    
+    # Insert default QITO Net redirect link if not exists
+    cursor.execute('''
+        INSERT OR IGNORE INTO account_setup_config (config_key, config_value, description)
+        VALUES ('qito_net_redirect_link', 'https://qito.net', 'QITO Net Account Setup Redirect Link')
+    ''')
+    
+    conn.commit()
+    conn.close()
+    print("✅ Account setup configuration table initialized successfully")
+
+def get_account_setup_config(config_key):
+    """Get account setup configuration value"""
+    conn = sqlite3.connect(DB_FILE)
+    cursor = conn.cursor()
+    
+    cursor.execute('''
+        SELECT config_value FROM account_setup_config 
+        WHERE config_key = ? AND is_active = 1
+    ''', (config_key,))
+    
+    result = cursor.fetchone()
+    conn.close()
+    
+    return result[0] if result else None
+
+def update_account_setup_config(config_key, config_value, description=None):
+    """Update account setup configuration"""
+    conn = sqlite3.connect(DB_FILE)
+    cursor = conn.cursor()
+    
+    cursor.execute('''
+        UPDATE account_setup_config 
+        SET config_value = ?, description = ?, updated_at = CURRENT_TIMESTAMP
+        WHERE config_key = ?
+    ''', (config_value, description, config_key))
+    
+    if cursor.rowcount == 0:
+        # Insert if not exists
+        cursor.execute('''
+            INSERT INTO account_setup_config (config_key, config_value, description)
+            VALUES (?, ?, ?)
+        ''', (config_key, config_value, description))
+    
+    conn.commit()
+    conn.close()
+    return True
+
+def get_all_account_setup_configs():
+    """Get all account setup configurations"""
+    conn = sqlite3.connect(DB_FILE)
+    cursor = conn.cursor()
+    
+    cursor.execute('''
+        SELECT * FROM account_setup_config 
+        ORDER BY created_at DESC
+    ''')
+    
+    configs = cursor.fetchall()
+    conn.close()
+    
+    return configs
+
+def get_all_users():
+    """Get all users from database"""
+    conn = sqlite3.connect(DB_FILE)
+    cursor = conn.cursor()
+    
+    cursor.execute('''
+        SELECT telegram_id, username, first_name, last_name 
+        FROM users 
+        ORDER BY created_at DESC
+    ''')
+    
+    users = cursor.fetchall()
+    conn.close()
+    
+    return users
+
+def get_all_active_plans_for_notification():
+    """Get all active plans for notification (both VPN and QITO)"""
+    conn = sqlite3.connect(DB_FILE)
+    cursor = conn.cursor()
+    
+    # Get all active plans
+    cursor.execute('''
+        SELECT p.plan_id_number, p.name, p.description, p.credits_required, 
+               p.duration_days, p.device_limit,
+               COUNT(CASE WHEN vk.is_used = 0 THEN 1 END) as available_keys
+        FROM plans p
+        LEFT JOIN vpn_keys vk ON p.id = vk.plan_id
+        WHERE p.is_active = 1
+        GROUP BY p.id, p.plan_id_number, p.name, p.description, p.credits_required, p.duration_days, p.device_limit
+        ORDER BY p.plan_id_number
+    ''')
+    
+    plans = cursor.fetchall()
+    conn.close()
+    
+    return plans
+
 def get_expired_keys_stats():
     """Get statistics about expired keys"""
     conn = sqlite3.connect(DB_FILE)

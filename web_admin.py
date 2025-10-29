@@ -5,7 +5,8 @@ from datetime import datetime
 from database import (init_plan_tables, create_plan, get_all_plans, get_plan, update_plan, 
                      delete_plan, add_vpn_keys, get_all_keys_for_plan, delete_vpn_key,
                      init_contact_tables, get_contact_config, update_contact_config,
-                     get_active_payment_methods_count)
+                     get_active_payment_methods_count, init_account_setup_tables,
+                     get_account_setup_config, update_account_setup_config, get_all_account_setup_configs)
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
@@ -1043,6 +1044,33 @@ def delete_backup(filename):
     
     return redirect(url_for('list_backups'))
 
+# Account Setup Management Routes
+@app.route('/account-setup')
+def account_setup():
+    """Account setup configuration page"""
+    configs = get_all_account_setup_configs()
+    return render_template('account_setup.html', configs=configs)
+
+@app.route('/account-setup/update', methods=['POST'])
+def update_account_setup():
+    """Update account setup configuration"""
+    config_key = request.form.get('config_key')
+    config_value = request.form.get('config_value')
+    description = request.form.get('description', '')
+    
+    if not config_key or not config_value:
+        flash('Configuration key and value are required!', 'error')
+        return redirect(url_for('account_setup'))
+    
+    try:
+        update_account_setup_config(config_key, config_value, description)
+        flash(f'Configuration "{config_key}" updated successfully!', 'success')
+    except Exception as e:
+        flash(f'Error updating configuration: {str(e)}', 'error')
+    
+    return redirect(url_for('account_setup'))
+
 if __name__ == '__main__':
     init_admin_tables()
+    init_account_setup_tables()
     app.run(debug=True, host='0.0.0.0', port=5000)
