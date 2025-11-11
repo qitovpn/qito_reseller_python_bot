@@ -458,7 +458,7 @@ def handle_my_balance(message):
     
     # Get actual balance from database
     current_balance = get_user_balance(message.from_user.id)
-    credits = int(current_balance * 100)  # Convert to credits (1 dollar = 100 credits)
+    credits = int(current_balance)  # 1 dollar = 1 credit (1:1 conversion)
     
     balance_text = f"""👤 သင့်အကောင့်ငွေလက်ကျန်
 
@@ -1263,7 +1263,7 @@ You can try making a new payment with a clearer payment proof."""
             
             # Check if user has enough balance
             user_balance = get_user_balance(call.from_user.id)
-            user_credits = int(user_balance * 100)  # Convert to credits
+            user_credits = int(user_balance)  # 1 dollar = 1 credit (1:1 conversion)
             
             if user_credits >= credits_required:
                 # Check if keys are available
@@ -1324,7 +1324,7 @@ Key Avaliable: {len(available_keys)} Keys
             
             # Double-check balance and key availability
             user_balance = get_user_balance(call.from_user.id)
-            user_credits = int(user_balance * 100)
+            user_credits = int(user_balance)  # 1 dollar = 1 credit (1:1 conversion)
             available_keys = get_available_keys(plan_id)
             
             if user_credits >= credits_required and available_keys:
@@ -1421,7 +1421,7 @@ Credits Used: {credits_required}"""
             
             # Check if user has enough balance
             user_balance = get_user_balance(call.from_user.id)
-            user_credits = int(user_balance * 100)  # Convert to credits
+            user_credits = int(user_balance)  # 1 dollar = 1 credit (1:1 conversion)
             
             print(f"💰 User Balance Check:")
             print(f"   💵 User Balance: {user_balance}")
@@ -1494,7 +1494,7 @@ QITO ပက်ကေ့ချ်သည် subscription-based ဖြစ်ပြ�
             
             # Double-check balance
             user_balance = get_user_balance(call.from_user.id)
-            user_credits = int(user_balance * 100)
+            user_credits = int(user_balance)  # 1 dollar = 1 credit (1:1 conversion)
             
             if user_credits >= credits_required:
                 # Create QITO user via API

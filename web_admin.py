@@ -432,9 +432,10 @@ def api_update_user_balance():
             return jsonify({'success': False, 'message': 'User not found'})
         
         # Update user balance
+        # Round to 0 decimal places to ensure whole numbers (no floating-point precision issues)
         cursor.execute('''
             UPDATE users 
-            SET balance = ?, updated_at = CURRENT_TIMESTAMP 
+            SET balance = ROUND(?, 0), updated_at = CURRENT_TIMESTAMP 
             WHERE id = ?
         ''', (new_balance, user_id))
         

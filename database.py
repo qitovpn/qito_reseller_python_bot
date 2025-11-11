@@ -84,11 +84,12 @@ def get_user_balance(telegram_id):
     conn = sqlite3.connect(DB_FILE)
     cursor = conn.cursor()
     
-    cursor.execute('SELECT balance FROM users WHERE telegram_id = ?', (telegram_id,))
+    # Round to 0 decimal places to ensure whole numbers (no floating-point precision issues)
+    cursor.execute('SELECT ROUND(balance, 0) FROM users WHERE telegram_id = ?', (telegram_id,))
     result = cursor.fetchone()
     
     conn.close()
-    return result[0] if result else 0.0
+    return float(result[0]) if result else 0.0
 
 def ensure_user_exists(telegram_id, username=None, first_name=None, last_name=None):
     """Check if user exists, if not create with balance 0"""
@@ -211,14 +212,17 @@ def add_user_balance(telegram_id, credits):
     cursor = conn.cursor()
     
     try:
-        # Convert credits to dollars (assuming 1 credit = $0.01)
-        dollars = credits * 0.01
+        # 1 dollar = 1 credit (1:1 conversion)
+        # Credits are stored directly as dollars in balance
+        # Use ROUND() to prevent floating-point precision issues
+        # Round to 0 decimal places since credits are whole numbers
+        credits_value = float(credits)  # Ensure it's a number
         
         cursor.execute('''
             UPDATE users 
-            SET balance = balance + ?, updated_at = CURRENT_TIMESTAMP 
+            SET balance = ROUND(balance + ?, 0), updated_at = CURRENT_TIMESTAMP 
             WHERE telegram_id = ?
-        ''', (dollars, telegram_id))
+        ''', (credits_value, telegram_id))
         
         conn.commit()
     except Exception as e:
