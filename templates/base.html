@@ -134,6 +134,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link {% if request.endpoint in ['bypass_plan_management', 'add_bypass_plan', 'edit_bypass_plan', 'bypass_statistics'] %}active{% endif %}" href="{{ url_for('bypass_plan_management') }}">
+                                <i class="fas fa-unlock me-2"></i>
+                                🔓 ByPass Plans
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link {% if request.endpoint == 'contact_management' %}active{% endif %}" href="{{ url_for('contact_management') }}">
                                 <i class="fas fa-phone me-2"></i>
                                 Contact Config

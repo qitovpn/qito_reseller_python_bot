@@ -16,7 +16,7 @@
             </div>
             <div class="card-body">
                 <p class="text-muted">
-                    Configure account setup links and instructions that will be displayed to users when they purchase QITO plans.
+                    Configure account setup links and instructions that will be displayed to users when they purchase QITO and ByPass plans.
                 </p>
                 
                 {% if configs %}
@@ -39,7 +39,7 @@
                                     <code>{{ config[1] }}</code>
                                 </td>
                                 <td>
-                                    {% if config[1] == 'qito_net_redirect_link' %}
+                                    {% if config[1] == 'qito_net_redirect_link' or config[1] == 'bypass_redirect_link' %}
                                         <a href="{{ config[2] }}" target="_blank" class="text-decoration-none">
                                             {{ config[2] }}
                                             <i class="fas fa-external-link-alt ms-1"></i>
@@ -131,10 +131,18 @@
                     when users purchase QITO plans. This link will be displayed as a clickable redirect link 
                     in the purchase confirmation message.
                 </p>
+                
+                <h6 class="mt-4">ByPass Redirect Link</h6>
+                <p class="text-muted">
+                    The <code>bypass_redirect_link</code> configuration is used in the bot's success message 
+                    when users purchase ByPass plans. This link will be displayed as a clickable redirect link 
+                    in the purchase confirmation message.
+                </p>
+                
                 <div class="alert alert-warning">
                     <i class="fas fa-exclamation-triangle me-2"></i>
-                    <strong>Important:</strong> Make sure the URL is valid and accessible. Users will click on this link 
-                    to access their QITO Net account setup.
+                    <strong>Important:</strong> Make sure the URLs are valid and accessible. Users will click on these links 
+                    to access their account setup pages. QITO and ByPass plans can have different redirect URLs.
                 </div>
             </div>
         </div>

@@ -22,6 +22,9 @@ load_dotenv()
 # QITO API Configuration
 QITO_API_URL = os.getenv('QITO_API_URL', 'http://localhost:3000/api/users')
 
+# ByPass API Configuration
+BYPASS_API_URL = os.getenv('BYPASS_API_URL', 'http://localhost:3000/api/users')
+
 # Initialize database
 init_database()
 init_payment_tables()
@@ -111,18 +114,61 @@ def create_qito_user_api(device_limit, duration_days):
         print(f"Error creating QITO user via API: {e}")
         return None
 
+def create_bypass_user_api(device_limit, duration_days):
+    """Create ByPass user via API"""
+    try:
+        from datetime import datetime, timedelta
+        # Calculate expiry date
+        expiry_date = datetime.now() + timedelta(days=duration_days)
+        expiry_date_str = expiry_date.strftime('%Y-%m-%dT%H:%M')
+        
+        # Prepare API request data
+        api_data = {
+            "expire_date": expiry_date_str,
+            "device_limit": device_limit
+        }
+        
+        # Make API request
+        headers = {
+            'Accept': '*/*',
+            'Accept-Language': 'en-US,en;q=0.9',
+            'Connection': 'keep-alive',
+            'Content-Type': 'application/json',
+            'Sec-Fetch-Dest': 'empty',
+            'Sec-Fetch-Mode': 'cors',
+            'Sec-Fetch-Site': 'same-origin',
+            'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Mobile Safari/537.36',
+            'sec-ch-ua': '"Google Chrome";v="137", "Chromium";v="137", "Not/A)Brand";v="24"',
+            'sec-ch-ua-mobile': '?1',
+        }
+        
+        response = requests.post(BYPASS_API_URL, headers=headers, json=api_data, timeout=30)
+        
+        if response.status_code == 200 or response.status_code == 201:
+            return response.json()
+        else:
+            print(f"ByPass API request failed with status {response.status_code}: {response.text}")
+            return None
+            
+    except Exception as e:
+        print(f"Error creating ByPass user via API: {e}")
+        return None
+
 # Create the main menu (Reply Keyboard)
 def create_main_menu():
     markup = ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=True)
     item1 = KeyboardButton("👤 ကျွန်ုပ်၏ Credit")
     item2 = KeyboardButton("💳 ငွေဖြည့်")
     item3 = KeyboardButton("VPN Key ဝယ်ရန်")
-    item4 = KeyboardButton("📋 ကျွန်ုပ်၏ပက်ကေ့ချ်")
-    item5 = KeyboardButton("📞 ဆက်သွယ်ရန်")
-    item6 = KeyboardButton("🗝 QITO Net")
+    item4 = KeyboardButton("🗝 QITO Net")
+    item5 = KeyboardButton("🔓 Bypass VIP")
+    item6 = KeyboardButton("📞 Our Channel")
+    item7 = KeyboardButton("📋 ကျွန်ုပ်၏ပက်ကေ့ချ်")
+    item8 = KeyboardButton("📞 ဆက်သွယ်ရန်")
     markup.add(item1, item2)
-    markup.add(item3, item6)
-    markup.add(item4, item5)
+    markup.add(item3, item4)
+    markup.add(item5, item6)
+    markup.add(item7, item8)
     return markup
 
 def create_admin_menu():
@@ -134,12 +180,15 @@ def create_admin_menu():
     item4 = KeyboardButton("📋 ကျွန်ုပ်၏ပက်ကေ့ချ်")
     item5 = KeyboardButton("📞 ဆက်သွယ်ရန်")
     item6 = KeyboardButton("🗝 QITO Net")
-    item7 = KeyboardButton("📢 Notification")  # Admin only
-    item8 = KeyboardButton("✏️ Custom Notification")  # Admin only
+    item7 = KeyboardButton("🔓 Bypass VIP")
+    item8 = KeyboardButton("📞 Our Channel")
+    item9 = KeyboardButton("📢 Notification")  # Admin only
+    item10 = KeyboardButton("✏️ Custom Notification")  # Admin only
     markup.add(item1, item2)
     markup.add(item3, item6)
+    markup.add(item7, item8)
     markup.add(item4, item5)
-    markup.add(item7, item8)  # Admin notification buttons
+    markup.add(item9, item10)  # Admin notification buttons
     return markup
 
 # Create inline keyboard for quick actions
@@ -619,9 +668,9 @@ def handle_buy_plans(message):
         last_name=message.from_user.last_name
     )
     
-    # Get active plans (excluding QITO plans)
+    # Get active plans (excluding QITO and ByPass plans)
     all_plans = get_active_plans()
-    plans = [plan for plan in all_plans if 'QITO' not in plan[2]]  # Filter out QITO plans (plan[2] is name)
+    plans = [plan for plan in all_plans if 'QITO' not in plan[2] and 'ByPass' not in plan[2]]  # Filter out QITO and ByPass plans (plan[2] is name)
     
     if not plans:
         bot.send_message(message.chat.id, "❌ လက်ရှိတွင် VPN ပက်ကေ့ချ်များ မရှိပါ။ ကျေးဇူးပြု၍ ဝန်ဆောင်မှုကို ဆက်သွယ်ပါ။", 
@@ -672,14 +721,18 @@ def handle_my_plans(message):
         if description:
             plans_text += f"\n{description}"
         
-        # Check if this is a QITO plan with API response
-        if api_response and 'QITO' in name:
+        # Check if this is a QITO or ByPass plan with API response
+        if api_response and ('QITO' in name or 'ByPass' in name):
             try:
                 api_data = json.loads(api_response)
                 username = api_data.get('username', 'N/A')
                 password = api_data.get('password', 'N/A')
-                plans_text += f"\n🗝 QITO Username: `{username}`"
-                plans_text += f"\n🗝 QITO Password: `{password}`"
+                if 'ByPass' in name:
+                    plans_text += f"\n🔓 ByPass Username: `{username}`"
+                    plans_text += f"\n🔓 ByPass Password: `{password}`"
+                else:
+                    plans_text += f"\n🗝 QITO Username: `{username}`"
+                    plans_text += f"\n🗝 QITO Password: `{password}`"
             except:
                 # Fallback to key_value if API response parsing fails
                 if key_value:
@@ -713,14 +766,14 @@ def handle_qito_key(message):
         last_name=message.from_user.last_name
     )
     
-    # Get QITO plans (plans with "QITO" in the name)
+    # Get QITO plans only (plans with "QITO" in the name, excluding ByPass)
     conn = sqlite3.connect('bot_database.db')
     cursor = conn.cursor()
     cursor.execute('''
         SELECT p.*, 
                COALESCE(p.device_limit, 1) as device_limit
         FROM plans p
-        WHERE p.name LIKE '%QITO%' AND p.is_active = 1
+        WHERE p.name LIKE '%QITO%' AND p.name NOT LIKE '%ByPass%' AND p.is_active = 1
         ORDER BY p.plan_id_number
     ''')
     qito_plans = cursor.fetchall()
@@ -750,6 +803,61 @@ QITO ပက်ကေ့ချ်များကို ကြည့်ရှု�
     bot.send_message(message.chat.id, qito_text, parse_mode='Markdown', reply_markup=markup)
     print("✅ QITO plans message sent successfully!")
 
+@bot.message_handler(func=lambda message: message.text == "🔓 Bypass VIP")
+def handle_bypass_plan(message):
+    """Handle ByPass Plan button"""
+    print("=" * 50)
+    print(f"🔔 ByPass Plan button pressed!")
+    print(f"👤 User: {message.from_user.first_name} {message.from_user.last_name or ''}")
+    print(f"🆔 User ID: {message.from_user.id}")
+    print(f"📱 Username: @{message.from_user.username or 'Not set'}")
+    print(f"💬 Chat ID: {message.chat.id}")
+    print("=" * 50)
+    # Ensure user exists
+    ensure_user_exists(
+        telegram_id=message.from_user.id,
+        username=message.from_user.username,
+        first_name=message.from_user.first_name,
+        last_name=message.from_user.last_name
+    )
+    
+    # Get ByPass plans only (plans with "ByPass" in the name)
+    conn = sqlite3.connect('bot_database.db')
+    cursor = conn.cursor()
+    cursor.execute('''
+        SELECT p.*, 
+               COALESCE(p.device_limit, 1) as device_limit
+        FROM plans p
+        WHERE p.name LIKE '%ByPass%' AND p.is_active = 1
+        ORDER BY p.plan_id_number
+    ''')
+    bypass_plans = cursor.fetchall()
+    conn.close()
+    
+    if not bypass_plans:
+        bot.send_message(message.chat.id, "❌ လက်ရှိတွင် ByPass ပက်ကေ့ချ်များ မရှိပါ။ ကျေးဇူးပြု၍ ဝန်ဆောင်မှုကို ဆက်သွယ်ပါ။", 
+                        reply_markup=create_main_menu())
+        return
+    
+    bypass_text = """🔓 **ByPass Plan များ**
+
+ByPass Plan များကို ကြည့်ရှုပြီး ရွေးချယ်ပါ:"""
+    
+    # Create inline keyboard for ByPass plans
+    print(f"📋 Creating ByPass plan buttons for {len(bypass_plans)} plans...")
+    markup = InlineKeyboardMarkup()
+    for plan in bypass_plans:
+        plan_id, plan_id_number, name, description, credits_required, duration_days, is_active, created_at, updated_at, device_limit, device_limit_alias = plan
+        button_text = f"{name} - {credits_required} Credits ({duration_days} days, {device_limit_alias} devices)"
+        button = InlineKeyboardButton(button_text, callback_data=f'bypass_plan_{plan_id}')
+        markup.add(button)
+        print(f"  ✅ Added: {button_text}")
+        print(f"     🔗 Callback: bypass_plan_{plan_id}")
+    
+    print(f"📤 Sending ByPass plans message to user {message.from_user.id}")
+    bot.send_message(message.chat.id, bypass_text, parse_mode='Markdown', reply_markup=markup)
+    print("✅ ByPass plans message sent successfully!")
+
 @bot.message_handler(func=lambda message: message.text == "📢 Notification")
 def handle_notification(message):
     """Handle admin notification button - send all plans to all users"""
@@ -778,13 +886,16 @@ def handle_notification(message):
 
 """
     
-    # Separate VPN and QITO plans
+    # Separate VPN, QITO, and ByPass plans
     vpn_plans = []
     qito_plans = []
+    bypass_plans = []
     
     for plan in plans:
         plan_id_number, name, description, credits_required, duration_days, device_limit, available_keys = plan
-        if 'QITO' in name:
+        if 'ByPass' in name:
+            bypass_plans.append(plan)
+        elif 'QITO' in name:
             qito_plans.append(plan)
         else:
             vpn_plans.append(plan)
@@ -800,6 +911,13 @@ def handle_notification(message):
     if qito_plans:
         notification_text += "\n**➖➖➖ QITO ပက်ကေ့ချ်များ ➖➖➖**\n"
         for plan in qito_plans:
+            plan_id_number, name, description, credits_required, duration_days, device_limit, available_keys = plan
+            notification_text += f"{name} | {credits_required} Credits | {duration_days} ရက် | In stock {available_keys} pcs\n"
+    
+    # Add ByPass plans
+    if bypass_plans:
+        notification_text += "\n**➖➖➖ ByPass ပက်ကေ့ချ်များ ➖➖➖**\n"
+        for plan in bypass_plans:
             plan_id_number, name, description, credits_required, duration_days, device_limit, available_keys = plan
             notification_text += f"{name} | {credits_required} Credits | {duration_days} ရက် | In stock {available_keys} pcs\n"
     
@@ -910,6 +1028,32 @@ def handle_custom_notification_text(message):
     bot.send_message(message.chat.id, preview_text, 
                     parse_mode='Markdown', 
                     reply_markup=confirm_markup)
+
+@bot.message_handler(func=lambda message: message.text == "📞 Our Channel")
+def handle_our_channel(message):
+    """Handle Our Channel button - opens Telegram channel"""
+    channel_url = "https://t.me/qitotech9"
+    
+    # Create inline keyboard with channel link
+    markup = InlineKeyboardMarkup()
+    channel_button = InlineKeyboardButton("📢 Join QITO Tech Channel", url=channel_url)
+    markup.add(channel_button)
+    
+    channel_text = """📞 **Our Channel**
+
+Join our official Telegram channel for updates, news, and support:
+
+**QITO Tech Channel**
+👉 [Click here to join](https://t.me/qitotech9)
+
+You can also visit:
+• Price List Channel: https://t.me/techQITO
+• Daily Free VPN/Key: https://t.me/qitotec
+• Admin: @qitoadmin"""
+    
+    bot.send_message(message.chat.id, channel_text, 
+                    parse_mode='Markdown', 
+                    reply_markup=markup)
 
 @bot.message_handler(func=lambda message: message.text == "📞 ဆက်သွယ်ရန်")
 def handle_contact(message):
@@ -1592,6 +1736,209 @@ QITO Password: {api_response.get('password', 'N/A')}"""
     elif call.data == 'cancel_qito_purchase':
         bot.answer_callback_query(call.id, "QITO ဝယ်ယူမှုပယ်ဖျက်ပြီး")
         bot.send_message(call.message.chat.id, "❌ QITO ဝယ်ယူမှုပယ်ဖျက်ပြီးပါပြီ။ မည်သည့်အချိန်တွင်မဆို အခြားပက်ကေ့ချ်များကို ကြည့်ရှုနိုင်ပါတယ်။", 
+                       reply_markup=create_main_menu())
+    
+    # ByPass plan callbacks
+    elif call.data.startswith('bypass_plan_'):
+        print("=" * 60)
+        print(f"🎯 BYPASS PLAN CALLBACK RECEIVED!")
+        print(f"📞 Callback Data: {call.data}")
+        print(f"👤 User: {call.from_user.first_name} {call.from_user.last_name or ''}")
+        print(f"🆔 User ID: {call.from_user.id}")
+        print(f"📱 Username: @{call.from_user.username or 'Not set'}")
+        print(f"💬 Chat ID: {call.message.chat.id}")
+        print(f"📝 Message ID: {call.message.message_id}")
+        
+        plan_id = call.data.split('_')[2]
+        print(f"🔍 Extracted Plan ID: {plan_id}")
+        
+        plan = get_plan(plan_id)
+        if plan:
+            print(f"✅ Plan Found: {plan[2]} (ID: {plan[0]})")
+            print(f"💰 Credits Required: {plan[4]}")
+            print(f"⏰ Duration: {plan[5]} days")
+        else:
+            print(f"❌ Plan NOT Found for ID: {plan_id}")
+        print("=" * 60)
+        
+        if plan:
+            plan_id, plan_id_number, name, description, credits_required, duration_days, is_active, created_at, updated_at, device_limit = plan
+            
+            print(f"🔧 Device Limit: {device_limit}")
+            
+            # Check if user has enough balance
+            user_balance = get_user_balance(call.from_user.id)
+            user_credits = int(user_balance)  # 1 dollar = 1 credit (1:1 conversion)
+            
+            print(f"💰 User Balance Check:")
+            print(f"   💵 User Balance: {user_balance}")
+            print(f"   🪙 User Credits: {user_credits}")
+            print(f"   💰 Required Credits: {credits_required}")
+            print(f"   ✅ Sufficient Balance: {user_credits >= credits_required}")
+            
+            if user_credits >= credits_required:
+                # Delete the original plans message
+                print(f"🗑️ Deleting original ByPass plans message...")
+                try:
+                    bot.delete_message(call.message.chat.id, call.message.message_id)
+                    print(f"✅ Message deleted successfully!")
+                except Exception as e:
+                    print(f"❌ Could not delete message: {e}")
+                
+                # Show ByPass confirmation dialog
+                print(f"📝 Showing ByPass confirmation dialog...")
+                confirmation_message = f"""🔓 **ByPass Plan ဝယ်ယူမှု အတည်ပြုခြင်း!**
+
+• ပက်ကေ့ချ် ID: {plan_id_number}
+• ByPass Plan : {name}
+• ဖော်ပြချက်     : {description or 'ဖော်ပြချက်မရှိ'}
+• သက်တမ်း      : {duration_days} ရက်
+• ကုန်ကျစရိတ်: {credits_required} Credits
+• စက်အရေအတွက်: {device_limit} စက်
+
+**သင့်အကောင့်:**
+• လက်ကျန် Credit : {user_credits} Credits
+
+ByPass Plan သည် subscription-based ဖြစ်ပြီး သီးခြား key မလိုအပ်ပါ။
+
+ကျေးဇူးပြု၍ သင့်ဝယ်ယူမှုကို အတည်ပြုပါ:"""
+                
+                # Create confirmation keyboard
+                confirmation_keyboard = InlineKeyboardMarkup()
+                confirm_btn = InlineKeyboardButton("✅ ByPass Plan ဝယ်ယူအတည်ပြုပါ", callback_data=f'confirm_bypass_purchase_{plan_id}')
+                cancel_btn = InlineKeyboardButton("❌ ပယ်ဖျက်ပါ", callback_data='cancel_bypass_purchase')
+                confirmation_keyboard.row(confirm_btn, cancel_btn)
+                
+                print(f"📤 Sending confirmation message...")
+                bot.answer_callback_query(call.id, "ကျေးဇူးပြု၍ သင့်ဝယ်ယူမှုကို အတည်ပြုပါ")
+                bot.send_message(call.message.chat.id, confirmation_message, 
+                               parse_mode='Markdown', reply_markup=confirmation_keyboard)
+                print(f"✅ ByPass confirmation message sent successfully!")
+            else:
+                bot.answer_callback_query(call.id, "Insufficient balance!")
+                bot.send_message(call.message.chat.id, f"❌ Insufficient balance!\n\nYou need {credits_required} credits but only have {user_credits} credits.\n\nUse '💳 ငွေဖြည့်' to add more credits.", 
+                               reply_markup=create_main_menu())
+        else:
+            bot.answer_callback_query(call.id, "ByPass plan not found!")
+            bot.send_message(call.message.chat.id, "❌ ByPass plan not found. Please try again.", 
+                           reply_markup=create_main_menu())
+    
+    # ByPass purchase confirmation callbacks
+    elif call.data.startswith('confirm_bypass_purchase_'):
+        plan_id = call.data.split('_')[3]
+        plan = get_plan(plan_id)
+        
+        if plan:
+            plan_id, plan_id_number, name, description, credits_required, duration_days, is_active, created_at, updated_at, device_limit = plan
+            
+            # Get device limit from database
+            from database import get_db_connection_with_retry
+            conn = get_db_connection_with_retry()
+            cursor = conn.cursor()
+            cursor.execute('SELECT COALESCE(device_limit, 1) FROM plans WHERE id = ?', (plan_id,))
+            device_limit = cursor.fetchone()[0]
+            conn.close()
+            
+            # Double-check balance
+            user_balance = get_user_balance(call.from_user.id)
+            user_credits = int(user_balance)  # 1 dollar = 1 credit (1:1 conversion)
+            
+            if user_credits >= credits_required:
+                # Create ByPass user via API
+                api_response = create_bypass_user_api(device_limit, duration_days)
+                
+                if api_response:
+                    # API call successful, store the response data
+                    from datetime import datetime, timedelta
+                    purchase_date = datetime.now()
+                    expiry_date = purchase_date + timedelta(days=duration_days)
+                    
+                    # Create user plan record with API response data
+                    conn2 = get_db_connection_with_retry()
+                    cursor2 = conn2.cursor()
+                    cursor2.execute('''
+                        INSERT INTO user_plans (user_id, plan_id, purchase_date, expiry_date, status, vpn_key, api_response)
+                        VALUES (?, ?, ?, ?, ?, ?, ?)
+                    ''', (call.from_user.id, plan_id, purchase_date, expiry_date, 'active', 
+                          f"{api_response.get('username', '')}|{api_response.get('password', '')}", 
+                          json.dumps(api_response)))
+                    conn2.commit()
+                    conn2.close()
+                    
+                    # Deduct credits from user balance
+                    add_user_balance(call.from_user.id, -credits_required)
+                    
+                    # Delete the original confirmation message
+                    try:
+                        bot.delete_message(call.message.chat.id, call.message.message_id)
+                    except Exception as e:
+                        print(f"Could not delete message: {e}")
+                    
+                    # Get ByPass redirect link from database
+                    bypass_redirect_link = get_account_setup_config('bypass_redirect_link') or 'https://qito.net'
+                    
+                    # Notify user with credentials
+                    success_message = f"""✅ **ByPass Plan ဝယ်ယူမှု အောင်မြင်ပါသည်!!**
+
+**ပက်ကေ့ချ် ID:** {plan_id_number}
+**ByPass Plan :** {name}
+**သက်တမ်း:** {duration_days} ရက်
+**ကုန်ကျစရိတ်:** {credits_required} Credits
+**စက်အရေအတွက်:** {device_limit} စက်
+**သက်တမ်းကုန်ဆုံးရက်:** {expiry_date.strftime('%Y-%m-%d')}
+
+**ByPass အကောင့်အသေးစိတ် ⬇️**
+
+**Username:** `{api_response.get('username', 'N/A')}`
+**Password:** `{api_response.get('password', 'N/A')}`
+
+**ByPass Account ထည့်နည်း:**
+[နှိပ်ပါ]({bypass_redirect_link})
+
+**အကူအညီလိုအပ်ပါက ဆက်သွယ်ပါ:**
+📞 ဆက်သွယ်ရန် ခလုတ်ကို နှိပ်ပါ"""
+                    
+                    bot.answer_callback_query(call.id, "ByPass Plan ဝယ်ယူမှု အောင်မြင်ပါသည်!!")
+                    bot.send_message(call.message.chat.id, success_message, 
+                                   parse_mode='Markdown', reply_markup=create_main_menu())
+                    
+                    # Notify admin
+                    if ADMIN_TELEGRAM_ID:
+                        admin_message = f"""🔔 **New ByPass Plan Purchase**
+
+User: {call.from_user.first_name} {call.from_user.last_name or ''}
+Username: @{call.from_user.username or 'Not set'}
+User ID: {call.from_user.id}
+Plan ID: {plan_id_number}
+Plan: {name}
+Device Limit: {device_limit} devices
+Duration: {duration_days} days
+Expiry Date: {expiry_date.strftime('%Y-%m-%d')}
+Credits Used: {credits_required}
+ByPass Username: {api_response.get('username', 'N/A')}
+ByPass Password: {api_response.get('password', 'N/A')}"""
+                        
+                        bot.send_message(ADMIN_TELEGRAM_ID, admin_message)
+                else:
+                    # API call failed
+                    conn.close()
+                    bot.answer_callback_query(call.id, "API Error!")
+                    bot.send_message(call.message.chat.id, "❌ ByPass service is temporarily unavailable. Please try again later.", 
+                                   reply_markup=create_main_menu())
+            else:
+                conn.close()
+                bot.answer_callback_query(call.id, "Insufficient balance!")
+                bot.send_message(call.message.chat.id, "❌ Sorry, you don't have enough credits. Please top up your account.", 
+                               reply_markup=create_main_menu())
+        else:
+            bot.answer_callback_query(call.id, "ByPass plan not found!")
+            bot.send_message(call.message.chat.id, "❌ ByPass plan not found. Please try again.", 
+                           reply_markup=create_main_menu())
+    
+    # Cancel ByPass purchase callback
+    elif call.data == 'cancel_bypass_purchase':
+        bot.answer_callback_query(call.id, "ByPass ဝယ်ယူမှုပယ်ဖျက်ပြီး")
+        bot.send_message(call.message.chat.id, "❌ ByPass ဝယ်ယူမှုပယ်ဖျက်ပြီးပါပြီ။ မည်သည့်အချိန်တွင်မဆို အခြားပက်ကေ့ချ်များကို ကြည့်ရှုနိုင်ပါတယ်။", 
                        reply_markup=create_main_menu())
     
     # Custom notification callbacks

@@ -136,20 +136,25 @@ def dashboard():
     # Get active payment methods count
     active_payment_methods_count = get_active_payment_methods_count()
     
-    # Get QITO plans (plans with "QITO" in the name)
+    # Get QITO plans (plans with "QITO" in the name, excluding ByPass)
     qito_plans = conn.execute('''
         SELECT p.*, 
                COUNT(CASE WHEN vk.is_used = 0 THEN 1 END) as available_keys
         FROM plans p
         LEFT JOIN vpn_keys vk ON p.id = vk.plan_id
-        WHERE p.name LIKE '%QITO%' AND p.is_active = 1
+        WHERE p.name LIKE '%QITO%' AND p.name NOT LIKE '%ByPass%' AND p.is_active = 1
         GROUP BY p.id
         ORDER BY p.plan_id_number
     ''').fetchall()
     
-    # Get QITO plans count
+    # Get QITO plans count (excluding ByPass)
     qito_plans_count = conn.execute('''
-        SELECT COUNT(*) FROM plans WHERE name LIKE '%QITO%' AND is_active = 1
+        SELECT COUNT(*) FROM plans WHERE name LIKE '%QITO%' AND name NOT LIKE '%ByPass%' AND is_active = 1
+    ''').fetchone()[0]
+    
+    # Get ByPass plans count
+    bypass_plans_count = conn.execute('''
+        SELECT COUNT(*) FROM plans WHERE name LIKE '%ByPass%' AND is_active = 1
     ''').fetchone()[0]
     
     # Get total available QITO keys count
@@ -571,7 +576,7 @@ def qito_plan_management():
         SELECT p.*, 
                COALESCE(p.device_limit, 1) as device_limit
         FROM plans p
-        WHERE p.name LIKE '%QITO%'
+        WHERE p.name LIKE '%QITO%' AND p.name NOT LIKE '%ByPass%'
         ORDER BY p.plan_id_number
     ''').fetchall()
     conn.close()
@@ -681,6 +686,126 @@ def qito_statistics():
                          qito_stats=qito_stats,
                          qito_purchases=qito_purchases,
                          popular_qito_plans=popular_qito_plans)
+
+# ByPass Plan Management Routes
+@app.route('/bypass')
+def bypass_plan_management():
+    """ByPass plan management page"""
+    conn = get_db_connection()
+    bypass_plans = conn.execute('''
+        SELECT p.*, 
+               COALESCE(p.device_limit, 1) as device_limit
+        FROM plans p
+        WHERE p.name LIKE '%ByPass%'
+        ORDER BY p.plan_id_number
+    ''').fetchall()
+    conn.close()
+    return render_template('qito_plan_management.html', qito_plans=bypass_plans)
+
+@app.route('/bypass/add', methods=['GET', 'POST'])
+def add_bypass_plan():
+    """Add new ByPass plan"""
+    if request.method == 'POST':
+        plan_id_number = request.form['plan_id_number']
+        name = f"ByPass {request.form['name']}"  # Automatically prefix with ByPass
+        description = request.form['description']
+        credits_required = int(request.form['credits_required'])
+        duration_days = int(request.form['duration_days'])
+        device_limit = int(request.form.get('device_limit', 1))
+        
+        try:
+            create_plan(plan_id_number, name, description, credits_required, duration_days, device_limit)
+            flash('ByPass plan added successfully!', 'success')
+            return redirect(url_for('bypass_plan_management'))
+        except sqlite3.IntegrityError:
+            flash('Plan ID number already exists! Please use a different ID number.', 'error')
+            return render_template('add_qito_plan.html')
+    
+    return render_template('add_qito_plan.html')
+
+@app.route('/bypass/edit/<int:plan_id>', methods=['GET', 'POST'])
+def edit_bypass_plan(plan_id):
+    """Edit ByPass plan"""
+    if request.method == 'POST':
+        plan_id_number = request.form['plan_id_number']
+        name = f"ByPass {request.form['name']}"  # Automatically prefix with ByPass
+        description = request.form['description']
+        credits_required = int(request.form['credits_required'])
+        duration_days = int(request.form['duration_days'])
+        device_limit = int(request.form.get('device_limit', 1))
+        is_active = request.form.get('is_active') == 'on'
+        
+        try:
+            update_plan(plan_id, plan_id_number, name, description, credits_required, duration_days, is_active, device_limit)
+            flash('ByPass plan updated successfully!', 'success')
+            return redirect(url_for('bypass_plan_management'))
+        except sqlite3.IntegrityError:
+            flash('Plan ID number already exists! Please use a different ID number.', 'error')
+            plan = get_plan(plan_id)
+            return render_template('edit_qito_plan.html', plan=plan)
+    
+    plan = get_plan(plan_id)
+    if plan is None:
+        flash('ByPass plan not found!', 'error')
+        return redirect(url_for('bypass_plan_management'))
+    
+    return render_template('edit_qito_plan.html', plan=plan)
+
+@app.route('/bypass/delete/<int:plan_id>')
+def delete_bypass_plan(plan_id):
+    """Delete ByPass plan"""
+    delete_plan(plan_id)
+    flash('ByPass plan deleted successfully!', 'success')
+    return redirect(url_for('bypass_plan_management'))
+
+@app.route('/bypass/statistics')
+def bypass_statistics():
+    """ByPass statistics page"""
+    conn = get_db_connection()
+    
+    # Get ByPass plan statistics
+    bypass_stats = conn.execute('''
+        SELECT 
+            COUNT(DISTINCT p.id) as total_plans,
+            COUNT(CASE WHEN p.is_active = 1 THEN 1 END) as active_plans,
+            SUM(COALESCE(p.device_limit, 1)) as total_device_slots
+        FROM plans p
+        WHERE p.name LIKE '%ByPass%'
+    ''').fetchone()
+    
+    # Get ByPass purchase statistics
+    bypass_purchases = conn.execute('''
+        SELECT 
+            DATE(up.purchase_date) as purchase_date,
+            COUNT(*) as purchase_count
+        FROM user_plans up
+        JOIN plans p ON up.plan_id = p.id
+        WHERE p.name LIKE '%ByPass%'
+        GROUP BY DATE(up.purchase_date)
+        ORDER BY purchase_date DESC
+        LIMIT 30
+    ''').fetchall()
+    
+    # Get most popular ByPass plans
+    popular_bypass_plans = conn.execute('''
+        SELECT 
+            p.plan_id_number,
+            p.name,
+            COUNT(up.id) as purchase_count
+        FROM plans p
+        LEFT JOIN user_plans up ON p.id = up.plan_id
+        WHERE p.name LIKE '%ByPass%'
+        GROUP BY p.id
+        ORDER BY purchase_count DESC
+        LIMIT 10
+    ''').fetchall()
+    
+    conn.close()
+    
+    return render_template('qito_statistics.html', 
+                         qito_stats=bypass_stats,
+                         qito_purchases=bypass_purchases,
+                         popular_qito_plans=popular_bypass_plans)
 
 # Contact Management Routes
 @app.route('/contact')

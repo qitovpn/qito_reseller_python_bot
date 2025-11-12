@@ -806,6 +806,12 @@ def init_account_setup_tables():
         VALUES ('qito_net_redirect_link', 'https://qito.net', 'QITO Net Account Setup Redirect Link')
     ''')
     
+    # Insert default ByPass redirect link if not exists
+    cursor.execute('''
+        INSERT OR IGNORE INTO account_setup_config (config_key, config_value, description)
+        VALUES ('bypass_redirect_link', 'https://qito.net', 'ByPass Plan Account Setup Redirect Link')
+    ''')
+    
     conn.commit()
     conn.close()
     print("✅ Account setup configuration table initialized successfully")
